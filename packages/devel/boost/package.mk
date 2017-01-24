@@ -25,7 +25,7 @@ PKG_SITE="http://www.boost.org/"
 PKG_URL="$SOURCEFORGE_SRC/boost/boost/1.56.0/${PKG_NAME}_${PKG_VERSION}.tar.bz2"
 PKG_SOURCE_DIR="${PKG_NAME}_${PKG_VERSION}"
 PKG_DEPENDS_HOST=""
-PKG_DEPENDS_TARGET="toolchain boost:host Python:host zlib bzip2"
+PKG_DEPENDS_TARGET="toolchain boost:host Python zlib bzip2"
 PKG_PRIORITY="optional"
 PKG_SECTION="devel"
 PKG_SHORTDESC="boost: Peer-reviewed STL style libraries for C++"
@@ -54,6 +54,7 @@ configure_target() {
   sh bootstrap.sh --prefix=/usr \
                   --with-bjam=$ROOT/$TOOLCHAIN/bin/bjam \
                   --with-python=$ROOT/$TOOLCHAIN/bin/python \
+                  --with-python-root=$SYSROOT_PREFIX/usr
 
   echo "using gcc : `$TARGET_CC -v 2>&1  | tail -n 1 |awk '{print $3}'` : $TARGET_CC  : <compileflags>\"$CFLAGS\" <linkflags>\"$LDFLAGS\" ;" \
     > tools/build/src/user-config.jam
@@ -74,5 +75,14 @@ makeinstall_target() {
                                 --with-serialization \
                                 --with-filesystem \
                                 --with-regex -sICU_PATH="$SYSROOT_PREFIX/usr" \
+                                --with-chrono \
+                                --with-date_time \
+                                --with-random \
+                                install
+  $ROOT/$TOOLCHAIN/bin/bjam -d2 --toolset=gcc link=shared \
+                                --prefix=$SYSROOT_PREFIX/usr \
+                                --ignore-site-config \
+                                --layout=system \
+                                --with-python \
                                 install
 }
