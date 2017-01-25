@@ -7,7 +7,7 @@ PKG_SOURCE_DIR="deluge-deluge-$PKG_VERSION"
 PKG_DEPENDS_TARGET="toolchain attrs cffi chardet constantly enum34 incremental libtorrent-rasterbar lxml mako pyasn1 pyasn1-modules pyopenssl python-gettext pyxdg service_identity six twisted zope.interface"
 PKG_SECTION="service"
 
-PKG_IS_ADDON="yes"
+#PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="Deluge"
 PKG_ADDON_TYPE="xbmc.service"
 PKG_MAINTAINER="thoradia"
