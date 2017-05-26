@@ -3,9 +3,6 @@
 . config/version
 
 build_addons() {
-  echo Building project $1
-  tools/repo-tool -b thoradia $1
-  echo
   for clone in ${@:3}; do
     echo Cloning $clone/$2 from $1/$2
     ARCH=$2 PROJECT=$clone scripts/create_addon thoradia
@@ -14,11 +11,9 @@ build_addons() {
   done
 }
 
-tools/repo-tool -b thoradia RPi2
-tools/repo-tool -b thoradia RPi
+tools/repo-tool -b thoradia S805
 
-build_addons Generic    x86_64  Virtual
-build_addons Odroid_C2  aarch64 WeTek_Hub WeTek_Play_2
-build_addons WeTek_Core arm     WeTek_Play imx6
+#build_addons Odroid_C2 aarch64 S905 S912
+build_addons Odroid_C2 arm     S905 S912
 
 tools/repo-tool -xml
