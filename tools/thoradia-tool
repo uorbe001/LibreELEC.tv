@@ -2,6 +2,12 @@
 
 . config/version
 
+build_project() {
+  for addon in packages/thoradia/addons/*; do
+    scripts/create_addon $(basename $addon) || exit 1
+  done
+}
+
 build_addons() {
   echo Building project $1
   tools/repo-tool -b thoradia $1
@@ -14,11 +20,12 @@ build_addons() {
   done
 }
 
-tools/repo-tool -b thoradia RPi2
-tools/repo-tool -b thoradia RPi
+ARCH=arm DEVICE=RPi2 PROJECT=RPi build_project
+#tools/repo-tool -b thoradia RPi2
+#tools/repo-tool -b thoradia RPi
 
-build_addons Generic    x86_64  Virtual
-build_addons Odroid_C2  aarch64 WeTek_Hub WeTek_Play_2
-build_addons WeTek_Core arm     WeTek_Play imx6
+#build_addons Generic    x86_64  Virtual
+#build_addons Odroid_C2  aarch64 WeTek_Hub WeTek_Play_2
+#build_addons WeTek_Core arm     WeTek_Play imx6
 
 tools/repo-tool -xml
