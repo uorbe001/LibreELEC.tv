@@ -8,7 +8,7 @@ PKG_DEPENDS_TARGET="toolchain libtorrent-rasterbar qt-everywhere"
 PKG_USE_CMAKE="no"
 PKG_SECTION="service"
 
-PKG_IS_ADDON="yes"
+#PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="qBittorrent"
 PKG_ADDON_TYPE="xbmc.service"
 PKG_MAINTAINER="thoradia"
