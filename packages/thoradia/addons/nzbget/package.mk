@@ -3,7 +3,7 @@ PKG_VERSION="18.1"
 PKG_LICENSE="GPLv2"
 PKG_SITE="http://nzbget.net/"
 PKG_URL="https://github.com/nzbget/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain libressl libxml2 p7zip unrar zlib"
+PKG_DEPENDS_TARGET="toolchain openssl libxml2 p7zip unrar zlib"
 PKG_SECTION="service"
 
 PKG_IS_ADDON="yes"
