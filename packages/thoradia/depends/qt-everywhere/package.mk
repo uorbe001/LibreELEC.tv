@@ -10,7 +10,7 @@ PKG_LONGDESC="A cross-platform application and UI framework"
 
 PKG_CONFIGURE_OPTS_TARGET="-prefix /usr
                            -sysroot $SYSROOT_PREFIX
-                           -hostprefix $ROOT/$TOOLCHAIN
+                           -hostprefix $TOOLCHAIN
                            -device linux-libreelec-g++
                            -opensource -confirm-license
                            -release

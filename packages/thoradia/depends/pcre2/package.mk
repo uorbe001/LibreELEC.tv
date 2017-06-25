@@ -8,7 +8,7 @@ PKG_LONGDESC="The PCRE library is a set of functions that implement regular expr
 PKG_USE_CMAKE="no"
 PKG_AUTORECONF="no"
 
-PKG_CONFIGURE_OPTS_HOST="--prefix=$ROOT/$TOOLCHAIN \
+PKG_CONFIGURE_OPTS_HOST="--prefix=$TOOLCHAIN \
              --enable-utf8 \
              --enable-unicode-properties \
              --with-gnu-ld"
