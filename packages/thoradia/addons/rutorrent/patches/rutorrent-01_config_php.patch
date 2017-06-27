@@ -21,10 +21,3 @@ diff -Naur ruTorrent-master/conf/config.php ruTorrent-master-config.php/conf/con
  	$profileMask = 0777;			// Mask for files and directory creation in user profiles.
  						// Both Webserver and rtorrent users must have read-write access to it.
  						// For example, if Webserver and rtorrent users are in the same group then the value may be 0770.
-@@ -61,4 +61,4 @@
- 
- 	$canUseXSendFile = true;		// Use X-Sendfile feature if it exist
- 
--	$locale = "UTF8";
-\ No newline at end of file
-+	$locale = "UTF8";
