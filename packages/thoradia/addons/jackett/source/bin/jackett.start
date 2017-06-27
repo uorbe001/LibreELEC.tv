@@ -8,4 +8,4 @@ if [ -z "$jk_nice" ]; then
 fi
 
 nice -n "$jk_nice" \
-mono $ADDON_DIR/Jackett/JackettConsole.exe --DataFolder $ADDON_HOME
+mono "$ADDON_DIR/Jackett/JackettConsole.exe" --DataFolder "$ADDON_HOME" --NoRestart
