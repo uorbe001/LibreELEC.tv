@@ -1,5 +1,5 @@
 PKG_NAME="qt-everywhere"
-PKG_VERSION="5.9.0"
+PKG_VERSION="5.9.1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://qt-project.org"
