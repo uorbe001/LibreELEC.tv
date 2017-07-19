@@ -19,6 +19,7 @@ PKG_CONFIGURE_OPTS_TARGET="--disable-all \
 
 pre_configure_target() {
   strip_lto
+  export CFLAGS="$CFLAGS -pthread"
 }
 
 makeinstall_target() {
