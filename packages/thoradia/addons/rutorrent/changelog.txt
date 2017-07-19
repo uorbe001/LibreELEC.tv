@@ -1,3 +1,6 @@
+5:
+- Build against static libcurl 7.54.0
+
 4:
 - Update to 3.8
 
