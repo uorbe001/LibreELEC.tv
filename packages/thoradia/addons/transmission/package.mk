@@ -10,11 +10,12 @@ PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="Transmission"
 PKG_ADDON_TYPE="xbmc.service"
 PKG_MAINTAINER="thoradia"
-PKG_REV="12"
+PKG_REV="13"
 PKG_SHORTDESC="$PKG_ADDON_NAME: a fast, easy and free BitTorrent client"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a fast, easy and free BitTorrent client"
 PKG_DISCLAIMER="Keep it legal and carry on"
 
+PKG_USE_CMAKE="no"
 PKG_CONFIGURE_OPTS_TARGET="--enable-daemon      \
                            --enable-utp         \
                            --disable-nls        \
