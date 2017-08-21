@@ -1,5 +1,5 @@
 PKG_NAME="cython"
-PKG_VERSION="0.25.2"
+PKG_VERSION="0.26"
 PKG_LICENSE="ASL"
 PKG_SITE="http://cython.org/"
 PKG_URL="https://files.pythonhosted.org/packages/source/C/Cython/Cython-$PKG_VERSION.tar.gz"
