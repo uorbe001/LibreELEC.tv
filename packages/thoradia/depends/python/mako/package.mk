@@ -1,5 +1,5 @@
 PKG_NAME="mako"
-PKG_VERSION="1.0.6"
+PKG_VERSION="1.0.7"
 PKG_LICENSE="MIT"
 PKG_SITE="http://www.makotemplates.org/"
 PKG_URL="https://files.pythonhosted.org/packages/source/M/Mako/Mako-$PKG_VERSION.tar.gz"
