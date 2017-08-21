@@ -1,3 +1,7 @@
+19:
+- Update to 2.2.0
+- Update Python dependencies
+
 18:
 - Update to 2.1.0
 
