@@ -1,5 +1,5 @@
 PKG_NAME="lxml"
-PKG_VERSION="3.7.3"
+PKG_VERSION="3.8.0"
 PKG_LICENSE="BSD"
 PKG_SITE="http://lxml.de/"
 PKG_URL="https://files.pythonhosted.org/packages/source/${PKG_NAME:0:1}/$PKG_NAME/$PKG_NAME-$PKG_VERSION.tar.gz"
