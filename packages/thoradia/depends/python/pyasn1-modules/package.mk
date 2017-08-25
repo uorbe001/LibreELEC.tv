@@ -1,8 +1,8 @@
 PKG_NAME="pyasn1-modules"
 PKG_VERSION="0.0.11"
 PKG_LICENSE="BSD"
-PKG_SITE="http://pyasn1.sourceforge.net/"
-PKG_URL="http://downloads.sourceforge.net/project/pyasn1/$PKG_NAME/$PKG_VERSION/$PKG_NAME-$PKG_VERSION.tar.gz"
+PKG_SITE="https://github.com/etingof/pyasn1-modules"
+PKG_URL="https://github.com/etingof/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain distutilscross:host Python"
 PKG_LONGDESC="Modules for ASN.1 library for Python"
 
