@@ -3,7 +3,7 @@ PKG_VERSION="0.9.6"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/rakshasa/rtorrent"
 PKG_URL="https://github.com/rakshasa/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain libtorrent curl netbsd-curses screen xmlrpc-c"
+PKG_DEPENDS_TARGET="toolchain libtorrent curl ncurses screen xmlrpc-c"
 PKG_AUTORECONF="yes"
 PKG_SECTION="service"
 
@@ -20,10 +20,6 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-static \
                            --disable-debug \
                            --disable-shared \
                            --with-xmlrpc-c=$SYSROOT_PREFIX/usr/bin/xmlrpc-c-config"
-
-pre_configure_target() {
-  export LIBS="-lncurses -lterminfo"
-}
 
 addon() {
   mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/bin
