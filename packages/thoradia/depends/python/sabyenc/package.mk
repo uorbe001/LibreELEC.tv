@@ -1,5 +1,5 @@
 PKG_NAME="sabyenc"
-PKG_VERSION="3.0.2"
+PKG_VERSION="3.3.1"
 PKG_LICENSE="LGPLv3"
 PKG_SITE="https://github.com/sabnzbd/sabyenc"
 PKG_URL="https://github.com/sabnzbd/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
