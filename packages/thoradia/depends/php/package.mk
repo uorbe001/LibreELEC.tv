@@ -1,5 +1,5 @@
 PKG_NAME="php"
-PKG_VERSION="7.1.6"
+PKG_VERSION="7.1.9"
 PKG_LICENSE="PHP"
 PKG_SITE="http://www.php.net"
 PKG_URL="http://www.php.net/distributions/$PKG_NAME-$PKG_VERSION.tar.xz"
