@@ -7,6 +7,7 @@ PKG_DEPENDS_TARGET="toolchain cffi:host Python packaging"
 PKG_LONGDESC="A package designed to expose cryptographic primitives and recipes to Python developers"
 
 make_target() {
+  export CC="$CC -pthread"
   export LDSHARED="$CC -shared"
   export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
   python setup.py build --cross-compile
