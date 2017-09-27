@@ -1,5 +1,5 @@
 PKG_NAME="pyasn1"
-PKG_VERSION="0.3.2"
+PKG_VERSION="0.3.6"
 PKG_LICENSE="BSD"
 PKG_SITE="https://github.com/etingof/pyasn1"
 PKG_URL="https://github.com/etingof/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
