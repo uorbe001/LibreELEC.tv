@@ -1,5 +1,5 @@
 PKG_NAME="pyasn1-modules"
-PKG_VERSION="0.0.11"
+PKG_VERSION="0.1.4"
 PKG_LICENSE="BSD"
 PKG_SITE="http://pyasn1.sourceforge.net/"
 PKG_URL="http://downloads.sourceforge.net/project/pyasn1/$PKG_NAME/$PKG_VERSION/$PKG_NAME-$PKG_VERSION.tar.gz"
