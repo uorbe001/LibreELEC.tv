@@ -15,7 +15,7 @@ make_target() {
 
 makeinstall_target() {
   python setup.py install --root=$INSTALL --prefix=/usr
-  find $INSTALL/usr/lib -name "*.py" -exec rm -rf "{}" ";"
+  find $INSTALL/usr/lib -name "*.pyo" -exec rm -rf "{}" ";"
   rm -rf $INSTALL/usr/lib/python*/site-packages/*.egg-info \
          $INSTALL/usr/lib/python*/site-packages/*/tests
 }
