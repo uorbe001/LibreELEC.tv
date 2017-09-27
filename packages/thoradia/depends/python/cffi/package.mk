@@ -1,5 +1,5 @@
 PKG_NAME="cffi"
-PKG_VERSION="1.10.0"
+PKG_VERSION="1.11.0"
 PKG_LICENSE="MIT"
 PKG_SITE="http://cffi.readthedocs.io/"
 PKG_URL="https://files.pythonhosted.org/packages/source/${PKG_NAME:0:1}/$PKG_NAME/$PKG_NAME-$PKG_VERSION.tar.gz"
