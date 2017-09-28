@@ -4,8 +4,11 @@ PKG_LICENSE="GPLv3"
 PKG_SITE="http://deluge-torrent.org/"
 PKG_URL="https://github.com/deluge-torrent/deluge/archive/$PKG_NAME-$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="deluge-deluge-$PKG_VERSION"
-PKG_DEPENDS_TARGET="toolchain asn1crypto attrs automat cffi chardet constantly enum34 hyperlink idna incremental ipaddress libtorrent-rasterbar mako pyasn1 pyasn1-modules pyopenssl python-gettext pyxdg service_identity six twisted zope.interface"
+PKG_DEPENDS_TARGET="toolchain libtorrent-rasterbar"
 PKG_SECTION="service"
+
+PKG_IS_PYTHON="yes"
+PKG_PYTHON_DEPENDS_TARGET="chardet mako pyopenssl python-gettext pyxdg twisted"
 
 PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="Deluge"
@@ -15,19 +18,6 @@ PKG_REV="20"
 PKG_SHORTDESC="$PKG_ADDON_NAME: lightweight, free software, cross-platform BitTorrent client"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a lightweight, free software, cross-platform BitTorrent client"
 PKG_DISCLAIMER="Keep it legal and carry on"
-
-make_target() {
-  export LDSHARED="$CC -shared"
-  export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
-  python setup.py build
-}
-
-makeinstall_target() {
-  python setup.py install --root=$INSTALL --prefix=/usr
-  find $INSTALL/usr/lib -name "*.py" -exec rm -rf "{}" ";"
-  rm -rf $INSTALL/usr/lib/python*/site-packages/*/tests
-
-}
 
 addon() {
   mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/deluge
@@ -40,10 +30,6 @@ addon() {
          $ADDON_BUILD/$PKG_ADDON_ID/deluge/
 
   cp -L $(get_build_dir libtorrent-rasterbar)/.install_pkg/usr/lib/libtorrent-rasterbar.so.? \
+        $(get_build_dir libtorrent-rasterbar)/.install_pkg/usr/lib/python*/site-packages/libtorrent.so \
         $ADDON_BUILD/$PKG_ADDON_ID/deluge/
-
-  for d in asn1crypto attrs automat cffi chardet constantly cryptography enum34 hyperlink idna incremental ipaddress libtorrent-rasterbar mako packaging pyasn1 pyasn1-modules pyopenssl python-gettext pyxdg service_identity six twisted zope.interface; do
-    cp -PR $(get_build_dir $d)/.install_pkg/usr/lib/python*/site-packages/* \
-           $ADDON_BUILD/$PKG_ADDON_ID/deluge/
-  done
 }
