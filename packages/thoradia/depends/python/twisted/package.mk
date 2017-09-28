@@ -7,15 +7,6 @@ PKG_SOURCE_DIR="twisted-$PKG_NAME-$PKG_VERSION"
 PKG_DEPENDS_TARGET="toolchain distutilscross:host Python"
 PKG_LONGDESC="Twisted is an event-driven networking engine"
 
-make_target() {
-  export LDSHARED="$CC -shared"
-  export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
-  python setup.py build --cross-compile
-}
-
-makeinstall_target() {
-  python setup.py install --root=$INSTALL --prefix=/usr
-  find $INSTALL/usr/lib -name "*.py" -exec rm -rf "{}" ";"
-  rm -rf $INSTALL/usr/lib/python*/site-packages/*.egg-info \
-         $INSTALL/usr/lib/python*/site-packages/*/tests
-}
+PKG_IS_PYTHON="yes"
+PKG_PYTHON_DEPENDS_TARGET="appdirs automat constantly cryptography hyperlink h2 idna incremental priority pyasn1 pyopenssl pyserial soappy service_identity zope.interface"
+PKG_PYTHON_OPTS_TARGET="--cross-compile"
