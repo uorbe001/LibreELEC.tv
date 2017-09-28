@@ -1,0 +1,10 @@
+PKG_NAME="pyserial"
+PKG_VERSION="3.4"
+PKG_LICENSE="MIT"
+PKG_SITE="https://github.com/pyserial/pyserial"
+PKG_URL="https://github.com/pyserial/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
+PKG_DEPENDS_TARGET="toolchain distutilscross:host Python"
+PKG_LONGDESC="Python serial port access library"
+
+PKG_IS_PYTHON="yes"
+PKG_PYTHON_OPTS_TARGET="--cross-compile"
