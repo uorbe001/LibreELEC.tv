@@ -1,0 +1,11 @@
+PKG_NAME="wstools"
+PKG_VERSION="0.4.6"
+PKG_LICENSE="BSD"
+PKG_SITE="https://github.com/pycontribs/wstools"
+PKG_URL="https://github.com/pycontribs/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
+PKG_DEPENDS_TARGET="toolchain Python distutilscross:host"
+PKG_LONGDESC="WSDL parsing services package for Web Services for Python"
+
+PKG_IS_PYTHON="yes"
+PKG_PYTHON_DEPENDS_TARGET="six"
+PKG_PYTHON_OPTS_TARGET="--cross-compile"
