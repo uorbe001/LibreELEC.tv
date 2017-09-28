@@ -7,15 +7,6 @@ PKG_SOURCE_DIR="Automat-$PKG_VERSION"
 PKG_DEPENDS_TARGET="toolchain distutilscross:host Python"
 PKG_LONGDESC="Self-service finite-state machines for the programmer on the go"
 
-make_target() {
-  export LDSHARED="$CC -shared"
-  export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
-  python setup.py build --cross-compile
-}
-
-makeinstall_target() {
-  python setup.py install --root=$INSTALL --prefix=/usr
-  find $INSTALL/usr/lib -name "*.py" -exec rm -rf "{}" ";"
-  rm -rf $INSTALL/usr/lib/python*/site-packages/*.egg-info \
-         $INSTALL/usr/lib/python*/site-packages/*/tests
-}
+PKG_IS_PYTHON="yes"
+PKG_PYTHON_DEPENDS_TARGET="attrs six"
+PKG_PYTHON_OPTS_TARGET="--cross-compile"
