@@ -1,0 +1,10 @@
+PKG_NAME="appdirs"
+PKG_VERSION="1.4.3"
+PKG_LICENSE="MIT"
+PKG_SITE="http://github.com/ActiveState/appdirs"
+PKG_URL="https://github.com/ActiveState/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
+PKG_DEPENDS_TARGET="toolchain distutilscross:host Python"
+PKG_LONGDESC="A small Python module for determining appropriate platform-specific dirs"
+
+PKG_IS_PYTHON="yes"
+PKG_PYTHON_OPTS_TARGET="--cross-compile"
