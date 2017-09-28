@@ -1,0 +1,12 @@
+PKG_NAME="soappy"
+PKG_VERSION="0.12.22"
+PKG_LICENSE="OSS"
+PKG_SITE="https://github.com/kiorky/SOAPpy"
+PKG_URL="https://github.com/kiorky/SOAPpy/archive/$PKG_VERSION.tar.gz"
+PKG_SOURCE_DIR="SOAPpy-$PKG_VERSION"
+PKG_DEPENDS_TARGET="toolchain distutilscross:host Python"
+PKG_LONGDESC="SOAP Services for Python"
+
+PKG_IS_PYTHON="yes"
+PKG_PYTHON_DEPENDS_TARGET="defusedxml wstools"
+PKG_PYTHON_OPTS_TARGET="--cross-compile"
