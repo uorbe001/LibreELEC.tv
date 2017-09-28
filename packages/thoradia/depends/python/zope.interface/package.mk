@@ -6,16 +6,9 @@ PKG_URL="https://github.com/zopefoundation/$PKG_NAME/archive/$PKG_VERSION.tar.gz
 PKG_DEPENDS_TARGET="toolchain distutilscross:host Python"
 PKG_LONGDESC="Interfaces for Python"
 
-make_target() {
-  export LDSHARED="$CC -shared"
-  export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
-  python setup.py build --cross-compile
-}
+PKG_IS_PYTHON="yes"
+PKG_PYTHON_OPTS_TARGET="--cross-compile"
 
-makeinstall_target() {
-  python setup.py install --root=$INSTALL --prefix=/usr
-  find $INSTALL/usr/lib -name "*.py" -exec rm -rf "{}" ";"
-  rm -rf $INSTALL/usr/lib/python*/site-packages/*.egg-info \
-         $INSTALL/usr/lib/python*/site-packages/*/tests
+post_makeinstall_target() {
   touch $INSTALL/usr/lib/python2.7/site-packages/zope/__init__.py
 }
