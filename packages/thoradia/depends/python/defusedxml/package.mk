@@ -1,0 +1,10 @@
+PKG_NAME="defusedxml"
+PKG_VERSION="0.5.0"
+PKG_LICENSE="PSFL"
+PKG_SITE="https://github.com/tiran/defusedxml"
+PKG_URL="https://github.com/tiran/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
+PKG_DEPENDS_TARGET="toolchain distutilscross:host Python"
+PKG_LONGDESC="XML bomb protection for Python stdlib modules"
+
+PKG_IS_PYTHON="yes"
+PKG_PYTHON_OPTS_TARGET="--cross-compile"
