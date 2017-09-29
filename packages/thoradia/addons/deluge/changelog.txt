@@ -2,7 +2,7 @@
 - Update Python dependencies
 
 19:
-- Update libtorrent-rasterbat to 1.1.4
+- Update libtorrent-rasterbar to 1.1.4
 
 18:
 - Rebuild
