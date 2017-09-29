@@ -3,7 +3,7 @@ PKG_VERSION="0c98085"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/rembo10/headphones"
 PKG_URL="https://github.com/rembo10/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain pyopenssl"
+PKG_DEPENDS_TARGET="toolchain lxml packaging pyopenssl"
 PKG_SECTION="service"
 
 PKG_IS_ADDON="yes"
@@ -29,7 +29,7 @@ addon() {
   cp -PR $PKG_BUILD/* \
          $ADDON_BUILD/$PKG_ADDON_ID/headphones 
 
-  for d in pyopenssl; do
+  for d in lxml packaging pyopenssl; do
     cp -PR $(get_build_dir $d)/.install_pkg/usr/lib/python*/site-packages/* \
            $ADDON_BUILD/$PKG_ADDON_ID/headphones/libs
   done
