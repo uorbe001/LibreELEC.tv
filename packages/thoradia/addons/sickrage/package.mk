@@ -4,7 +4,7 @@ PKG_LICENSE="GPLv3"
 PKG_SITE="https://sickrage.github.io/"
 PKG_URL="https://github.com/SickRage/SickRage/archive/v$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="SickRage-$PKG_VERSION"
-PKG_DEPENDS_TARGET="toolchain lmxl packaging pyopenssl"
+PKG_DEPENDS_TARGET="toolchain lxml packaging pyopenssl"
 PKG_SECTION="service"
 
 PKG_IS_ADDON="yes"
@@ -30,7 +30,7 @@ addon() {
   cp -PR $PKG_BUILD/* \
          $ADDON_BUILD/$PKG_ADDON_ID/SickRage/
 
-  for d in lmxl packaging pyopenssl; do
+  for d in lxml packaging pyopenssl; do
     cp -PR $(get_build_dir $d)/.install_pkg/usr/lib/python*/site-packages/* \
            $ADDON_BUILD/$PKG_ADDON_ID/SickRage/
   done
