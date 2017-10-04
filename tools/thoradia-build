@@ -1,0 +1,8 @@
+#!/bin/bash
+
+. config/options $1
+if [ -f "$TARGET/$ADDONS/$ADDON_VERSION/$WHERE/$TARGET_ARCH/$PKG_ADDON_ID/$PKG_ADDON_ID-$ADDON_VERSION.$PKG_REV.zip" ]; then
+  echo "Skipping $WHERE $1"
+else
+  scripts/create_addon "$1"
+fi
