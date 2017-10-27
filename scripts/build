@@ -164,6 +164,11 @@ if [ ! -f $STAMP ]; then
   # include buildfile
     . $PKG_DIR/package.mk
 
+    if [ "$PKG_IS_PYTHON" = "yes" ]; then
+      PKG_DEPENDS_HOST="toolchain distutilscross:host $PKG_DEPENDS_HOST"
+      PKG_DEPENDS_TARGET="toolchain distutilscross:host Python $PKG_DEPENDS_TARGET"
+    fi
+
     if [ "$TARGET" = "target" ]; then
       for p in $PKG_DEPENDS_TARGET; do
         $SCRIPTS/build $p
@@ -297,11 +302,25 @@ if [ ! -f $STAMP ]; then
         make_$TARGET
       else
         if [ "$TARGET" = "target" ]; then
-          echo "Executing (target): make $PKG_MAKE_OPTS_TARGET" | tr -s " "
-          make $PKG_MAKE_OPTS_TARGET
+          if [ "$PKG_IS_PYTHON" = "yes" ]; then
+            echo "Executing (target): python setup.py build $PKG_PYTHON_OPTS_TARGET" | tr -s " "
+            mkdir -p ".$TARGET_NAME"
+            cd ".$TARGET_NAME"
+            cp -r ../* .
+            export LDSHARED="$CC -shared $LDSHARED"
+            export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
+            python setup.py build $PKG_PYTHON_OPTS_TARGET
+            mkdir -p "$INSTALL/lib/python"
+            PYTHONPATH="$INSTALL/lib/python" python setup.py install --home="$INSTALL"
+          else
+            echo "Executing (target): make $PKG_MAKE_OPTS_TARGET" | tr -s " "
+            make $PKG_MAKE_OPTS_TARGET
+          fi
         elif [ "$TARGET" = "host" ]; then
-          echo "Executing (host): make $PKG_MAKE_OPTS_HOST" | tr -s " "
-          make $PKG_MAKE_OPTS_HOST
+          if [ "$PKG_IS_PYTHON" != "yes" ]; then
+            echo "Executing (host): make $PKG_MAKE_OPTS_HOST" | tr -s " "
+            make $PKG_MAKE_OPTS_HOST
+          fi
         elif [ "$TARGET" = "init" ]; then
           echo "Executing (init): make $PKG_MAKE_OPTS_INIT" | tr -s " "
           make $PKG_MAKE_OPTS_INIT
@@ -322,10 +341,33 @@ if [ ! -f $STAMP ]; then
         makeinstall_$TARGET
       else
         if [ "$TARGET" = "target" ]; then
-          $MAKEINSTALL $PKG_MAKEINSTALL_OPTS_TARGET
-          make install DESTDIR=$INSTALL $PKG_MAKEINSTALL_OPTS_TARGET
+          if [ "$PKG_IS_PYTHON" = "yes" ]; then
+            for egg in "$INSTALL"/lib/python/*.egg; do
+              echo "Installing $(basename $egg)"
+              if [ -d "$egg" ]; then
+                cp -r "$egg"/* "$INSTALL/lib"
+              else
+                unzip -oq "$egg" -d "$INSTALL/lib"
+              fi
+            done
+            rm -fr "$INSTALL/lib/python" \
+                   "$INSTALL/lib/EGG-INFO"
+            find $INSTALL/lib -name "*.py" -exec rm -rf "{}" ";"
+          else
+            $MAKEINSTALL $PKG_MAKEINSTALL_OPTS_TARGET
+            make install DESTDIR=$INSTALL $PKG_MAKEINSTALL_OPTS_TARGET
+          fi
         elif [ "$TARGET" = "host" ]; then
-          make install $PKG_MAKEINSTALL_OPTS_HOST
+          if [ "$PKG_IS_PYTHON" = "yes" ]; then
+            mkdir -p ".$HOST_NAME"
+            cd ".$HOST_NAME"
+            cp -r ../* .
+            export LDSHARED="$CC -shared $LDSHARED"
+            python setup.py build
+            python setup.py install
+          else
+            make install $PKG_MAKEINSTALL_OPTS_HOST
+          fi
         elif [ "$TARGET" = "init" ]; then
           make install DESTDIR=$INSTALL $PKG_MAKEINSTALL_OPTS_INIT
         elif [ "$TARGET" = "bootstrap" ]; then
