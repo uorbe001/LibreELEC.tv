@@ -4,19 +4,40 @@ PKG_DEPENDS_TARGET="cffi"
 PKG_LONGDESC="SABnzbd Python dependencies"
 
 PKG_IS_PYTHON="yes"
-PKG_PYTHON_OPTS_TARGET="--cross-compile"
 
 pre_make_target() {
   export LDSHARED="-pthread"
-  cp -r "$PKG_DIR"/python/* .
+
+  touch dummy.py
+
+  cat << EOF > setup.py
+#!/usr/bin/env python
+
+from setuptools import setup
+
+setup(name='$PKG_NAME',
+      version='$PKG_VERSION',
+      description='$PKG_LONGDESC',
+      author='thoradia',
+      url='https://github.com/thoradia/LibreELEC.tv',
+      py_modules = ['dummy'],
+      install_requires=[
+          "Cheetah==2.4.4",
+          "Markdown==2.6.9",
+          "asn1crypto==0.23.0",
+          "cryptography==2.1.2",
+          "enum34==1.1.6",
+          "idna==2.6",
+          "ipaddress==1.0.18",
+          "py-notify==0.3.1",
+          "sabyenc==3.3.1",
+          "setuptools==36.6.0",
+          "six==1.11.0",
+        ],
+     )
+EOF
 }
 
 post_make_target() {
-  rm -fr "$INSTALL"/lib/python/cffi*
-  cp -r "$(get_build_dir cffi)"/.install_pkg/lib/python/*.egg \
-        "$INSTALL/lib/python"
-}
-
-post_makeinstall_target() {
-  rm -f "$INSTALL/lib/dummy.pyo"
+  cp -r "$(get_build_dir cffi)"/.install_pkg/lib/*.egg "$INSTALL/lib"
 }
