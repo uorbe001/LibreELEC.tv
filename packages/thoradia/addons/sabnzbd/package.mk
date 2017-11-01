@@ -1,7 +1,7 @@
 PKG_NAME="sabnzbd"
 PKG_VERSION="2.3.1"
 PKG_SHA256="0214f8497c3422649274128dfec10090c44e8bf1911aed14cb44d877424b45ef"
-PKG_REV="23"
+PKG_REV="24"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://sabnzbd.org/"
 PKG_URL="https://github.com/sabnzbd/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
@@ -22,7 +22,8 @@ make_target() {
 }
 
 makeinstall_target() {
-  : # nop
+  $TOOLCHAIN/bin/python $TOOLCHAIN/lib/python2.7/compileall.py -q .
+  find . -name "*.py" -exec rm -rf "{}" ";"
 }
 
 addon() {
@@ -35,7 +36,7 @@ addon() {
          $ADDON_BUILD/$PKG_ADDON_ID/bin/
 
   cp -PR $PKG_BUILD/* \
-         $(get_build_dir python_sabnzbd)/.install_pkg/lib/* \
+         $(get_build_dir python_sabnzbd)/.install_pkg/lib/*.egg \
          $ADDON_BUILD/$PKG_ADDON_ID/SABnzbd/
 
   rm -fr $ADDON_BUILD/$PKG_ADDON_ID/SABnzbd/osx \
