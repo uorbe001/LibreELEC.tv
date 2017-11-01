@@ -13,7 +13,3 @@ PKG_IS_PYTHON="yes"
 pre_make_host() {
   unset _python_exec_prefix _python_prefix _python_sysroot
 }
-
-makeinstall_target() {
-  :
-}
