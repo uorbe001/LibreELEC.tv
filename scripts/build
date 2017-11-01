@@ -309,9 +309,12 @@ if [ ! -f $STAMP ]; then
             cp -r ../* .
             export LDSHARED="$CC -shared $LDSHARED"
             export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
-            python setup.py build $PKG_PYTHON_OPTS_TARGET
-            mkdir -p "$INSTALL/lib/python"
-            PYTHONPATH="$INSTALL/lib/python" python setup.py install --home="$INSTALL"
+            mkdir -p "$INSTALL/lib"
+            PYTHONPATH="$INSTALL/lib" python setup.py easy_install \
+              --always-unzip \
+              --install-dir "$INSTALL/lib" \
+              --script-dir "$INSTALL/bin"\
+              .
           else
             echo "Executing (target): make $PKG_MAKE_OPTS_TARGET" | tr -s " "
             make $PKG_MAKE_OPTS_TARGET
@@ -342,17 +345,10 @@ if [ ! -f $STAMP ]; then
       else
         if [ "$TARGET" = "target" ]; then
           if [ "$PKG_IS_PYTHON" = "yes" ]; then
-            for egg in "$INSTALL"/lib/python/*.egg; do
-              echo "Installing $(basename $egg)"
-              if [ -d "$egg" ]; then
-                cp -r "$egg"/* "$INSTALL/lib"
-              else
-                unzip -oq "$egg" -d "$INSTALL/lib"
-              fi
-            done
-            rm -fr "$INSTALL/lib/python" \
-                   "$INSTALL/lib/EGG-INFO"
             find $INSTALL/lib -name "*.py" -exec rm -rf "{}" ";"
+            for egg in "$INSTALL"/lib/*.egg; do
+              echo "Installed $(basename $egg)"
+            done
           else
             $MAKEINSTALL $PKG_MAKEINSTALL_OPTS_TARGET
             make install DESTDIR=$INSTALL $PKG_MAKEINSTALL_OPTS_TARGET
