@@ -1,0 +1,20 @@
+#!/bin/sh
+
+. /etc/profile
+oe_setup_addon service.deluge
+
+if [ -z "$dl_nice" ]; then
+  dl_nice="0"
+fi
+
+cd "$ADDON_DIR/deluge"
+
+pythonpath="."
+for egg in *.egg; do
+  pythonpath="$pythonpath:$egg"
+done
+
+LD_LIBRARY_PATH="$PWD" \
+PYTHONPATH="$pythonpath" \
+nice -n "$dl_nice" \
+python deluge-web -c "$ADDON_HOME"
