@@ -1,7 +1,7 @@
 PKG_NAME="sabnzbd"
 PKG_VERSION="2.3.1"
 PKG_SHA256="0214f8497c3422649274128dfec10090c44e8bf1911aed14cb44d877424b45ef"
-PKG_REV="24"
+PKG_REV="25"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://sabnzbd.org/"
 PKG_URL="https://github.com/sabnzbd/$PKG_NAME/archive/$PKG_VERSION.tar.gz"

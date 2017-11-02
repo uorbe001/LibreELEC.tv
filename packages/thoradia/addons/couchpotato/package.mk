@@ -1,7 +1,7 @@
 PKG_NAME="couchpotato"
 PKG_VERSION="0a97ed5"
 PKG_SHA256="597ffec8d854bf195904bec7d5f44b13c97bdca6910742bdfbd8c91e4a6f5f83"
-PKG_REV="19"
+PKG_REV="20"
 PKG_LICENSE="GPLv3"
 PKG_SITE="http://couchpota.to"
 PKG_URL="https://github.com/CouchPotato/CouchPotatoServer/archive/$PKG_VERSION.tar.gz"
