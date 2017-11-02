@@ -384,6 +384,7 @@ if [ ! -f $STAMP ]; then
             mkdir -p ".$TARGET_NAME"
             cd ".$TARGET_NAME"
             cp -r ../* .
+            export CFLAGS="$CFLAGS -I$SYSROOT_PREFIX/usr/include -L$SYSROOT_PREFIX/usr/lib"
             export LDSHARED="$CC -shared $LDSHARED"
             export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
             mkdir -p "$INSTALL/lib"
