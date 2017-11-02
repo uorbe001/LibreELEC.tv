@@ -6,7 +6,6 @@ PKG_LONGDESC="SABnzbd Python dependencies"
 PKG_IS_PYTHON="yes"
 
 pre_make_target() {
-  export CFLAGS="$CFLAGS -L$SYSROOT_PREFIX/usr/lib"
   export LDSHARED="-pthread"
 
   touch dummy.py
