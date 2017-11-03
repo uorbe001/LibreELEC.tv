@@ -1,6 +1,6 @@
 PKG_NAME="python_common"
 PKG_VERSION="1"
-PKG_DEPENDS_TARGET="cffi libxslt"
+PKG_DEPENDS_TARGET="libxslt:host cffi libxslt"
 PKG_LONGDESC="Common Python dependencies"
 
 PKG_IS_PYTHON="yes"
