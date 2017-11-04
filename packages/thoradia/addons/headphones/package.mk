@@ -1,7 +1,7 @@
 PKG_NAME="headphones"
 PKG_VERSION="da9287d"
 PKG_SHA256="78108b833681c2df0c94272d2e8754e0f31daa3a1d4b6006306421f30bed4f7a"
-PKG_REV="17"
+PKG_REV="18"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/rembo10/headphones"
 PKG_URL="https://github.com/rembo10/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
@@ -25,11 +25,11 @@ makeinstall_target() {
 }
 
 addon() {
-  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/headphones/libs
+  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/headphones
 
   cp -PR $PKG_BUILD/* \
          $ADDON_BUILD/$PKG_ADDON_ID/headphones 
 
   cp -PR $(get_build_dir python_common)/.install_pkg/lib/*.egg/* \
-         $ADDON_BUILD/$PKG_ADDON_ID/headphones/libs
+         $ADDON_BUILD/$PKG_ADDON_ID/headphones/lib
 }
