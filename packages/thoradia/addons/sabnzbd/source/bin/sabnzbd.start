@@ -7,14 +7,6 @@ if [ -z "$sa_nice" ]; then
   sa_nice="0"
 fi
 
-cd "$ADDON_DIR/SABnzbd/"
-
-pythonpath="."
-for egg in *.egg; do
-  pythonpath="$pythonpath:$egg"
-done
-
-PYTHONPATH="$pythonpath" \
 nice -n "$sa_nice" \
 python "$ADDON_DIR/SABnzbd/SABnzbd.pyo" \
        --config-file "$ADDON_HOME/" \
