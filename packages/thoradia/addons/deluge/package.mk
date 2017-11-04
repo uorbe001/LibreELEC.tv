@@ -1,7 +1,7 @@
 PKG_NAME="deluge"
 PKG_VERSION="1.3.15"
 PKG_SHA256="6f2accf55bd97828f81ea13d5f29087103eb4f95b6be957323e23174cdc86826"
-PKG_REV="22"
+PKG_REV="23"
 PKG_LICENSE="GPLv3"
 PKG_SITE="http://deluge-torrent.org/"
 PKG_URL="https://github.com/deluge-torrent/deluge/archive/$PKG_NAME-$PKG_VERSION.tar.gz"
@@ -31,6 +31,6 @@ addon() {
          $PKG_BUILD/.install_pkg/lib/*.egg \
          $(get_build_dir libtorrent-rasterbar)/.install_pkg/usr/lib/libtorrent-rasterbar.so.? \
          $(get_build_dir libtorrent-rasterbar)/.install_pkg/usr/lib/python*/site-packages/libtorrent.so \
-         $(get_build_dir python_deluge)/.install_pkg/lib/*.egg \
+         $(get_build_dir python_deluge)/.install_pkg/lib/*.egg/* \
          $ADDON_BUILD/$PKG_ADDON_ID/deluge/
 }
