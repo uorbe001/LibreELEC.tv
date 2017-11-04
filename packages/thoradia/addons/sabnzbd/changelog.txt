@@ -1,3 +1,6 @@
+26
+- Simplify PYTHONPATH
+
 25
 - Rebuild
 
