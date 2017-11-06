@@ -118,6 +118,7 @@ pack_addon() {
        -e "s|@PROVIDER_NAME@|$PROVIDER_NAME|g" \
        -e "s|@PKG_ADDON_PROVIDES@|$PKG_ADDON_PROVIDES|g" \
        -e "s|@PKG_ADDON_SCREENSHOT@|$PKG_ADDON_SCREENSHOT|g" \
+       -e "s|@VPA@|$ADDON_VERSION/${DEVICE:-$PROJECT}/$ARCH|g" \
        -e "s|@PKG_ADDON_BROKEN@|$PKG_ADDON_BROKEN|g" \
        -i $ADDON_BUILD/$PKG_ADDON_ID/addon.xml
 
