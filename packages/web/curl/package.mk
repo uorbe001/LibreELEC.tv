@@ -25,7 +25,8 @@
 #   there: http://forum.xbmc.org/showthread.php?tid=177557
 
 PKG_NAME="curl"
-PKG_VERSION="7.52.0"
+PKG_VERSION="7.56.1"
+PKG_SHA256="2594670367875e7d87b0f129b5e4690150780884d90244ba0fe3e74a778b5f90"
 PKG_ARCH="any"
 PKG_LICENSE="MIT"
 PKG_SITE="http://curl.haxx.se"
@@ -41,6 +42,7 @@ PKG_AUTORECONF="no"
 
 PKG_CONFIGURE_OPTS_TARGET="ac_cv_lib_rtmp_RTMP_Init=yes \
                            ac_cv_header_librtmp_rtmp_h=yes \
+                           --disable-shared --enable-static \
                            --disable-debug \
                            --enable-optimize \
                            --enable-warnings \
