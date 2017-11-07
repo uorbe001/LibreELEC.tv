@@ -17,8 +17,8 @@
 ################################################################################
 
 PKG_NAME="inputstream.adaptive"
-PKG_VERSION="dde3921"
-PKG_SHA256="a3b2f2c47a9545921980fe1b81825538fd877c0ad9809ed266c80f5cba7544e6"
+PKG_VERSION="853144d"
+PKG_SHA256="cadc38ee93894b37603af30eb71f248fcf2df056d3cff9b840de1e895679d6e4"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.kodi.tv"
 PKG_URL="https://github.com/peak3d/inputstream.adaptive/archive/$PKG_VERSION.tar.gz"
@@ -28,6 +28,10 @@ PKG_SHORTDESC="inputstream.adaptive"
 PKG_LONGDESC="inputstream.adaptive"
 
 PKG_IS_ADDON="yes"
+
+if [ "$TARGET_ARCH" = "x86_64" ] || [ "$TARGET_ARCH" = "arm" ]; then
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET nss"
+fi
 
 addon() {
   install_binary_addon $PKG_ADDON_ID
