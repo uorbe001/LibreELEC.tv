@@ -1,0 +1,20 @@
+PKG_NAME="libevent"
+PKG_VERSION="2.1.8-stable"
+PKG_LICENSE="BSD"
+PKG_SITE="http://libevent.org/"
+PKG_URL="https://github.com/libevent/$PKG_NAME/archive/release-$PKG_VERSION.tar.gz"
+PKG_SOURCE_DIR="$PKG_NAME-release-$PKG_VERSION"
+PKG_DEPENDS_TARGET="toolchain openssl zlib"
+PKG_SHORTDESC="libevent: a library for asynchronous event notification"
+PKG_AUTORECONF="yes"
+PKG_USE_CMAKE="no"
+
+PKG_CONFIGURE_OPTS_TARGET="--disable-libevent-regress \
+                           --disable-samples \
+                           --disable-shared \
+                           --enable-static \
+                           --enable-openssl"
+
+post_makeinstall_target() {
+  rm -fr "$INSTALL"
+}
