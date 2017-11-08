@@ -37,7 +37,7 @@ if __name__ == '__main__':
          release[1] = 'RPi2'
       elif release[1] in ['Slice']:
          release[1] = 'RPi'
-      elif release[1] in ['WeTek_Core', 'WeTek_Hub', 'WeTek_Play_2']:
+      elif release[1] in ['S805', 'WeTek_Core', 'WeTek_Hub', 'WeTek_Play_2']:
          release[1] = 'WeTek_Play'
 
    xml = getXML()
