@@ -1,3 +1,6 @@
+12
+- Support S805
+
 11
 - Mention Medusa, remove SickRage
 
