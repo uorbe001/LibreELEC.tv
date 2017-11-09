@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. /etc/profile
+oe_setup_addon service.aria2
+
+nice -n "$ar_nice" \
+$ADDON_DIR/bin/aria2c \
+  --conf-path="$ADDON_HOME/aria2.conf" \
+  --enable-rpc \
+  --rpc-listen-all
