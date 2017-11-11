@@ -1,4 +1,5 @@
 import os.path
+import subprocess
 import xbmc
 import xbmcaddon
 import xbmcgui
@@ -62,4 +63,4 @@ if __name__ == '__main__':
                                 strings(30013),
                                 nolabel=strings(30014),
                                 yeslabel=strings(30015)) == False:
-         xbmc.executebuiltin('RestartApp')
+         subprocess.call(['systemctl', 'restart', 'kodi'])
