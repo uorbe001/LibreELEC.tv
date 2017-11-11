@@ -24,7 +24,10 @@ if __name__ == '__main__':
    vpa_old = addon.getSetting('vpa')
    addon.setSetting('le', strings(30010))
    addon.setSetting('vpa', strings(30010))
-   release = getTag(getTree(getXML('repository.libreelec.tv')), 'datadir').text.strip('/').split('/')[-3:]
+   try:
+      release = getTag(getTree(getXML('repository.libreelec.tv')), 'datadir').text.strip('/').split('/')[-3:]
+   except:
+      release = getTag(getTree(getXML('repository.rbrepo')), 'datadir').text.strip('/').split('/')[-3:]
    addon.setSetting('le', strings(30011).format(*release))
 
    if release[1] in ['Virtual']:
