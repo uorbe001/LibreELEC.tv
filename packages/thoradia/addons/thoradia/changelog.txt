@@ -1,3 +1,6 @@
+15
+- Add NZBHydra
+
 14
 - Support repository.rbrepo
 
