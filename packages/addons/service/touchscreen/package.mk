@@ -20,7 +20,7 @@ PKG_NAME="touchscreen"
 PKG_VERSION="1.0"
 PKG_REV="101"
 PKG_ARCH="any"
-PKG_ADDON_PROJECTS="Generic RPi RPi2 imx6"
+PKG_ADDON_PROJECTS="Generic RPi RPi2"
 PKG_LICENSE="GPL"
 PKG_SITE=""
 PKG_URL=""
@@ -49,8 +49,8 @@ addon() {
 
   cp $PKG_DIR/addon.xml $ADDON_BUILD/$PKG_ADDON_ID
 
-  # set version (no need to edit xml file on version bump)
-  $SED -e "s|@ADDON_VERSION@|$ADDON_VERSION.$PKG_REV|g" \
+  # set only version (revision will be added by buildsystem)
+  $SED -e "s|@ADDON_VERSION@|$ADDON_VERSION|g" \
        -i $ADDON_BUILD/$PKG_ADDON_ID/addon.xml
 
   cp $(get_build_dir tslib)/.install_pkg/usr/bin/* $ADDON_BUILD/$PKG_ADDON_ID/bin
