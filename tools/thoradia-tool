@@ -53,7 +53,7 @@ build_projects() {
     ARCH='aarch64'               PROJECT='Odroid_C2'  build_project
     ARCH='arm'     DEVICE='RPi'  PROJECT='RPi'        build_project
     ARCH='arm'                   PROJECT='WeTek_Play' build_project
-    ARCH='arm'                   PROJECT='imx6'       build_project
+#    ARCH='arm'                   PROJECT='imx6'       build_project
   fi
 }
 
