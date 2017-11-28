@@ -26,7 +26,7 @@ addon() {
 
   cp -PR "$PKG_BUILD"/.install_pkg/lib/* \
          "$PKG_BUILD"/flexget_vanilla.py \
-         "$(get_build_dir Python2)/Lib/lib2to3" \
+         "$(get_build_dir Python)/Lib/lib2to3" \
          "$ADDON_BUILD/$PKG_ADDON_ID/flexget"
 
   rm -fr "$ADDON_BUILD/$PKG_ADDON_ID"/flexget/FlexGet*/flexget/plugins \
