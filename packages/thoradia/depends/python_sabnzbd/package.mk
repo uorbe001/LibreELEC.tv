@@ -3,12 +3,10 @@ PKG_VERSION="1"
 PKG_DEPENDS_TARGET="cffi"
 PKG_LONGDESC="SABnzbd Python dependencies"
 
-PKG_IS_PYTHON="yes"
+PKG_TOOLCHAIN="python2"
 
 pre_make_target() {
   export LDSHARED="-pthread"
-
-  touch dummy.py
 
   cat << EOF > setup.py
 #!/usr/bin/env python
@@ -20,7 +18,6 @@ setup(name='$PKG_NAME',
       description='$PKG_LONGDESC',
       author='thoradia',
       url='https://github.com/thoradia/LibreELEC.tv',
-      py_modules = ['dummy'],
       install_requires=[
           "Cheetah==2.4.4",
           "Markdown==2.6.9",
@@ -39,5 +36,6 @@ EOF
 }
 
 post_make_target() {
-  cp -r "$(get_build_dir cffi)"/.install_pkg/lib/*.egg "$INSTALL/lib"
+  cp -r "$(get_build_dir cffi)/.install_pkg/usr/lib/$PKG_PYTHON_VERSION/site-packages"/*.egg \
+        "$INSTALL/usr/lib/$PKG_PYTHON_VERSION/site-packages"
 }
