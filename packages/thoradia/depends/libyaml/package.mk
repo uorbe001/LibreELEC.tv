@@ -6,7 +6,6 @@ PKG_SITE="http://pyyaml.org"
 PKG_URL="https://github.com/yaml/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="yaml is the next generation YAML parser and emitter"
-PKG_AUTORECONF="yes"
-PKG_USE_CMAKE="no"
+PKG_TOOLCHAIN="autotools"
 
 PKG_CONFIGURE_OPTS_TARGET="--disable-shared --enable-static"
