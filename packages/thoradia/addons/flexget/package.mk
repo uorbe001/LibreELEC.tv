@@ -7,7 +7,7 @@ PKG_URL="https://github.com/Flexget/Flexget/archive/$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="Flexget-$PKG_VERSION"
 PKG_DEPENDS_TARGET="libyaml"
 PKG_SECTION="service"
-PKG_IS_PYTHON="yes"
+PKG_TOOLCHAIN="python2"
 
 PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="FlexGet"
@@ -24,15 +24,12 @@ pre_make_target() {
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/flexget"
 
-  cp -PR "$PKG_BUILD"/.install_pkg/lib/* \
-         "$PKG_BUILD"/flexget_vanilla.py \
+  cp -PR "$PKG_BUILD/.install_pkg/usr/lib/$PKG_PYTHON_VERSION/site-packages"/*.egg \
+         "$PKG_BUILD/flexget_vanilla.py" \
          "$(get_build_dir Python2)/Lib/lib2to3" \
          "$ADDON_BUILD/$PKG_ADDON_ID/flexget"
 
-  rm -fr "$ADDON_BUILD/$PKG_ADDON_ID"/flexget/FlexGet*/flexget/plugins \
-         "$ADDON_BUILD/$PKG_ADDON_ID"/flexget/easy-install.pth \
-         "$ADDON_BUILD/$PKG_ADDON_ID"/flexget/site.pyo
-
-  cp -PR "$PKG_BUILD"/flexget/plugins \
-         "$ADDON_BUILD/$PKG_ADDON_ID"/flexget/FlexGet*/flexget
+  rm -fr "$ADDON_BUILD/$PKG_ADDON_ID/flexget"/FlexGet*.egg/flexget/plugins
+  cp -PR "$PKG_BUILD/flexget/plugins" \
+         "$ADDON_BUILD/$PKG_ADDON_ID/flexget"/FlexGet*.egg/flexget
 }
