@@ -6,7 +6,7 @@ PKG_SITE="https://github.com/Parchive/par2cmdline"
 PKG_URL="https://github.com/Parchive/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_SHORTDESC="par2cmdline: a PAR 2.0 compatible file verification and repair tool"
-PKG_AUTORECONF="yes"
+PKG_TOOLCHAIN="autotools"
 
 post_makeinstall_target() {
   ln -fs $INSTALL/usr/bin/par2 $INSTALL/usr/bin/par2create
