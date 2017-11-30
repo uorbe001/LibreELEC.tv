@@ -17,28 +17,24 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: free and easy binary newsreader"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a program to download binary files from Usenet servers."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
-make_target() {
-  : # nop
-}
+PKG_TOOLCHAIN="python2"
 
-makeinstall_target() {
-  $TOOLCHAIN/bin/python $TOOLCHAIN/lib/python2.7/compileall.py -q .
+make_target() {
+  rm -fr linux osx six win
+  "$TOOLCHAIN/bin/python" "$TOOLCHAIN/lib/python2.7/compileall.py" -q .
   find . -name "*.py" -exec rm -rf "{}" ";"
 }
 
 addon() {
-  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/bin \
-           $ADDON_BUILD/$PKG_ADDON_ID/SABnzbd
+  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/bin" \
+           "$ADDON_BUILD/$PKG_ADDON_ID/SABnzbd"
 
-  cp -PR $(get_build_dir p7zip)/bin/* \
-         $(get_build_dir par2cmdline)/.install_pkg/usr/bin/par2 \
-         $(get_build_dir unrar)/unrar \
-         $ADDON_BUILD/$PKG_ADDON_ID/bin/
+  cp -PR "$(get_build_dir p7zip)"/bin/* \
+         "$(get_build_dir par2cmdline)/.install_pkg/usr/bin/par2" \
+         "$(get_build_dir unrar)/unrar" \
+         "$ADDON_BUILD/$PKG_ADDON_ID/bin"
 
-  cp -PR $PKG_BUILD/* \
-         $(get_build_dir python_sabnzbd)/.install_pkg/lib/*.egg/* \
-         $ADDON_BUILD/$PKG_ADDON_ID/SABnzbd/
-
-  rm -fr $ADDON_BUILD/$PKG_ADDON_ID/SABnzbd/osx \
-         $ADDON_BUILD/$PKG_ADDON_ID/SABnzbd/win
+  cp -PR "$PKG_BUILD"/* \
+         "$(get_build_dir python_sabnzbd)/.install_pkg/usr/lib/$PKG_PYTHON_VERSION/site-packages"/*.egg \
+         "$ADDON_BUILD/$PKG_ADDON_ID/SABnzbd"
 }
