@@ -7,6 +7,11 @@ if [ -z "$cp_nice" ]; then
   cp_nice="0"
 fi
 
+for p in "$ADDON_DIR"/CouchPotato/libs/*.egg; do
+  _pythonpath="$_pythonpath:$p"
+done
+
+PYTHONPATH="$_pythonpath" \
 nice -n "$cp_nice" \
 python $ADDON_DIR/CouchPotato/CouchPotato.py \
        --config_file $ADDON_HOME/settings.conf \

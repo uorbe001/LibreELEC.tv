@@ -17,6 +17,8 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: automatic movie downloading via Usenet and BitTo
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) downloads movies automatically, easily and in the best quality as soon as they are available."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
+PKG_TOOLCHAIN="python2"
+
 make_target() {
   :
 }
@@ -31,6 +33,6 @@ addon() {
   cp -PR $PKG_BUILD/* \
          $ADDON_BUILD/$PKG_ADDON_ID/CouchPotato
 
-  cp -PR $(get_build_dir python_common)/.install_pkg/lib/*.egg/* \
+  cp -r "$(get_build_dir python_common)/.install_pkg/usr/lib/$PKG_PYTHON_VERSION/site-packages"/*.egg \
          $ADDON_BUILD/$PKG_ADDON_ID/CouchPotato/libs
 }
