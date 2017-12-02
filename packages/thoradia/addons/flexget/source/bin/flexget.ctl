@@ -7,13 +7,8 @@ if [ ! -f "$ADDON_HOME/config.yml" ]; then
   cp "$ADDON_DIR/config/config.yml" "$ADDON_HOME"
 fi
 
-pythonpath="$ADDON_DIR/flexget"
-for p in "$ADDON_DIR"/flexget/*; do
-  pythonpath="$pythonpath:$p"
-done
-
-PYTHONPATH="$pythonpath" \
+PYTHONUSERBASE="$ADDON_DIR" \
 nice -n "$fg_nice" \
-python "$ADDON_DIR/flexget/flexget_vanilla.py" \
+python "$ADDON_DIR/bin/flexget_vanilla.py" \
        -c "$ADDON_HOME/config.yml" \
        $@

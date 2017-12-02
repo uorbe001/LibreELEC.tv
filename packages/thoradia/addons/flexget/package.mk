@@ -1,13 +1,13 @@
 PKG_NAME="flexget"
-PKG_VERSION="2.11.3"
-PKG_SHA256="0c3875ddacf7e3f7e5cc35edc5ab48cf99c29dcb3dec6c8210e9a5045046d503"
-PKG_REV="2"
+PKG_VERSION="2.11.6"
+PKG_SHA256="2c51f8e3028e5f008be9375b04155e677c57dc3868da27e81a3df240608d42f2"
+PKG_REV="3"
 PKG_SITE="https://flexget.com"
 PKG_URL="https://github.com/Flexget/Flexget/archive/$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="Flexget-$PKG_VERSION"
 PKG_DEPENDS_TARGET="libyaml"
 PKG_SECTION="service"
-PKG_IS_PYTHON="yes"
+PKG_TOOLCHAIN="python2"
 
 PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="FlexGet"
@@ -18,21 +18,24 @@ PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a program aimed to automate down
 PKG_DISCLAIMER="Keep it legal and carry on"
 
 pre_make_target() {
-  echo "setuptools==36.8.0" >> requirements.txt
+  echo "setuptools==38.2.3" >> requirements.txt
+}
+
+post_makeinstall_target() {
+  cp -PR "$(get_build_dir Python)/Lib/lib2to3" \
+         "$INSTALL/usr/lib/python2.7/site-packages"
+
+  rm -fr "$INSTALL/usr/lib/python2.7/site-packages"/FlexGet*.egg/flexget/plugins
+  cp -PR "$ROOT/$PKG_BUILD/flexget/plugins" \
+         "$INSTALL/usr/lib/python2.7/site-packages"/FlexGet*.egg/flexget
 }
 
 addon() {
-  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/flexget"
+  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/bin"
 
-  cp -PR "$PKG_BUILD"/.install_pkg/lib/* \
-         "$PKG_BUILD"/flexget_vanilla.py \
-         "$(get_build_dir Python)/Lib/lib2to3" \
-         "$ADDON_BUILD/$PKG_ADDON_ID/flexget"
+  cp -PR "$PKG_BUILD/flexget_vanilla.py" \
+         "$ADDON_BUILD/$PKG_ADDON_ID/bin"
 
-  rm -fr "$ADDON_BUILD/$PKG_ADDON_ID"/flexget/FlexGet*/flexget/plugins \
-         "$ADDON_BUILD/$PKG_ADDON_ID"/flexget/easy-install.pth \
-         "$ADDON_BUILD/$PKG_ADDON_ID"/flexget/site.pyo
-
-  cp -PR "$PKG_BUILD"/flexget/plugins \
-         "$ADDON_BUILD/$PKG_ADDON_ID"/flexget/FlexGet*/flexget
+  cp -PR "$PKG_BUILD/.install_pkg/usr/lib" \
+         "$ADDON_BUILD/$PKG_ADDON_ID"
 }
