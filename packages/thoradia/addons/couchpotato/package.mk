@@ -28,11 +28,11 @@ makeinstall_target() {
 }
 
 addon() {
-  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/CouchPotato
+  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/couchpotato"
 
-  cp -PR $PKG_BUILD/* \
-         $ADDON_BUILD/$PKG_ADDON_ID/CouchPotato
+  cp -PR "$PKG_BUILD"/* \
+         "$ADDON_BUILD/$PKG_ADDON_ID/couchpotato"
 
-  cp -r "$(get_build_dir python_common)/.install_pkg/usr/lib/$PKG_PYTHON_VERSION/site-packages"/*.egg \
-         $ADDON_BUILD/$PKG_ADDON_ID/CouchPotato/libs
+  cp -PR "$(get_build_dir python_common)/.install_pkg/usr/lib" \
+         "$ADDON_BUILD/$PKG_ADDON_ID"
 }
