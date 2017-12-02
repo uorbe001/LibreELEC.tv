@@ -164,7 +164,7 @@ if [ ! -f $STAMP ]; then
   # include buildfile
     . $PKG_DIR/package.mk
 
-    if [ "$PKG_IS_PYTHON" = "yes" ]; then
+    if [ "$PKG_TOOLCHAIN" = "python2" ]; then
       PKG_DEPENDS_HOST="toolchain distutilscross:host $PKG_DEPENDS_HOST"
       PKG_DEPENDS_TARGET="toolchain distutilscross:host Python $PKG_DEPENDS_TARGET"
     fi
@@ -302,26 +302,33 @@ if [ ! -f $STAMP ]; then
         make_$TARGET
       else
         if [ "$TARGET" = "target" ]; then
-          if [ "$PKG_IS_PYTHON" = "yes" ]; then
-            echo "Executing (target): python setup.py build $PKG_PYTHON_OPTS_TARGET" | tr -s " "
-            mkdir -p ".$TARGET_NAME"
-            cd ".$TARGET_NAME"
-            cp -r ../* .
+          if [ "$PKG_TOOLCHAIN" = "python2" ]; then
+            echo "Executing (target): python2 setup.py easy_install" | tr -s " "
+            mkdir -p .$TARGET_NAME
+            cp -r * .$TARGET_NAME
+            cd .$TARGET_NAME
             export CFLAGS="$CFLAGS -I$SYSROOT_PREFIX/usr/include -L$SYSROOT_PREFIX/usr/lib"
             export LDSHARED="$CC -shared $LDSHARED"
             export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
-            mkdir -p "$INSTALL/lib"
-            PYTHONPATH="$INSTALL/lib" python setup.py easy_install \
-              --always-unzip \
-              --install-dir "$INSTALL/lib" \
-              --script-dir "$INSTALL/bin"\
+            _prefix="$INSTALL/usr"
+            _pythonpath="$_prefix/lib/python2.7/site-packages"
+            mkdir -p "$_pythonpath"
+            PYTHONPATH="$PYTHONPATH:$_pythonpath" \
+            $TOOLCHAIN/bin/python2 setup.py easy_install \
+              --prefix "$_prefix" \
               .
+            find "$_prefix" -name "*.py" -exec rm -rf "{}" ";"
+            find "$_prefix" -name "*.egg" -type f -exec zip -dq {} "*.exe" "*.py" ";"
           else
             echo "Executing (target): make $PKG_MAKE_OPTS_TARGET" | tr -s " "
             make $PKG_MAKE_OPTS_TARGET
           fi
         elif [ "$TARGET" = "host" ]; then
-          if [ "$PKG_IS_PYTHON" != "yes" ]; then
+          if [ "$PKG_TOOLCHAIN" = "python2" ]; then
+            echo "Executing (host): python2 setup.py build" | tr -s " "
+            export LDSHARED="$CC -shared $LDSHARED"
+            $TOOLCHAIN/bin/python2 setup.py build --build-base .$HOST_NAME
+          else
             echo "Executing (host): make $PKG_MAKE_OPTS_HOST" | tr -s " "
             make $PKG_MAKE_OPTS_HOST
           fi
@@ -345,23 +352,14 @@ if [ ! -f $STAMP ]; then
         makeinstall_$TARGET
       else
         if [ "$TARGET" = "target" ]; then
-          if [ "$PKG_IS_PYTHON" = "yes" ]; then
-            find $INSTALL/lib -name "*.py" -exec rm -rf "{}" ";"
-            for egg in "$INSTALL"/lib/*.egg; do
-              echo "Installed $(basename $egg)"
-            done
-          else
+          if [ "$PKG_TOOLCHAIN" != "python2" ]; then
             $MAKEINSTALL $PKG_MAKEINSTALL_OPTS_TARGET
             make install DESTDIR=$INSTALL $PKG_MAKEINSTALL_OPTS_TARGET
           fi
         elif [ "$TARGET" = "host" ]; then
-          if [ "$PKG_IS_PYTHON" = "yes" ]; then
-            mkdir -p ".$HOST_NAME"
-            cd ".$HOST_NAME"
-            cp -r ../* .
-            export LDSHARED="$CC -shared $LDSHARED"
-            python setup.py build
-            python setup.py install
+          if [ "$PKG_TOOLCHAIN" = "python2" ]; then
+            echo "Executing (host): python2 setup.py install" | tr -s " "
+            $TOOLCHAIN/bin/python2 setup.py build --build-base .$HOST_NAME install
           else
             make install $PKG_MAKEINSTALL_OPTS_HOST
           fi
