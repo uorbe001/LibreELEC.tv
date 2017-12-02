@@ -21,15 +21,21 @@ pre_make_target() {
   echo "setuptools==36.8.0" >> requirements.txt
 }
 
-addon() {
-  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/flexget"
+post_makeinstall_target() {
+  cp -PR "$(get_build_dir Python2)/Lib/lib2to3" \
+         "$INSTALL/usr/lib/$PKG_PYTHON_VERSION/site-packages"
 
-  cp -PR "$PKG_BUILD/.install_pkg/usr/lib/$PKG_PYTHON_VERSION/site-packages"/*.egg \
-         "$PKG_BUILD/flexget_vanilla.py" \
-         "$(get_build_dir Python2)/Lib/lib2to3" \
-         "$ADDON_BUILD/$PKG_ADDON_ID/flexget"
-
-  rm -fr "$ADDON_BUILD/$PKG_ADDON_ID/flexget"/FlexGet*.egg/flexget/plugins
+  rm -fr "$INSTALL/usr/lib/$PKG_PYTHON_VERSION/site-packages"/FlexGet*.egg/flexget/plugins
   cp -PR "$PKG_BUILD/flexget/plugins" \
-         "$ADDON_BUILD/$PKG_ADDON_ID/flexget"/FlexGet*.egg/flexget
+         "$INSTALL/usr/lib/$PKG_PYTHON_VERSION/site-packages"/FlexGet*.egg/flexget
+}
+
+addon() {
+  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/bin"
+
+  cp -PR "$PKG_BUILD/flexget_vanilla.py" \
+         "$ADDON_BUILD/$PKG_ADDON_ID/bin"
+ 
+  cp -PR "$PKG_BUILD/.install_pkg/usr/lib" \
+         "$ADDON_BUILD/$PKG_ADDON_ID"
 }
