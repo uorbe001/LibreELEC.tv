@@ -464,12 +464,12 @@ else
 
     # python based build
     "python2:host")
-      echo "Executing (host): python setup.py build" | tr -s " "
+      echo "Executing (host): python2 setup.py build" | tr -s " "
       export LDSHARED="$CC -shared $LDSHARED"
-      python setup.py build --build-base .$HOST_NAME
+      $TOOLCHAIN/bin/python2 setup.py build --build-base .$HOST_NAME
       ;;
     "python2:target")
-      echo "Executing (target): python setup.py easy_install" | tr -s " "
+      echo "Executing (target): python2 setup.py easy_install" | tr -s " "
       mkdir -p .$TARGET_NAME
       cp -r * .$TARGET_NAME
       cd .$TARGET_NAME
@@ -480,8 +480,8 @@ else
       _pythonpath="$_prefix/lib/$PKG_PYTHON_VERSION/site-packages"
       mkdir -p "$_pythonpath"
       PYTHONPATH="$PYTHONPATH:$_pythonpath" \
-        python setup.py easy_install \
-          --prefix "$INSTALL/usr" \
+      $TOOLCHAIN/bin/python2 setup.py easy_install \
+        --prefix "$_prefix" \
         .
       find "$_prefix" -name "*.py" -exec rm -rf "{}" ";"
       find "$_prefix" -name "*.egg" -type f -exec zip -dq {} "*.exe" "*.py" ";"
@@ -532,8 +532,8 @@ else
 
     # python based build
     "python2:host")
-      echo "Executing (host): python setup.py install" | tr -s " "
-      python setup.py build --build-base .$HOST_NAME install
+      echo "Executing (host): python2 setup.py install" | tr -s " "
+      $TOOLCHAIN/bin/python2 setup.py build --build-base .$HOST_NAME install
       ;;
   esac
 fi
