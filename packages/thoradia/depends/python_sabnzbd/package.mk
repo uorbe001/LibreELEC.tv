@@ -3,12 +3,10 @@ PKG_VERSION="1"
 PKG_DEPENDS_TARGET="cffi"
 PKG_LONGDESC="SABnzbd Python dependencies"
 
-PKG_IS_PYTHON="yes"
+PKG_TOOLCHAIN="python2"
 
 pre_make_target() {
   export LDSHARED="-pthread"
-
-  touch dummy.py
 
   cat << EOF > setup.py
 #!/usr/bin/env python
@@ -20,24 +18,25 @@ setup(name='$PKG_NAME',
       description='$PKG_LONGDESC',
       author='thoradia',
       url='https://github.com/thoradia/LibreELEC.tv',
-      py_modules = ['dummy'],
       install_requires=[
           "Cheetah==2.4.4",
           "Markdown==2.6.9",
           "asn1crypto==0.23.0",
-          "cryptography==2.1.2",
+          "cryptography==2.1.4",
           "enum34==1.1.6",
           "idna==2.6",
           "ipaddress==1.0.18",
           "py-notify==0.3.1",
           "sabyenc==3.3.1",
-          "setuptools==36.6.0",
+          "setuptools==38.2.3",
           "six==1.11.0",
         ],
      )
 EOF
 }
 
-post_make_target() {
-  cp -r "$(get_build_dir cffi)"/.install_pkg/lib/*.egg "$INSTALL/lib"
+post_makeinstall_target() {
+  _site="usr/lib/python2.7/site-packages"
+  cp -r "$(get_build_dir cffi)/.install_pkg/$_site"/*.egg "$INSTALL/$_site"
+  cat "$(get_build_dir cffi)/.install_pkg/$_site/easy-install.pth" >> "$INSTALL/$_site/easy-install.pth"
 }
