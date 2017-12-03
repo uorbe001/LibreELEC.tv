@@ -1,7 +1,7 @@
 PKG_NAME="couchpotato"
 PKG_VERSION="0a97ed5"
 PKG_SHA256="597ffec8d854bf195904bec7d5f44b13c97bdca6910742bdfbd8c91e4a6f5f83"
-PKG_REV="20"
+PKG_REV="21"
 PKG_LICENSE="GPLv3"
 PKG_SITE="http://couchpota.to"
 PKG_URL="https://github.com/CouchPotato/CouchPotatoServer/archive/$PKG_VERSION.tar.gz"
@@ -17,15 +17,7 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: automatic movie downloading via Usenet and BitTo
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) downloads movies automatically, easily and in the best quality as soon as they are available."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
-PKG_TOOLCHAIN="python2"
-
-make_target() {
-  :
-}
-
-makeinstall_target() {
-  :
-}
+PKG_TOOLCHAIN="manual"
 
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/couchpotato"
