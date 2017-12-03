@@ -13,3 +13,7 @@ PKG_TOOLCHAIN="python2"
 pre_make_host() {
   unset _python_exec_prefix _python_prefix _python_sysroot
 }
+
+post_makeinstall_target() {
+  rm "$INSTALL"/usr/lib/python2.7/site-packages/cffi-*.egg/EGG-INFO/requires.txt
+}
