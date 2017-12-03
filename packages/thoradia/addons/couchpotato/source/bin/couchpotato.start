@@ -3,10 +3,6 @@
 . /etc/profile
 oe_setup_addon service.couchpotato
 
-if [ -z "$cp_nice" ]; then
-  cp_nice="0"
-fi
-
 PYTHONUSERBASE="$ADDON_DIR" \
 nice -n "$cp_nice" \
 python "$ADDON_DIR/couchpotato/CouchPotato.py" \
