@@ -8,7 +8,7 @@ PKG_DEPENDS_HOST="libffi:host"
 PKG_DEPENDS_TARGET="cffi:host libffi"
 PKG_LONGDESC="Foreign Function Interface for Python calling C code"
 
-PKG_IS_PYTHON="yes"
+PKG_TOOLCHAIN="python2"
 
 pre_make_host() {
   unset _python_exec_prefix _python_prefix _python_sysroot
