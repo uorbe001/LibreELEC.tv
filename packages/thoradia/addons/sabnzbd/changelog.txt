@@ -1,3 +1,7 @@
+27
+- Fix nice
+- Rework Python
+
 26
 - Simplify PYTHONPATH
 
