@@ -1,3 +1,7 @@
+21
+- Fix nice
+- Rework Python
+
 20
 - Rebuild
 

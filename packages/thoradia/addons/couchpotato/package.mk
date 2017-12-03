@@ -1,7 +1,7 @@
 PKG_NAME="couchpotato"
 PKG_VERSION="0a97ed5"
 PKG_SHA256="597ffec8d854bf195904bec7d5f44b13c97bdca6910742bdfbd8c91e4a6f5f83"
-PKG_REV="20"
+PKG_REV="21"
 PKG_LICENSE="GPLv3"
 PKG_SITE="http://couchpota.to"
 PKG_URL="https://github.com/CouchPotato/CouchPotatoServer/archive/$PKG_VERSION.tar.gz"
@@ -26,11 +26,11 @@ makeinstall_target() {
 }
 
 addon() {
-  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/CouchPotato
+  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/couchpotato"
 
-  cp -PR $PKG_BUILD/* \
-         $ADDON_BUILD/$PKG_ADDON_ID/CouchPotato
+  cp -PR "$PKG_BUILD"/* \
+         "$ADDON_BUILD/$PKG_ADDON_ID/couchpotato"
 
-  cp -PR $(get_build_dir python_common)/.install_pkg/lib/*.egg/* \
-         $ADDON_BUILD/$PKG_ADDON_ID/CouchPotato/libs
+  cp -PR "$(get_build_dir python_common)/.install_pkg/usr/lib" \
+         "$ADDON_BUILD/$PKG_ADDON_ID"
 }
