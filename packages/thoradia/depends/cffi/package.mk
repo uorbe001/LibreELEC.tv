@@ -9,3 +9,7 @@ PKG_DEPENDS_TARGET="cffi:host libffi"
 PKG_LONGDESC="Foreign Function Interface for Python calling C code"
 
 PKG_TOOLCHAIN="python2"
+
+post_makeinstall_target() {
+  rm "$INSTALL/usr/lib/$PKG_PYTHON_VERSION"/site-packages/cffi-*.egg/EGG-INFO/requires.txt
+}
