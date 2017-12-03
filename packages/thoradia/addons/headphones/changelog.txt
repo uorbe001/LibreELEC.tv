@@ -1,3 +1,8 @@
+19
+- Add port to settings
+- Fix nice
+- Rework Python
+
 18
 - Copy python_common in lib
 
