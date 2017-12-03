@@ -14,10 +14,6 @@ while true; do
   sleep 1
 done
 
-if [ -z "$dl_nice" ]; then
-  dl_nice="0"
-fi
-
-LD_LIBRARY_PATH="$ADDON_DIR/deluge" \
+PYTHONUSERBASE="$ADDON_DIR" \
 nice -n "$dl_nice" \
-python "$ADDON_DIR/deluge/deluged" -d -c "$ADDON_HOME"
+deluged --config "$ADDON_HOME" --do-not-daemonize
