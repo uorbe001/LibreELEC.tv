@@ -1,7 +1,7 @@
 PKG_NAME="flexget"
-PKG_VERSION="2.11.6"
-PKG_SHA256="2c51f8e3028e5f008be9375b04155e677c57dc3868da27e81a3df240608d42f2"
-PKG_REV="3"
+PKG_VERSION="2.11.9"
+PKG_SHA256="17afbe7da1b572f53cc51b0ad06ad3a890e589b0a1fba59f832ad17aaccd90b7"
+PKG_REV="4"
 PKG_SITE="https://flexget.com"
 PKG_URL="https://github.com/Flexget/Flexget/archive/$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="Flexget-$PKG_VERSION"
@@ -19,6 +19,7 @@ PKG_DISCLAIMER="Keep it legal and carry on"
 
 pre_make_target() {
   echo "setuptools==38.2.3" >> requirements.txt
+  echo "transmissionrpc==0.11" >> requirements.txt
 }
 
 post_makeinstall_target() {
