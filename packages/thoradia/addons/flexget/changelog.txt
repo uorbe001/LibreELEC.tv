@@ -1,3 +1,7 @@
+4
+- Update to 2.11.9
+- Add transmissionrpc
+
 3
 - Update to 2.11.6
 - Rework Python
