@@ -1,2 +1,6 @@
+2
+- Update to 0.1.20
+- Medusa requires Locale
+
 1
 - Initial add-on
