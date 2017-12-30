@@ -17,6 +17,8 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: automatic video library manager for TV shows"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) watches for new episodes of your favorite shows, and when they are posted it does its magic."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
+PKG_TOOLCHAIN="manual"
+
 make_target() {
   :
 }
