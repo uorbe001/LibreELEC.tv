@@ -4,6 +4,7 @@
 oe_setup_addon service.qbittorrent
 
 HOME="$ADDON_HOME" \
+LD_LIBRARY_PATH="$ADDON_DIR/lib" \
 nice -n "$qb_nice" \
 qbittorrent-nox --daemon --webui-port="$qb_port" << EOF
 y
