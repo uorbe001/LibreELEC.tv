@@ -1,7 +1,7 @@
 PKG_NAME="deluge"
 PKG_VERSION="1.3.15"
 PKG_SHA256="6f2accf55bd97828f81ea13d5f29087103eb4f95b6be957323e23174cdc86826"
-PKG_REV="24"
+PKG_REV="25"
 PKG_LICENSE="GPLv3"
 PKG_SITE="http://deluge-torrent.org/"
 PKG_URL="https://github.com/deluge-torrent/deluge/archive/$PKG_NAME-$PKG_VERSION.tar.gz"
