@@ -43,10 +43,6 @@
 # build and install espeak support (yes / no)
   ESPEAK_SUPPORT="yes"
 
-# build and install with non-free support
-# (RAR compression support in KODI) (yes / no)
-  KODI_NONFREE_SUPPORT="yes"
-
 # build and install with BluRay support (yes / no)
   KODI_BLURAY_SUPPORT="yes"
 
@@ -168,6 +164,11 @@
 
 # swapfile size if SWAP_SUPPORT=yes in MB
   SWAPFILESIZE="128"
+
+# additional packages to install:
+# Space separated list is supported,
+# e.g. ADDITIONAL_PACKAGES="PACKAGE1 PACKAGE2"
+  ADDITIONAL_PACKAGES=""
 
 # build with installer (yes / no)
   INSTALLER_SUPPORT="yes"

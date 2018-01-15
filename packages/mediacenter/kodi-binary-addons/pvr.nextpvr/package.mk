@@ -17,8 +17,8 @@
 ################################################################################
 
 PKG_NAME="pvr.nextpvr"
-PKG_VERSION="5b7caa2"
-PKG_SHA256="9781a1b90287e146c4fed57a3604799dbad791cac7046827f449828a39d2077d"
+PKG_VERSION="11dfdbb"
+PKG_SHA256="7b02914050f5c6a81fc6fb67c50ef5991c82348b8ae83bde6ea7efb9a921e3e0"
 PKG_REV="2"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"

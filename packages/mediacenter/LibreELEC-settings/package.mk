@@ -17,10 +17,10 @@
 ################################################################################
 
 PKG_NAME="LibreELEC-settings"
-PKG_VERSION="85b86d4"
-PKG_SHA256="944f0984f96234e81ae79a595942d830c9554b39c8be8ca287a3c4ff8930c695"
+PKG_VERSION="b13dbf3"
+PKG_SHA256="ca9622bbeac2c5fa4d2e362b653de41502e9a584d73c1026f1e46ea5b0e571a5"
 PKG_ARCH="any"
-PKG_LICENSE="prop."
+PKG_LICENSE="GPL"
 PKG_SITE="https://libreelec.tv"
 PKG_URL="https://github.com/LibreELEC/service.libreelec.settings/archive/$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="service.libreelec.settings-$PKG_VERSION*"

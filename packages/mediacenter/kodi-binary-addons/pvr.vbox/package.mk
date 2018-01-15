@@ -17,8 +17,8 @@
 ################################################################################
 
 PKG_NAME="pvr.vbox"
-PKG_VERSION="56052da"
-PKG_SHA256="96c5cd2e3fb2d0d8cdb6f6c9d1afa3cfccb65604407eaac531ca784f01387a9b"
+PKG_VERSION="24126fd"
+PKG_SHA256="e5ff139d29b53d56552201ed1efaad9599b4f7eca4ff96b7f3f358246dbbb723"
 PKG_REV="2"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"

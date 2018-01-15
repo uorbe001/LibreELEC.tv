@@ -35,6 +35,9 @@ ROOT="${PWD}"
 DISTRO_DIR="$ROOT/distributions"
 PROJECT_DIR="$ROOT/projects"
 
+# include helper functions
+. config/functions
+
 # include versioning
   . config/version
 
@@ -58,8 +61,9 @@ PROJECT_DIR="$ROOT/projects"
    . $PROJECT_DIR/$PROJECT/devices/$DEVICE/options
  fi
 
-LINUX_DEPENDS="$PROJECT_DIR/$PROJECT/linux/linux.${TARGET_PATCH_ARCH:-$TARGET_ARCH}.conf $PROJECT_DIR/$PROJECT/devices/$DEVICE/linux/linux.${TARGET_PATCH_ARCH:-$TARGET_ARCH}.conf $ROOT/packages/linux/package.mk"
-[ "$TARGET_ARCH" = "x86_64" ] && LINUX_DEPENDS+=" $ROOT/packages/linux-firmware/intel-ucode/package.mk $ROOT/packages/linux-firmware/x86-firmware/package.mk"
+LINUX_DEPENDS="$PROJECT_DIR/$PROJECT/linux $PROJECT_DIR/$PROJECT/patches/linux $ROOT/packages/linux"
+[ -n "$DEVICE" ] && LINUX_DEPENDS+=" $PROJECT_DIR/$PROJECT/devices/$DEVICE/linux $PROJECT_DIR/$PROJECT/devices/$DEVICE/patches/linux"
+[ "$TARGET_ARCH" = "x86_64" ] && LINUX_DEPENDS+=" $ROOT/packages/linux-firmware/intel-ucode $ROOT/packages/linux-firmware/kernel-firmware"
 
 # Need to point to your actual cc
 # If you have ccache installed, take care that LOCAL_CC don't point to it
@@ -104,6 +108,9 @@ fi
 if [ "$OEM" = yes -o "$OEM" = no ]; then
   OEM_SUPPORT=$OEM
 fi
+
+check_path >&2
+check_config >&2
 
 . config/graphic
 . config/path $1

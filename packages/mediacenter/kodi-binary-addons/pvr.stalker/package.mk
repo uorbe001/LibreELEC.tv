@@ -17,8 +17,8 @@
 ################################################################################
 
 PKG_NAME="pvr.stalker"
-PKG_VERSION="5f53d18"
-PKG_SHA256="a73dc965734eb5fd17580f3d1f8e27f87da1c3f5fc490eaa998a7dbf0856e44f"
+PKG_VERSION="c91421d"
+PKG_SHA256="5062ca5199f08d698aaae3625d8ccd1decdae49281e860b484719f84e5bea902"
 PKG_REV="2"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"

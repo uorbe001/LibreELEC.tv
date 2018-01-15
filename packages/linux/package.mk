@@ -31,22 +31,24 @@ PKG_IS_KERNEL_PKG="yes"
 
 case "$LINUX" in
   amlogic-3.10)
-    PKG_VERSION="f016bb1"
-    PKG_SHA256="6297c6aa6bbe1ffa794b516b32dd4d6be5cd4d26cd502e4dbd9079b49ad7b403"
+    PKG_VERSION="24a7272"
+    PKG_SHA256="7219a9d0ba7b3ded590f335671671431b15fff64dc05b83565e2867c4f7b2e60"
     PKG_URL="https://github.com/LibreELEC/linux-amlogic/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_DIR="$PKG_NAME-amlogic-$PKG_VERSION*"
     PKG_PATCH_DIRS="amlogic-3.10"
+    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET aml-dtbtools:host"
     ;;
   amlogic-3.14)
-    PKG_VERSION="2e193b8"
-    PKG_SHA256="cc6139490d461c1c5c0fad1003d3f94153272a11db9a786362fb2a0daa04b926"
+    PKG_VERSION="9ccf3f0"
+    PKG_SHA256="0b5f0ecffe6ceb0e31dfc6c27ba328d0682b05723fe88a2f5c4cf6ceb7b7565f"
     PKG_URL="https://github.com/LibreELEC/linux-amlogic/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_DIR="$PKG_NAME-amlogic-$PKG_VERSION*"
     PKG_PATCH_DIRS="amlogic-3.14"
+    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET aml-dtbtools:host"
     ;;
   *)
-    PKG_VERSION="4.14"
-    PKG_SHA256="f81d59477e90a130857ce18dc02f4fbe5725854911db1e7ba770c7cd350f96a7"
+    PKG_VERSION="4.14.10"
+    PKG_SHA256="86baf1374ca003bdd9a43cae7f59cec02b455a6c38c3705aa46b2b68d91ed110"
     PKG_URL="https://www.kernel.org/pub/linux/kernel/v4.x/$PKG_NAME-$PKG_VERSION.tar.xz"
     PKG_PATCH_DIRS="default"
     ;;
@@ -187,9 +189,24 @@ make_target() {
   LDFLAGS="" make $KERNEL_TARGET $KERNEL_MAKE_EXTRACMD
 
   if [ "$BUILD_ANDROID_BOOTIMG" = "yes" ]; then
+    DTB_BLOBS=($(ls arch/$TARGET_KERNEL_ARCH/boot/dts/amlogic/*.dtb 2>/dev/null || true))
+    DTB_BLOBS_COUNT="${#DTB_BLOBS[@]}"
+    DTB_BLOB_OUTPUT="arch/$TARGET_KERNEL_ARCH/boot/dtb.img"
+    ANDROID_BOOTIMG_SECOND="--second $DTB_BLOB_OUTPUT"
+
+    if [ "$DTB_BLOBS_COUNT" -gt 1 ]; then
+      $TOOLCHAIN/bin/dtbTool -o arch/$TARGET_KERNEL_ARCH/boot/dtb.img -p scripts/dtc/ arch/$TARGET_KERNEL_ARCH/boot/dts/amlogic/
+    elif [ "$DTB_BLOBS_COUNT" -eq 1 ]; then
+      cp -PR $DTB_BLOBS $DTB_BLOB_OUTPUT
+    else
+      ANDROID_BOOTIMG_SECOND=""
+    fi
+
     LDFLAGS="" mkbootimg --kernel arch/$TARGET_KERNEL_ARCH/boot/$KERNEL_TARGET --ramdisk $BUILD/image/initramfs.cpio \
-      $ANDROID_BOOTIMG_OPTIONS --output arch/$TARGET_KERNEL_ARCH/boot/boot.img
+      $ANDROID_BOOTIMG_SECOND $ANDROID_BOOTIMG_OPTIONS --output arch/$TARGET_KERNEL_ARCH/boot/boot.img
+
     mv -f arch/$TARGET_KERNEL_ARCH/boot/boot.img arch/$TARGET_KERNEL_ARCH/boot/$KERNEL_TARGET
+
   fi
 }
 
