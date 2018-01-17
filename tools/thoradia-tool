@@ -60,8 +60,8 @@ build_projects() {
 build_repositories() {
 . config/options
 
-  echo $TARGET $ADDONS $ADDON_VERSION
-  for REPO in $(ls -1d $TARGET/$ADDONS/$ADDON_VERSION/*/*); do
+  echo $TARGET_IMG $ADDONS $ADDON_VERSION
+  for REPO in $(ls -1d $TARGET_IMG/$ADDONS/$ADDON_VERSION/*/*); do
     if [ ! -f "$REPO/addons.xml" ]; then
       touch "$REPO/addons.xml"
     fi
@@ -69,7 +69,7 @@ build_repositories() {
 
   echo "[*] cleanup addons ..."
   olddir=""
-  find $TARGET/$ADDONS/$ADDON_VERSION -iname 'changelog*.txt' | sort -rV | while read line ; do
+  find $TARGET_IMG/$ADDONS/$ADDON_VERSION -iname 'changelog*.txt' | sort -rV | while read line ; do
     dir=$(dirname $line)
     if [ "$olddir" = "$dir" ] ; then
       rm -f $line
@@ -78,7 +78,7 @@ build_repositories() {
   done
 
   olddir=""
-  find $TARGET/$ADDONS/$ADDON_VERSION -iname '*.zip' | sort -rV | while read line ; do
+  find $TARGET_IMG/$ADDONS/$ADDON_VERSION -iname '*.zip' | sort -rV | while read line ; do
     dir=$(dirname $line)
     if [ "$olddir" = "$dir" ] ; then
       rm -f $line
@@ -90,7 +90,7 @@ build_repositories() {
   echo "[*] updating addons.xml* ..."
   rm -rf .addons
   pwd=`pwd`
-  find $TARGET/$ADDONS/$ADDON_VERSION -iname addons.xml | while read line ; do
+  find $TARGET_IMG/$ADDONS/$ADDON_VERSION -iname addons.xml | while read line ; do
     localdir=`echo $line | sed s/addons.xml//g`
     echo " [*] updating $line..."
     echo '<?xml version="1.0" encoding="UTF-8"?>
