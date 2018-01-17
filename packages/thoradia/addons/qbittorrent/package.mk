@@ -7,7 +7,7 @@ PKG_SITE="http://www.qbittorrent.org/"
 PKG_URL="https://github.com/qbittorrent/qBittorrent/archive/release-$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="qBittorrent-release-$PKG_VERSION"
 PKG_DEPENDS_TARGET="toolchain libtorrent-rasterbar qt-everywhere"
-PKG_USE_CMAKE="no"
+PKG_TOOLCHAIN="configure"
 PKG_SECTION="service"
 
 PKG_IS_ADDON="yes"
