@@ -1,7 +1,7 @@
 PKG_NAME="transmission"
-PKG_VERSION="2.92"
-PKG_SHA256="3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f"
-PKG_REV="14"
+PKG_VERSION="2.93"
+PKG_SHA256="8815920e0a4499bcdadbbe89a4115092dab42ce5199f71ff9a926cfd12b9b90b"
+PKG_REV="15"
 PKG_LICENSE="OSS"
 PKG_SITE="http://www.transmissionbt.com/"
 PKG_URL="https://github.com/transmission/transmission-releases/raw/master/$PKG_NAME-$PKG_VERSION.tar.xz"
@@ -16,7 +16,7 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: a fast, easy and free BitTorrent client"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a fast, easy and free BitTorrent client."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
-PKG_USE_CMAKE="no"
+PKG_TOOLCHAIN="autotools"
 PKG_CONFIGURE_OPTS_TARGET="--enable-static  \
                            --enable-daemon  \
                            --enable-utp     \
