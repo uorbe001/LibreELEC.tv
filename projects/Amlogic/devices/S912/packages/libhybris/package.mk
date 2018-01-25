@@ -16,20 +16,21 @@
 #  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="qca9377-firmware-aml"
-PKG_VERSION="1.0.0-3"
-PKG_SHA256="9a9f214943e77e89ce8fc8c0dc5b41bc253478a9d92383a76590993df861f36d"
-PKG_ARCH="arm aarch64"
-PKG_LICENSE="BSD-3c"
-PKG_SITE="http://linode.boundarydevices.com/repos/apt/ubuntu-relx/pool/main/q/qca-firmware/"
-PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.xz"
-PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="firmware"
-PKG_SHORTDESC="qca9377 Linux firmware"
-PKG_LONGDESC="qca9377 Linux firmware"
-PKG_TOOLCHAIN="manual"
+PKG_NAME="libhybris"
+PKG_VERSION="070c3ab"
+PKG_SHA256="070dcf48aa424c1c56c1d95f5116051a22a76bd5ac0c877febf04b63d9559ea2"
+PKG_ARCH="any"
+PKG_LICENSE="GPL"
+PKG_SITE="https://github.com/libhybris/libhybris"
+PKG_URL="https://github.com/libhybris/libhybris/archive/$PKG_VERSION.tar.gz"
+PKG_SOURCE_DIR="$PKG_NAME-$PKG_VERSION*/hybris"
+PKG_DEPENDS_TARGET="toolchain android-headers"
+PKG_SECTION="devel"
+PKG_SHORTDESC="libhybris: Allows to run bionic-based HW adaptations in glibc systems - libs"
+PKG_TOOLCHAIN="autotools"
 
-makeinstall_target() {
-  mkdir -p $INSTALL/$(get_full_firmware_dir)
-    cp -a * $INSTALL/$(get_full_firmware_dir)
-}
+PKG_CONFIGURE_OPTS_TARGET="--enable-arch=$TARGET_ARCH \
+                           --with-default-egl-platform=fbdev \
+                           --with-android-headers=$BUILD/android-headers-25 \
+                           --with-default-hybris-ld-library-path=/system/lib \
+                           --enable-mali-quirks"

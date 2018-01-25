@@ -16,20 +16,25 @@
 #  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="qca9377-firmware-aml"
-PKG_VERSION="1.0.0-3"
-PKG_SHA256="9a9f214943e77e89ce8fc8c0dc5b41bc253478a9d92383a76590993df861f36d"
-PKG_ARCH="arm aarch64"
-PKG_LICENSE="BSD-3c"
-PKG_SITE="http://linode.boundarydevices.com/repos/apt/ubuntu-relx/pool/main/q/qca-firmware/"
-PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.xz"
-PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="firmware"
-PKG_SHORTDESC="qca9377 Linux firmware"
-PKG_LONGDESC="qca9377 Linux firmware"
+PKG_NAME="opengl-meson-t82x"
+PKG_VERSION="915cb48"
+PKG_SHA256="9b5f65afa21250b67578c250da030a5829e69131ce91b2f167b01b1ed30be781"
+PKG_ARCH="arm"
+PKG_LICENSE="nonfree"
+PKG_SITE="https://github.com/kszaq/opengl-meson-t82x"
+PKG_URL="https://github.com/kszaq/opengl-meson-t82x/archive/$PKG_VERSION.tar.gz"
+PKG_DEPENDS_TARGET="toolchain libhybris"
+PKG_SOURCE_DIR="$PKG_NAME-$PKG_VERSION*"
+PKG_SECTION="graphics"
+PKG_SHORTDESC="opengl-meson: OpenGL ES pre-compiled libraries for Mali GPUs found in Amlogic Meson SoCs"
+PKG_LONGDESC="opengl-meson: OpenGL ES pre-compiled libraries for Mali GPUs found in Amlogic Meson SoCs. The libraries were extracted from Khadas VIM2 Android firmware."
 PKG_TOOLCHAIN="manual"
 
 makeinstall_target() {
-  mkdir -p $INSTALL/$(get_full_firmware_dir)
-    cp -a * $INSTALL/$(get_full_firmware_dir)
+  mkdir -p $INSTALL/system
+    cp -a system/* $INSTALL/system
+}
+
+post_install() {
+  enable_service unbind-console.service
 }

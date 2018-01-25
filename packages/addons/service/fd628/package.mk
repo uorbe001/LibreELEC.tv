@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of LibreELEC - https://libreelec.tv
-#      Copyright (C) 2017-present Team LibreELEC
+#      Copyright (C) 2018-present Team LibreELEC
 #
 #  LibreELEC is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -16,20 +16,30 @@
 #  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="qca9377-firmware-aml"
-PKG_VERSION="1.0.0-3"
-PKG_SHA256="9a9f214943e77e89ce8fc8c0dc5b41bc253478a9d92383a76590993df861f36d"
-PKG_ARCH="arm aarch64"
-PKG_LICENSE="BSD-3c"
-PKG_SITE="http://linode.boundarydevices.com/repos/apt/ubuntu-relx/pool/main/q/qca-firmware/"
-PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.xz"
+PKG_NAME="fd628"
+PKG_VERSION="1.0"
+PKG_REV="100"
+PKG_ARCH="any"
+PKG_LICENSE="GPL"
+PKG_SITE="https://libreelec.tv"
+PKG_URL=""
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="firmware"
-PKG_SHORTDESC="qca9377 Linux firmware"
-PKG_LONGDESC="qca9377 Linux firmware"
+PKG_SECTION="service"
+PKG_SHORTDESC="fd628: Kodi service to light up additional icons on devices with FD628 display"
+PKG_LONGDESC="fd628: Kodi service to light up additional icons on devices with FD628 display"
 PKG_TOOLCHAIN="manual"
 
-makeinstall_target() {
-  mkdir -p $INSTALL/$(get_full_firmware_dir)
-    cp -a * $INSTALL/$(get_full_firmware_dir)
+PKG_IS_ADDON="yes"
+PKG_ADDON_NAME="service.fd628"
+PKG_ADDON_PROJECTS="S905"
+PKG_ADDON_TYPE="xbmc.service"
+
+make_target() {
+  $SED -e "s|@PKG_VERSION@|$PKG_VERSION|g" \
+       -i addon.xml
+}
+
+addon() {
+  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID
+  cp -R $PKG_BUILD/* $ADDON_BUILD/$PKG_ADDON_ID
 }

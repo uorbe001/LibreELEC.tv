@@ -16,20 +16,14 @@
 #  along with LibreELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="qca9377-firmware-aml"
-PKG_VERSION="1.0.0-3"
-PKG_SHA256="9a9f214943e77e89ce8fc8c0dc5b41bc253478a9d92383a76590993df861f36d"
-PKG_ARCH="arm aarch64"
-PKG_LICENSE="BSD-3c"
-PKG_SITE="http://linode.boundarydevices.com/repos/apt/ubuntu-relx/pool/main/q/qca-firmware/"
-PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.xz"
+PKG_NAME="android-headers"
+PKG_VERSION="25"
+PKG_SHA256="1e0ecdf56c33aaa523109254e2c475878d8cfc5795ebd4bb5ecbaf80926f4fe9"
+PKG_ARCH="any"
+PKG_LICENSE="Apache"
+PKG_SITE="https://android.googlesource.com/"
+PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="firmware"
-PKG_SHORTDESC="qca9377 Linux firmware"
-PKG_LONGDESC="qca9377 Linux firmware"
+PKG_SECTION="devel"
+PKG_SHORTDESC="android-headers: Android Platform Headers from AOSP releases"
 PKG_TOOLCHAIN="manual"
-
-makeinstall_target() {
-  mkdir -p $INSTALL/$(get_full_firmware_dir)
-    cp -a * $INSTALL/$(get_full_firmware_dir)
-}
