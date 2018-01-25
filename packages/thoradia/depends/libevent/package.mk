@@ -7,8 +7,7 @@ PKG_URL="https://github.com/libevent/$PKG_NAME/archive/release-$PKG_VERSION.tar.
 PKG_SOURCE_DIR="$PKG_NAME-release-$PKG_VERSION"
 PKG_DEPENDS_TARGET="toolchain openssl zlib"
 PKG_SHORTDESC="libevent: a library for asynchronous event notification"
-PKG_AUTORECONF="yes"
-PKG_USE_CMAKE="no"
+PKG_TOOLCHAIN="autotools"
 
 PKG_CONFIGURE_OPTS_TARGET="--disable-libevent-regress \
                            --disable-samples \
