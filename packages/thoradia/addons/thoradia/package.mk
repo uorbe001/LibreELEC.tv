@@ -12,13 +12,7 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: add-on repository"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_REV) add-on repository, provides aria2, btfs, CouchPotato, Deluge, FlexGet, Headphones, Jackett, Lidarr, Medusa, NZBGet, NZBHydra, qBittorent, Radarr, rTorrent, ruTorrent, SABnzbd, Sonarr and Transmission."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
-make_target() {
-  :
-}
-
-makeinstall_target() {
-  :
-}
+PKG_TOOLCHAIN="manual"
 
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID"
