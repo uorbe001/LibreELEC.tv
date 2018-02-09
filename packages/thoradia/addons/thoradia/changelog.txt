@@ -1,3 +1,6 @@
+17
+- Add btfs and Lidarr
+
 16
 - Add FlexGet
 
