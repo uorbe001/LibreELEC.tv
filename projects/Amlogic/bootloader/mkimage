@@ -25,3 +25,7 @@ for src in $INSTALL_SRC_DIR/*autoscript.src ; do
     mcopy "$LE_TMP/$(basename $src .src)" ::
   fi
 done
+
+# copy device trees to part1
+mmd device_trees
+  mcopy $RELEASE_DIR/3rdparty/bootloader/*.dtb ::/device_trees

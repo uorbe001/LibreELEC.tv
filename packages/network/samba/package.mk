@@ -17,8 +17,8 @@
 ################################################################################
 
 PKG_NAME="samba"
-PKG_VERSION="4.7.4"
-PKG_SHA256="fb12d0c4452f85b67b78bbeabd4c762d8feb8ff83e39d044d285120c2c488247"
+PKG_VERSION="4.7.5"
+PKG_SHA256="316d04fa9fbabad6f2739fe68e1928778af4866265409119aba6ef3435c8fe8d"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv3+"
 PKG_SITE="https://www.samba.org"
@@ -139,21 +139,16 @@ post_makeinstall_target() {
   rm -rf $INSTALL/usr/bin
   rm -rf $INSTALL/usr/lib/python*
   rm -rf $INSTALL/usr/share/perl*
+  rm -rf $INSTALL/usr/lib64
 
   mkdir -p $INSTALL/usr/lib/samba
     cp $PKG_DIR/scripts/samba-config $INSTALL/usr/lib/samba
 
-  mkdir -p $INSTALL/etc/samba
-  if [ -n "$DEVICE" -a -f $PROJECT_DIR/$PROJECT/devices/$DEVICE/config/smb.conf ]; then
-    cp $PROJECT_DIR/$PROJECT/devices/$DEVICE/config/smb.conf $INSTALL/etc/samba
-  elif [ -f $PROJECT_DIR/$PROJECT/config/smb.conf ]; then
-    cp $PROJECT_DIR/$PROJECT/config/smb.conf $INSTALL/etc/samba
-  elif [ -f $DISTRO_DIR/$DISTRO/config/smb.conf ]; then
-    cp $DISTRO_DIR/$DISTRO/config/smb.conf $INSTALL/etc/samba
-  else
-    cp $PKG_DIR/config/smb.conf $INSTALL/etc/samba
+  if find_file_path config/smb.conf; then
+    mkdir -p $INSTALL/etc/samba
+      cp ${FOUND_PATH} $INSTALL/etc/samba
     mkdir -p $INSTALL/usr/config
-      cp $PKG_DIR/config/smb.conf $INSTALL/usr/config/samba.conf.sample
+      cp $INSTALL/etc/samba/smb.conf $INSTALL/usr/config/samba.conf.sample
   fi
 
   if [ "$DEVTOOLS" = "yes" ]; then
