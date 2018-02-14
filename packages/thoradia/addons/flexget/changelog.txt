@@ -1,3 +1,9 @@
+5
+- Update to 2.12.7
+- Add deluge
+- Add mechanize
+- Fix flexget.ctl
+
 4
 - Update to 2.11.9
 - Add transmissionrpc
