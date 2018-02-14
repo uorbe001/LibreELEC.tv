@@ -11,4 +11,4 @@ PYTHONUSERBASE="$ADDON_DIR" \
 nice -n "$fg_nice" \
 python "$ADDON_DIR/bin/flexget_vanilla.py" \
        -c "$ADDON_HOME/config.yml" \
-       $@
+       "$@"
