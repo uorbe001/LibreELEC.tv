@@ -1,7 +1,7 @@
 PKG_NAME="flexget"
-PKG_VERSION="2.11.9"
-PKG_SHA256="17afbe7da1b572f53cc51b0ad06ad3a890e589b0a1fba59f832ad17aaccd90b7"
-PKG_REV="4"
+PKG_VERSION="2.12.7"
+PKG_SHA256="7cc26ac06dcc77f036e27f62b56dde6446bb2dc87b60575482c2f34ec985ea13"
+PKG_REV="5"
 PKG_SITE="https://flexget.com"
 PKG_URL="https://github.com/Flexget/Flexget/archive/$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="Flexget-$PKG_VERSION"
@@ -18,7 +18,8 @@ PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a program aimed to automate down
 PKG_DISCLAIMER="Keep it legal and carry on"
 
 pre_make_target() {
-  echo "setuptools==38.2.3" >> requirements.txt
+  echo "mechanize==0.3.6" >> requirements.txt
+  echo "setuptools==38.5.1" >> requirements.txt
   echo "transmissionrpc==0.11" >> requirements.txt
 }
 
@@ -33,9 +34,6 @@ post_makeinstall_target() {
 
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/bin"
-
-  cp -PR "$PKG_BUILD/flexget_vanilla.py" \
-         "$ADDON_BUILD/$PKG_ADDON_ID/bin"
 
   cp -PR "$PKG_BUILD/.install_pkg/usr/lib" \
          "$ADDON_BUILD/$PKG_ADDON_ID"
