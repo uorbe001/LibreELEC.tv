@@ -15,13 +15,7 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: meta search for NZB indexers "
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a meta search for NZB indexers. It provides easy access to a number of raw and newznab based indexers. You can search all your indexers from one place and use it as indexer source for tools like Sonarr or CouchPotato."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
-make_target() {
-  :
-}
-
-makeinstall_target() {
-  :
-}
+PKG_TOOLCHAIN="manual"
 
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/nzbhydra"
