@@ -8,6 +8,8 @@ PKG_SOURCE_DIR="MediaInfoLib-$PKG_VERSION"
 PKG_DEPENDS_TARGET="toolchain libzen zlib"
 PKG_SHORTDESC="MediaInfo is a convenient unified display of the most relevant technical and tag data for video and audio files"
 
+PKG_TOOLCHAIN="manual"
+
 make_target() {
   cd Project/GNU/Library
   do_autoreconf
