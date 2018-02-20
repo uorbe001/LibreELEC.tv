@@ -7,7 +7,6 @@ PKG_SITE="https://github.com/Novik/ruTorrent"
 PKG_URL="https://github.com/Novik/ruTorrent/archive/v$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="ruTorrent-$PKG_VERSION"
 PKG_DEPENDS_TARGET="toolchain mediainfo php unrar"
-PKG_AUTORECONF="no"
 PKG_SECTION="service"
 
 PKG_IS_ADDON="yes"
@@ -19,17 +18,7 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: web front-end for rTorrent"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a web front-end for rtorrent designed to emulate the look and feel of µTorrent web user interface."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
-configure_target() {
-  :
-}
-
-make_target() {
-  :
-}
-
-makeinstall_target() {
-  :
-}
+PKG_TOOLCHAIN="manual"
 
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/bin"
