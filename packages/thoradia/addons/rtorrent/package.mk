@@ -6,7 +6,6 @@ PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/rakshasa/rtorrent"
 PKG_URL="https://github.com/rakshasa/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain curl libtorrent ncurses screen xmlrpc-c"
-PKG_AUTORECONF="yes"
 PKG_SECTION="service"
 
 PKG_IS_ADDON="yes"
@@ -17,10 +16,15 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: quick and efficient BitTorrent client"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a quick and efficient BitTorrent client."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
+PKG_TOOLCHAIN="autotools"
+
 PKG_CONFIGURE_OPTS_TARGET="--enable-static \
                            --disable-debug \
                            --disable-shared \
                            --with-xmlrpc-c=$SYSROOT_PREFIX/usr/bin/xmlrpc-c-config"
+pre_configure_target() {
+  export LIBS="-lncurses"
+}
 
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/bin"
