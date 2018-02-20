@@ -17,7 +17,7 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: the next generation download utility"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a lightweight multi-protocol and multi-source command-line download utility, which supports HTTP/HTTPS, FTP, SFTP, BitTorrent and Metalink, and can be manipulated via built-in JSON-RPC and XML-RPC interfaces."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
-PKG_AUTORECONF="yes"
+PKG_TOOLCHAIN="autotools"
 PKG_CONFIGURE_OPTS_TARGET="--disable-shared --enable-static"
 
 makeinstall_target() {
