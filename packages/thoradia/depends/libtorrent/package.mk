@@ -6,7 +6,8 @@ PKG_SITE="https://github.com/rakshasa/libtorrent"
 PKG_URL="https://github.com/rakshasa/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain openssl zlib"
 PKG_LONGDESC="libtorrent"
-PKG_AUTORECONF="yes"
+
+PKG_TOOLCHAIN="autotools"
 
 PKG_CONFIGURE_OPTS_TARGET="--enable-static \
                            --disable-debug \
