@@ -18,13 +18,7 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: a fork of Sonarr to work with movies à la Couch
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a fork of Sonarr to work with movies à la CouchPotato."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
-make_target() {
-  :
-}
-
-makeinstall_target() {
-  :
-}
+PKG_TOOLCHAIN="manual"
 
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/Radarr"
