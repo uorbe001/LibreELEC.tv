@@ -14,5 +14,5 @@ PKG_DISCLAIMER="Keep it legal and carry on"
 
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/lib"
-  cp -L $(get_build_dir libmediainfo-shared)/.install_pkg/usr/lib/libmediainfo.so.0 $ADDON_BUILD/$PKG_ADDON_ID/lib/
+  cp -L $(get_build_dir libmediainfo-shared)/Project/GNU/Library/.libs/libmediainfo.so.0 $ADDON_BUILD/$PKG_ADDON_ID/lib/
 }
