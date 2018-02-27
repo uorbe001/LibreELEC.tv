@@ -1,6 +1,6 @@
 PKG_NAME="cffi"
-PKG_VERSION="1.11.2"
-PKG_SHA256="ab87dd91c0c4073758d07334c1e5f712ce8fe48f007b86f8238773963ee700a6"
+PKG_VERSION="1.11.5"
+PKG_SHA256="e90f17980e6ab0f3c2f3730e56d1fe9bcba1891eeea58966e89d352492cc74f4"
 PKG_LICENSE="MIT"
 PKG_SITE="http://cffi.readthedocs.io/"
 PKG_URL="https://files.pythonhosted.org/packages/source/${PKG_NAME:0:1}/$PKG_NAME/$PKG_NAME-$PKG_VERSION.tar.gz"
