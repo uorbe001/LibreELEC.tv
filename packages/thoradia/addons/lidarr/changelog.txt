@@ -1,2 +1,5 @@
+2
+- Update to 0.2.0.286
+
 1
 - Initial add-on
