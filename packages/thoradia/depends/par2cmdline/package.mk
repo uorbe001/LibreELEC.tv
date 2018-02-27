@@ -1,6 +1,6 @@
 PKG_NAME="par2cmdline"
-PKG_VERSION="0.7.4"
-PKG_SHA256="ea260fa804bb20514123dea06a0ad4066260cd5c76db087715468ca7e2d49c47"
+PKG_VERSION="0.8.0"
+PKG_SHA256="461b45627a0d800061657b2d800c432c7d1c86c859b40a3ced35a0cc6a85faca"
 PKG_LICENSE="OSS"
 PKG_SITE="https://github.com/Parchive/par2cmdline"
 PKG_URL="https://github.com/Parchive/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
