@@ -1,3 +1,6 @@
+3
+- Update to 0.2.0
+
 2
 - Update to 0.1.20
 - Medusa requires Locale
