@@ -1,3 +1,6 @@
+7
+- Update libmediainfo to 17.12
+
 6
 - Update libmediainfo to 17.10
 
