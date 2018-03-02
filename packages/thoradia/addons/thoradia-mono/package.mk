@@ -1,5 +1,5 @@
 PKG_NAME="thoradia-mono"
-PKG_REV="6"
+PKG_REV="7"
 PKG_DEPENDS_TARGET="toolchain libmediainfo-shared"
 PKG_SECTION="virtual"
 
