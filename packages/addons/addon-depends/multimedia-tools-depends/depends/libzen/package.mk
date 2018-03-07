@@ -27,7 +27,7 @@ PKG_SOURCE_DIR="ZenLib"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_SECTION="multimedia"
 PKG_LONGDESC="MediaInfo is a convenient unified display of the most relevant technical and tag data for video and audio files"
-PKG_TOOLCHAIN="manual"
+PKG_TOOLCHAIN="make"
 
 make_target() {
   cd Project/GNU/Library
