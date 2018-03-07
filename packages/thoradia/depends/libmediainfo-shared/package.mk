@@ -7,10 +7,10 @@ PKG_URL="https://github.com/MediaArea/MediaInfoLib/archive/v$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="MediaInfoLib-$PKG_VERSION"
 PKG_DEPENDS_TARGET="toolchain libzen zlib"
 PKG_SHORTDESC="MediaInfo is a convenient unified display of the most relevant technical and tag data for video and audio files"
-
-PKG_TOOLCHAIN="manual"
+PKG_TOOLCHAIN="make"
 
 make_target() {
+  CXXFLAGS="$CXXFLAGS -lpthread -lzen"
   cd Project/GNU/Library
   do_autoreconf
   ./configure \
@@ -20,7 +20,8 @@ make_target() {
         --enable-shared \
         --prefix=/usr \
         --enable-visibility \
-        --disable-libcurl \
-        --disable-libmms
+        --with-gnu-ld \
+        --without-libcurl \
+        --without-libmms
   make
 }
