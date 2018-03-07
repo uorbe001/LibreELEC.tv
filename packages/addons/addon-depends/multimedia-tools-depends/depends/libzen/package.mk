@@ -9,7 +9,7 @@ PKG_SITE="http://mediaarea.net/en/MediaInfo/"
 PKG_URL="http://mediaarea.net/download/source/libzen/${PKG_VERSION}/libzen_${PKG_VERSION}.tar.xz"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="MediaInfo is a convenient unified display of the most relevant technical and tag data for video and audio files"
-PKG_TOOLCHAIN="manual"
+PKG_TOOLCHAIN="make"
 
 make_target() {
   cd Project/GNU/Library
