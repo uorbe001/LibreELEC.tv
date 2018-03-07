@@ -1,5 +1,5 @@
 PKG_NAME="thoradia-mono"
-PKG_REV="7"
+PKG_REV="8"
 PKG_DEPENDS_TARGET="toolchain libmediainfo-shared"
 PKG_SECTION="virtual"
 
@@ -14,5 +14,5 @@ PKG_DISCLAIMER="Keep it legal and carry on"
 
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/lib"
-  cp -L $(get_build_dir libmediainfo-shared)/Project/GNU/Library/.libs/libmediainfo.so.0 $ADDON_BUILD/$PKG_ADDON_ID/lib/
+  cp -L $(get_build_dir libmediainfo-shared)/.install_pkg/usr/lib/libmediainfo.so.0 $ADDON_BUILD/$PKG_ADDON_ID/lib/
 }
