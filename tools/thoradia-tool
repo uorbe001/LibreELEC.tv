@@ -50,6 +50,7 @@ build_projects() {
   else
     ARCH='arm'     DEVICE='RPi2' PROJECT='RPi'        build_project
     ARCH='x86_64'                PROJECT='Generic'    build_project
+    ARCH='arm'     DEVICE='RPi'  PROJECT='RPi'        build_project
 #    ARCH='aarch64'               PROJECT='Odroid_C2'  build_project
 #    ARCH='arm'     DEVICE='RPi'  PROJECT='RPi'        build_project
 #    ARCH='arm'                   PROJECT='WeTek_Play' build_project
