@@ -17,9 +17,9 @@
 ################################################################################
 
 PKG_NAME="ffmpeg"
-# Current branch is: release/3.4-kodi
-PKG_VERSION="f96fd5c"
-PKG_SHA256="35ccc07c72b203101030a35b4bb11779365adb7bbf143ef1d68a1f87c781e38b"
+# Current branch is: release/4.0-kodi
+PKG_VERSION="e115b34"
+PKG_SHA256="d9aa2a281f002982474b45980553d3669a8c79021cf08e4cfcff5dd6e8e81268"
 PKG_ARCH="any"
 PKG_LICENSE="LGPLv2.1+"
 PKG_SITE="https://ffmpeg.org"
@@ -29,12 +29,13 @@ PKG_DEPENDS_TARGET="toolchain yasm:host zlib bzip2 openssl speex"
 PKG_SECTION="multimedia"
 PKG_SHORTDESC="FFmpeg is a complete, cross-platform solution to record, convert and stream audio and video."
 PKG_LONGDESC="FFmpeg is a complete, cross-platform solution to record, convert and stream audio and video."
+PKG_BUILD_FLAGS="-gold -lto"
 
 # Dependencies
 get_graphicdrivers
 
 if [ "$VAAPI_SUPPORT" = "yes" ]; then
-  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET intel-vaapi-driver"
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libva"
   FFMPEG_VAAPI="--enable-vaapi"
 else
   FFMPEG_VAAPI="--disable-vaapi"
@@ -45,6 +46,13 @@ if [ "$VDPAU_SUPPORT" = "yes" -a "$DISPLAYSERVER" = "x11" ]; then
   FFMPEG_VDPAU="--enable-vdpau"
 else
   FFMPEG_VDPAU="--disable-vdpau"
+fi
+
+if [ "$PROJECT" = "Rockchip" ]; then
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET rkmpp"
+  FFMPEG_RKMPP="--enable-rkmpp --enable-libdrm --enable-version3"
+else
+  FFMPEG_RKMPP="--disable-rkmpp"
 fi
 
 if build_with_debug; then
@@ -75,12 +83,6 @@ fi
 pre_configure_target() {
   cd $PKG_BUILD
   rm -rf .$TARGET_NAME
-
-# ffmpeg fails building for x86_64 with LTO support
-  strip_lto
-
-# ffmpeg fails running with GOLD support
-  strip_gold
 
   if [ "$KODIPLAYER_DRIVER" = "bcm2835-driver" ]; then
     CFLAGS="-I$SYSROOT_PREFIX/usr/include/interface/vcos/pthreads -I$SYSROOT_PREFIX/usr/include/interface/vmcs_host/linux $CFLAGS"
@@ -125,7 +127,6 @@ configure_target() {
               --disable-extra-warnings \
               --disable-ffprobe \
               --disable-ffplay \
-              --disable-ffserver \
               --enable-ffmpeg \
               --enable-avdevice \
               --enable-avcodec \
@@ -149,6 +150,7 @@ configure_target() {
               $FFMPEG_VAAPI \
               $FFMPEG_VDPAU \
               $FFMPEG_RPI \
+              $FFMPEG_RKMPP \
               --disable-dxva2 \
               --enable-runtime-cpudetect \
               $FFMPEG_TABLES \

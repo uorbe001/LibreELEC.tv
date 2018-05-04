@@ -17,8 +17,8 @@
 ################################################################################
 
 PKG_NAME="mesa"
-PKG_VERSION="17.3.5"
-PKG_SHA256="eb9228fc8aaa71e0205c1481c5b157752ebaec9b646b030d27478e25a6d7936a"
+PKG_VERSION="18.0.2"
+PKG_SHA256="98fa159768482dc568b9f8bf0f36c7acb823fa47428ffd650b40784f16b9e7b3"
 PKG_ARCH="any"
 PKG_LICENSE="OSS"
 PKG_SITE="http://www.mesa3d.org/"
@@ -68,6 +68,13 @@ else
   MESA_VDPAU="--disable-vdpau"
 fi
 
+if [ "$VAAPI_SUPPORT" = "yes" ]; then
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libva"
+  MESA_VAAPI="--enable-va"
+else
+  MESA_VAAPI="--disable-va"
+fi
+
 XA_CONFIG="--disable-xa"
 for drv in $GRAPHIC_DRIVERS; do
   [ "$drv" = "vmware" ] && XA_CONFIG="--enable-xa"
@@ -90,6 +97,7 @@ PKG_CONFIGURE_OPTS_TARGET="CC_FOR_BUILD=$HOST_CC \
                            --enable-asm \
                            --disable-selinux \
                            $MESA_PLATFORMS \
+                           --disable-libunwind \
                            --enable-opengl \
                            $MESA_GLES \
                            $MESA_DRI \
@@ -103,7 +111,7 @@ PKG_CONFIGURE_OPTS_TARGET="CC_FOR_BUILD=$HOST_CC \
                            --disable-xvmc \
                            $MESA_VDPAU \
                            --disable-omx-bellagio \
-                           --disable-va \
+                           $MESA_VAAPI \
                            --disable-opencl \
                            --enable-opencl-icd \
                            --disable-gallium-tests \

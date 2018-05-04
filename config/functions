@@ -1,4 +1,44 @@
 setup_toolchain() {
+  # lto flag
+  if flag_enabled "lto" "$LTO_SUPPORT" "only-disable"; then
+    TARGET_CFLAGS+=" $CFLAGS_OPTIM_LTO"
+    TARGET_CXXFLAGS+=" $CXXFLAGS_OPTIM_LTO"
+    TARGET_LDFLAGS+=" $LDFLAGS_OPTIM_LTO"
+  fi
+
+  # gold flag
+  if flag_enabled "gold" "$GOLD_SUPPORT" "only-disable"; then
+    TARGET_LDFLAGS+=" $LDFLAGS_OPTIM_GOLD"
+  fi
+
+  # position-independent code
+  if flag_enabled "pic" "no"; then
+    TARGET_CFLAGS+=" $CFLAGS_OPTIM_PIC"
+    TARGET_CXXFLAGS+=" $CXXFLAGS_OPTIM_PIC"
+    TARGET_LDFLAGS+=" $LDFLAGS_OPTIM_PIC"
+  fi
+  if flag_enabled "pic:host" "no"; then
+    HOST_CFLAGS+=" $CFLAGS_OPTIM_PIC"
+    HOST_CXXFLAGS+=" $CXXFLAGS_OPTIM_PIC"
+    HOST_LDFLAGS+=" $LDFLAGS_OPTIM_PIC"
+  fi
+
+  # hardening support
+  if flag_enabled "hardening" "$HARDENING_SUPPORT"; then
+    TARGET_CFLAGS+=" $CFLAGS_OPTIM_HARDENING"
+    TARGET_CXXFLAGS+=" $CXXFLAGS_OPTIM_HARDENING"
+    TARGET_CFLAGS+=" $CPPFLAGS_OPTIM_HARDENING"
+    TARGET_LDFLAGS+=" $LDFLAGS_OPTIM_HARDENING"
+  fi
+
+  # parallel
+  if ! flag_enabled "parallel" "yes"; then
+    NINJA_OPTS="$NINJA_OPTS -j1"
+    export MAKEFLAGS="-j1"
+  else
+    export MAKEFLAGS="-j$CONCURRENCY_MAKE_LEVEL"
+  fi
+
   case "$1" in
     target|init)
       export DESTIMAGE="target"
@@ -38,27 +78,6 @@ setup_toolchain() {
         echo "SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)"  >> $CMAKE_CONF
         echo "SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)"  >> $CMAKE_CONF
         echo "SET(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)"  >> $CMAKE_CONF
-      fi
-      export MESON_CONF=$TOOLCHAIN/etc/meson-$TARGET_NAME.conf
-      if [ ! -f $MESON_CONF ] ; then
-        mkdir -p $TOOLCHAIN/etc
-        echo "[binaries]" >> $MESON_CONF
-        echo "c = '$CC'" >> $MESON_CONF
-        echo "cpp = '$CXX'" >> $MESON_CONF
-        echo "ar = '$AR'" >> $MESON_CONF
-        echo "strip = '$STRIP'" >> $MESON_CONF
-        echo "pkgconfig = '$PKG_CONFIG'" >> $MESON_CONF
-        echo "" >> $MESON_CONF
-        echo "[host_machine]" >> $MESON_CONF
-        echo "system = 'linux'" >> $MESON_CONF
-        echo "cpu_family = '$TARGET_ARCH'" >> $MESON_CONF
-        echo "cpu = '$TARGET_SUBARCH'" >> $MESON_CONF
-        echo "endian = 'little'" >> $MESON_CONF
-        echo "" >> $MESON_CONF
-        echo "[properties]" >> $MESON_CONF
-        echo "root = '$SYSROOT_PREFIX/usr'" >> $MESON_CONF
-        python -c "import os; print('c_args = {}'.format([x for x in os.getenv('CFLAGS').split()]))" >> $MESON_CONF
-        python -c "import os; print('c_link_args = {}'.format([x for x in os.getenv('LDFLAGS').split()]))" >> $MESON_CONF
       fi
       export HOST_CC="$TOOLCHAIN/bin/host-gcc"
       export HOST_CXX="$TOOLCHAIN/bin/host-g++"
@@ -112,27 +131,6 @@ setup_toolchain() {
         echo "SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH)" >> $CMAKE_CONF
         echo "SET(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE BOTH)" >> $CMAKE_CONF
       fi
-      export MESON_CONF=$TOOLCHAIN/etc/meson-$HOST_NAME.conf
-      if [ ! -f $MESON_CONF ] ; then
-        mkdir -p $TOOLCHAIN/etc
-        echo "[binaries]" >> $MESON_CONF
-        echo "c = '$CC'" >> $MESON_CONF
-        echo "cpp = '$CXX'" >> $MESON_CONF
-        echo "ar = '$AR'" >> $MESON_CONF
-        echo "strip = '$STRIP'" >> $MESON_CONF
-        echo "pkgconfig = '$PKG_CONFIG'" >> $MESON_CONF
-        echo "" >> $MESON_CONF
-        echo "[host_machine]" >> $MESON_CONF
-        echo "system = 'linux'" >> $MESON_CONF
-        echo "cpu_family = '$TARGET_ARCH'" >> $MESON_CONF
-        echo "cpu = '$TARGET_SUBARCH'" >> $MESON_CONF
-        echo "endian = 'big'" >> $MESON_CONF
-        echo ""	>> $MESON_CONF
-        echo "[properties]" >> $MESON_CONF
-        echo "root = '$TOOLCHAIN'" >> $MESON_CONF
-        python -c "import os; print('c_args = {}'.format([x for x in os.getenv('CFLAGS').split()]))" >> $MESON_CONF
-        python -c "import os; print('c_link_args = {}'.format([x for x in os.getenv('LDFLAGS').split()]))" >> $MESON_CONF
-      fi
       export HOST_CC="$CC"
       export HOST_CXX="$CXX"
       export HOSTCC="$CC"
@@ -146,6 +144,38 @@ setup_toolchain() {
       export _python_exec_prefix=/
       ;;
   esac
+}
+
+create_meson_conf() {
+  local endian root
+  case "$1" in
+    target|init)    endian="little"
+                    root="$SYSROOT_PREFIX/usr"
+                    ;;
+    host|bootstrap) endian="big"
+                    root="$TOOLCHAIN"
+                    ;;
+  esac
+
+  cat > $2 <<EOF
+[binaries]
+c = '$CC'
+cpp = '$CXX'
+ar = '$AR'
+strip = '$STRIP'
+pkgconfig = '$PKG_CONFIG'
+
+[host_machine]
+system = 'linux'
+cpu_family = '$TARGET_ARCH'
+cpu = '$TARGET_SUBARCH'
+endian = '$endian'
+
+[properties]
+root = '$root'
+$(python -c "import os; print('c_args = {}'.format([x for x in os.getenv('CFLAGS').split()]))")
+$(python -c "import os; print('c_link_args = {}'.format([x for x in os.getenv('LDFLAGS').split()]))")
+EOF
 }
 
 # unset all PKG_* vars apart from those exported by setup_toolchain, then set default values
@@ -293,6 +323,14 @@ get_pkg_variable() {
   fi
 }
 
+calculate_stamp() {
+  local stamp
+  stamp="$PKG_DIR $PROJECT_DIR/$PROJECT/patches/$PKG_NAME"
+  [ -n "$DEVICE" ] && stamp+=" $PROJECT_DIR/$PROJECT/devices/$DEVICE/patches/$PKG_NAME"
+  [ -n "$PKG_NEED_UNPACK" ] && stamp+=" $PKG_NEED_UNPACK"
+  find ${stamp} -exec sha256sum {} \; 2>/dev/null | sed "s/ ${ROOT//\//\\/}\// /" | sort | sha256sum | cut -d" " -f1
+}
+
 # return 0 if $2 in space-separated list $1, otherwise return 1
 listcontains() {
   if [ -n "$1" -a -n "$2" ]; then
@@ -316,6 +354,37 @@ listremoveitem() {
   # Use array word splitting to squash spaces
   tmp_array=(${data})
   echo "${tmp_array[@]}"
+}
+
+# check if a flag is enabled
+# $1: flag-name, $2: default (yes/no), $3: ingenious check (none,only-disable,only-enable)
+# set variable PKG_[FLAG]_[HOST/TARGET]_ENABLED=(yes/no)
+# return 0 if flag is enabled, otherwise 1
+flag_enabled() {
+  # make flag name upper case and replace hyphen with underscore, to use as variable name
+  local flag_name=${1^^}
+  [[ $flag_name =~ : ]] || flag_name+="_TARGET"
+  flag_name="PKG_${flag_name//[:-]/_}_ENABLED"
+
+  # check flag
+  if [ -n "${PKG_BUILD_FLAGS}" ] && listcontains "${PKG_BUILD_FLAGS}" "[+]?$1"; then
+    if [ "${3:none}" = "only-disable" ]; then
+      echo "ERROR: $1 can not enable via PKG_BUILD_FLAGS (found in $PKG_NAME)"
+      exit 1
+    fi
+    declare ${flag_name}="yes"
+    return 0
+  elif [ "$2" = "yes" ] && ! listcontains "${PKG_BUILD_FLAGS}" "-$1"; then
+    declare ${flag_name}="yes"
+    return 0
+  else
+    if [ "${3:none}" = "only-enable" ]; then
+      echo "ERROR: $1 can not disable via PKG_BUILD_FLAGS (found in $PKG_NAME)"
+      exit 1
+    fi
+    declare ${flag_name}="no"
+    return 1
+  fi
 }
 
 target_has_feature() {
@@ -441,10 +510,10 @@ build_with_debug() {
     [ "${PKG_NAME}" = "debug" ] && return 0
 
     # Build addons with debug if we're building the mediacenter with debug
-    [ "${PKG_IS_ADDON}" == "yes" ] && listcontains "${_DEBUG_DEPENDS_LIST}" "${MEDIACENTER}" && return 0
+    [ "${PKG_IS_ADDON}" = "yes" ] && listcontains "${_DEBUG_DEPENDS_LIST}" "${MEDIACENTER}" && return 0
 
     # Build kernel packages with debug if we're building the kernel with debug
-    [ "${PKG_IS_KERNEL_PKG}" == "yes" ] && listcontains "${_DEBUG_DEPENDS_LIST}" "linux" && return 0
+    [ "${PKG_IS_KERNEL_PKG}" = "yes" ] && listcontains "${_DEBUG_DEPENDS_LIST}" "linux" && return 0
 
     # Build this package with debug if it's a resolved dependency
     listcontains "${_DEBUG_DEPENDS_LIST}" "${PKG_NAME}" && return 0
@@ -563,7 +632,7 @@ install_driver_addon_files() {
   mkdir -p $PKG_MODULE_DIR
   find $@ -name \*.ko -exec cp {} $PKG_MODULE_DIR \;
 
-  find $PKG_MODULE_DIR -name \*.ko -exec $STRIP --strip-debug {} \;
+  find $PKG_MODULE_DIR -name \*.ko -exec ${TARGET_KERNEL_PREFIX}strip --strip-debug {} \;
 
   mkdir -p $PKG_ADDON_DIR
   cp $PKG_DIR/changelog.txt $PKG_ADDON_DIR
@@ -661,26 +730,6 @@ do_autoreconf() {
     fi
     $AUTORECONF $@
   fi
-}
-
-strip_lto() {
-  # strip out LTO optimization from *FLAGS
-  if [ -n "$GCC_OPTIM_LTO" ] ; then
-    CFLAGS=`echo $CFLAGS | sed -e "s|$GCC_OPTIM_LTO||g"`
-    CXXFLAGS=`echo $CXXFLAGS | sed -e "s|$GCC_OPTIM_LTO||g"`
-    TARGET_CFLAGS=`echo $TARGET_CFLAGS | sed -e "s|$GCC_OPTIM_LTO||g"`
-    TARGET_CXXFLAGS=`echo $TARGET_CXXFLAGS | sed -e "s|$GCC_OPTIM_LTO||g"`
-  fi
-  if [ -n "$LD_OPTIM_LTO" ] ; then
-    LDFLAGS=`echo $LDFLAGS | sed -e "s|$LD_OPTIM_LTO||g"`
-    TARGET_LDFLAGS=`echo $TARGET_LDFLAGS | sed -e "s|$LD_OPTIM_LTO||g"`
-  fi
-}
-
-strip_gold() {
-  # strip out usage from GOLD linker
-  LDFLAGS=`echo $LDFLAGS | sed -e "s|-fuse-ld=gold||g"`
-  TARGET_LDFLAGS=`echo $TARGET_LDFLAGS | sed -e "s|-fuse-ld=gold||g"`
 }
 
 fix_module_depends() {
@@ -849,7 +898,7 @@ debug_strip() {
 print_color() {
   local clr_name="$1" clr_text="$2" clr_actual
 
-  if [ "$DISABLE_COLORS" == "yes" ]; then
+  if [ "$DISABLE_COLORS" = "yes" ]; then
     [ $# -eq 2 ] && echo -en "${clr_text}"
     return 0
   fi

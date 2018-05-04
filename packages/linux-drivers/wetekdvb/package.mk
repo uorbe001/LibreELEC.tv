@@ -33,7 +33,7 @@ PKG_TOOLCHAIN="manual"
 
 makeinstall_target() {
   device=${DEVICE:-$PROJECT}
-  [ $device="S905" ] && device=WeTek_Play_2
+  [ $device = "S905" ] && device=WeTek_Play_2
   for overlay_dir in driver/$device/*/; do
     overlay_dir=`basename $overlay_dir`
     mkdir -p $INSTALL/$(get_full_module_dir $overlay_dir)/$PKG_NAME
@@ -42,4 +42,8 @@ makeinstall_target() {
 
   mkdir -p $INSTALL/$(get_full_firmware_dir)
     cp firmware/* $INSTALL/$(get_full_firmware_dir)
+}
+
+post_install() {
+  enable_service wetekdvb.service
 }

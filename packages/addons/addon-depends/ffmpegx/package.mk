@@ -27,6 +27,8 @@ PKG_SOURCE_DIR="FFmpeg-n${PKG_VERSION}"
 PKG_DEPENDS_TARGET="toolchain bzip2 fdk-aac libvorbis openssl opus x264 x265 zlib"
 PKG_SECTION="multimedia"
 PKG_LONGDESC="FFmpegx is an complete FFmpeg build to support encoding and decoding"
+# ffmpeg builds better with these options
+PKG_BUILD_FLAGS="-gold -lto"
 
 # Dependencies
 get_graphicdrivers
@@ -39,13 +41,14 @@ if [[ ! $TARGET_ARCH = arm ]] || target_has_feature neon; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libvpx"
 fi
 
+# X11 grab for screen recording
+if [ "$DISPLAYSERVER" = "x11" ]; then
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libxcb libX11"
+fi
+
 pre_configure_target() {
   cd $PKG_BUILD
   rm -rf .$TARGET_NAME
-
-# ffmpeg builds better with these options
-  strip_gold
-  strip_lto
 
   if [ "$KODIPLAYER_DRIVER" == "bcm2835-driver" ]; then
     CFLAGS="-DRPI=1 -I$SYSROOT_PREFIX/usr/include/IL -I$SYSROOT_PREFIX/usr/include/interface/vcos/pthreads -I$SYSROOT_PREFIX/usr/include/interface/vmcs_host/linux $CFLAGS"
@@ -123,7 +126,6 @@ pre_configure_target() {
 
 # X11 grab for screen recording
   if [ "$DISPLAYSERVER" = "x11" ]; then
-    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET libxcb"
     PKG_FFMPEG_LIBS="$PKG_FFMPEG_LIBS -lX11"
     PKG_FFMPEG_X11_GRAB="\
     --enable-libxcb \

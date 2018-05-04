@@ -28,6 +28,7 @@ PKG_DEPENDS_TARGET="toolchain kodi-platform"
 PKG_SECTION="emulation"
 PKG_SHORTDESC="Late 2010 version of MAME (0.139) for libretro"
 PKG_LONGDESC="Late 2010 version of MAME (0.139) for libretro"
+PKG_BUILD_FLAGS="-lto"
 
 PKG_LIBNAME="mame2010_libretro.so"
 PKG_LIBPATH="$PKG_LIBNAME"
@@ -37,7 +38,6 @@ pre_make_target() {
   export CFLAGS="$CFLAGS -fpermissive"
   export CXXFLAGS="$CXXFLAGS -fpermissive"
   export LD="$CXX"
-  strip_lto
 }
 
 make_target() {
@@ -48,7 +48,7 @@ make_target() {
     cortex-a7|cortex-a9)
       make platform=armv7-neon-hardfloat-$TARGET_CPU
       ;;
-    cortex-a53|cortex-a17)
+    *cortex-a53|cortex-a17)
       if [ "$TARGET_ARCH" = "aarch64" ]; then
         make platform=aarch64
       else

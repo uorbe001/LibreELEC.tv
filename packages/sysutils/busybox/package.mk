@@ -17,8 +17,8 @@
 ################################################################################
 
 PKG_NAME="busybox"
-PKG_VERSION="1.27.1"
-PKG_SHA256="c890ac53fb218eb4c6ad9ed3207a896783b142e6d306f292b8d9bec82af5f936"
+PKG_VERSION="1.28.1"
+PKG_SHA256="98fe1d3c311156c597cd5cfa7673bb377dc552b6fa20b5d3834579da3b13652e"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.busybox.net"
@@ -29,6 +29,8 @@ PKG_DEPENDS_INIT="toolchain"
 PKG_SECTION="system"
 PKG_SHORTDESC="BusyBox: The Swiss Army Knife of Embedded Linux"
 PKG_LONGDESC="BusyBox combines tiny versions of many common UNIX utilities into a single small executable. It provides replacements for most of the utilities you usually find in GNU fileutils, shellutils, etc. The utilities in BusyBox generally have fewer options than their full-featured GNU cousins; however, the options that are included provide the expected functionality and behave very much like their GNU counterparts. BusyBox provides a fairly complete environment for any small or embedded system."
+# busybox fails to build with GOLD support enabled with binutils-2.25
+PKG_BUILD_FLAGS="-parallel -gold"
 
 PKG_MAKE_OPTS_HOST="ARCH=$TARGET_ARCH CROSS_COMPILE= KBUILD_VERBOSE=1 install"
 PKG_MAKE_OPTS_TARGET="ARCH=$TARGET_ARCH \
@@ -51,9 +53,6 @@ PKG_MAKE_OPTS_INIT="ARCH=$TARGET_ARCH \
 if [ "$NFS_SUPPORT" = yes ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET rpcbind"
 fi
-
-# dont build parallel
-MAKEFLAGS=-j1
 
 pre_build_target() {
   mkdir -p $PKG_BUILD/.$TARGET_NAME
@@ -88,14 +87,11 @@ configure_target() {
     # set install dir
     sed -i -e "s|^CONFIG_PREFIX=.*$|CONFIG_PREFIX=\"$INSTALL/usr\"|" .config
 
-    if [ ! "$DEVTOOLS" = yes ]; then
-      sed -i -e "s|^CONFIG_DEVMEM=.*$|# CONFIG_DEVMEM is not set|" .config
-    fi
-
     if [ ! "$CRON_SUPPORT" = "yes" ] ; then
       sed -i -e "s|^CONFIG_CROND=.*$|# CONFIG_CROND is not set|" .config
       sed -i -e "s|^CONFIG_FEATURE_CROND_D=.*$|# CONFIG_FEATURE_CROND_D is not set|" .config
       sed -i -e "s|^CONFIG_CRONTAB=.*$|# CONFIG_CRONTAB is not set|" .config
+      sed -i -e "s|^CONFIG_FEATURE_CROND_SPECIAL_TIMES=.*$|# CONFIG_FEATURE_CROND_SPECIAL_TIMES is not set|" .config
     fi
 
     if [ ! "$NFS_SUPPORT" = yes ]; then
@@ -109,9 +105,6 @@ configure_target() {
     # optimize for size
     CFLAGS=`echo $CFLAGS | sed -e "s|-Ofast|-Os|"`
     CFLAGS=`echo $CFLAGS | sed -e "s|-O.|-Os|"`
-
-    # busybox fails to build with GOLD support enabled with binutils-2.25
-    strip_gold
 
     LDFLAGS="$LDFLAGS -fwhole-program"
 
@@ -129,9 +122,6 @@ configure_init() {
     # optimize for size
     CFLAGS=`echo $CFLAGS | sed -e "s|-Ofast|-Os|"`
     CFLAGS=`echo $CFLAGS | sed -e "s|-O.|-Os|"`
-
-    # busybox fails to build with GOLD support enabled with binutils-2.25
-    strip_gold
 
     LDFLAGS="$LDFLAGS -fwhole-program"
 
