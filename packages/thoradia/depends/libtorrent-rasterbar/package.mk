@@ -1,6 +1,6 @@
 PKG_NAME="libtorrent-rasterbar"
-PKG_VERSION="1_1_6"
-PKG_SHA256="8752c9ab631671ddc10dc00376e8377591c51f976baec16b047dc9ebb10690f6"
+PKG_VERSION="1_1_7"
+PKG_SHA256="8c3b4f2cecffca07845b50217a8618f5eabdef8a8abb82f3412775c4193f7c6d"
 PKG_LICENSE="https://github.com/arvidn/libtorrent/blob/master/LICENSE"
 PKG_SITE="http://libtorrent.org/"
 PKG_URL="https://github.com/arvidn/libtorrent/archive/libtorrent-$PKG_VERSION.tar.gz"
