@@ -1,7 +1,7 @@
 PKG_NAME="sabnzbd"
-PKG_VERSION="2.3.2"
-PKG_SHA256="7debc856e981c9b4e4f2a137d0be24999482d369acd21487cfd8c23bd7b33a3d"
-PKG_REV="28"
+PKG_VERSION="2.3.3"
+PKG_SHA256="968d88317f2e2a9e53981b94a77d10172bf1f4a774a4deaecbfc695fc71c2319"
+PKG_REV="29"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://sabnzbd.org/"
 PKG_URL="https://github.com/sabnzbd/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
@@ -21,6 +21,7 @@ PKG_TOOLCHAIN="python2"
 
 make_target() {
   rm -fr linux osx six win
+  "$TOOLCHAIN/bin/python" tools/make_mo.py
   "$TOOLCHAIN/bin/python" "$TOOLCHAIN/lib/$PKG_PYTHON_VERSION/compileall.py" -q .
   find . -name "*.py" -exec rm -rf "{}" ";"
 }
