@@ -1,3 +1,6 @@
+30
+- Update to 2.3.4
+
 29
 - Update to 2.3.3
 
