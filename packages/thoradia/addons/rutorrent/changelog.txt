@@ -1,3 +1,6 @@
+8
+- Update php to 7.2.5
+
 7
 - Update php to 7.1.11
 
