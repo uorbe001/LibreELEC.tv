@@ -1,9 +1,9 @@
 PKG_NAME="libtorrent"
-PKG_VERSION="0.13.6"
-PKG_SHA256="bf963ac6e73e194a2cd87ebdf809988b5b3d6244bb7cd43d7d0c4852fc501524"
+PKG_VERSION="0.13.7"
+PKG_SHA256="86b4b1753385aaddf9e59ad94f1292eee5102139eb57520e84d1af2f04693708"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/rakshasa/libtorrent"
-PKG_URL="https://github.com/rakshasa/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
+PKG_URL="https://github.com/rakshasa/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
 PKG_DEPENDS_TARGET="toolchain openssl zlib"
 PKG_LONGDESC="libtorrent"
 
