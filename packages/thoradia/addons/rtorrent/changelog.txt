@@ -1,3 +1,7 @@
+7
+- Update to 0.9.7
+- Update libtorrent to 1.13.7
+
 6
 - Rework add-on
 
