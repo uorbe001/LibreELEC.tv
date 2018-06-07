@@ -1,7 +1,7 @@
 PKG_NAME="rutorrent"
 PKG_VERSION="3.8"
 PKG_SHA256="610fc5df350fe7915b4413067fea8657eb6f26b1cc5212de97a4af98439b2e2c"
-PKG_REV="7"
+PKG_REV="8"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/Novik/ruTorrent"
 PKG_URL="https://github.com/Novik/ruTorrent/archive/v$PKG_VERSION.tar.gz"
