@@ -216,6 +216,11 @@ if [ "$(type -t configure_package)" = "function" ]; then
   configure_package
 fi
 
+if [ "$PKG_TOOLCHAIN" = "python2" ]; then
+  PKG_DEPENDS_HOST="toolchain distutilscross:host $PKG_DEPENDS_HOST"
+  PKG_DEPENDS_TARGET="toolchain distutilscross:host Python2 $PKG_DEPENDS_TARGET"
+fi
+
 # build dependencies, only when PKG_DEPENDS_? is filled
 unset _pkg_depends
 case "$TARGET" in
@@ -291,7 +296,7 @@ if [ -z "$PKG_TOOLCHAIN" -o "$PKG_TOOLCHAIN" = "auto" ]; then
   fi
   _auto_toolchain=" (auto-detect)"
 fi
-if ! listcontains "meson cmake cmake-make configure ninja make autotools manual" "$PKG_TOOLCHAIN"; then
+if ! listcontains "meson cmake cmake-make configure ninja make autotools manual python2" "$PKG_TOOLCHAIN"; then
   printf "$(print_color bold-red "ERROR:") unknown toolchain $PKG_TOOLCHAIN"
   exit 1
 fi
@@ -459,6 +464,31 @@ else
       echo "Executing (bootstrap): make $PKG_MAKE_OPTS_BOOTSTRAP" | tr -s " "
       make $PKG_MAKE_OPTS_BOOTSTRAP
       ;;
+
+    # python based build
+    "python2:host")
+      echo "Executing (host): python2 setup.py build" | tr -s " "
+      export LDSHARED="$CC -shared $LDSHARED"
+      $TOOLCHAIN/bin/python2 setup.py build --build-base .$HOST_NAME
+      ;;
+    "python2:target")
+      echo "Executing (target): python2 setup.py easy_install" | tr -s " "
+      mkdir -p .$TARGET_NAME
+      cp -r * .$TARGET_NAME
+      cd .$TARGET_NAME
+      export CFLAGS="$CFLAGS -I$SYSROOT_PREFIX/usr/include -L$SYSROOT_PREFIX/usr/lib"
+      export LDSHARED="$CC -shared $LDSHARED"
+      export PYTHONXCPREFIX="$SYSROOT_PREFIX/usr"
+      _prefix="$INSTALL/usr"
+      _pythonpath="$_prefix/lib/$PKG_PYTHON_VERSION/site-packages"
+      mkdir -p "$_pythonpath"
+      PYTHONPATH="$PYTHONPATH:$_pythonpath" \
+      $TOOLCHAIN/bin/python2 setup.py easy_install \
+        --prefix "$_prefix" \
+        .
+      find "$_prefix" -name "*.py" -exec rm -rf "{}" ";"
+      find "$_prefix" -name "*.egg" -type f -exec zip -dq {} "*.exe" "*.py" ";"
+      ;;
   esac
 fi
 if [ "$(type -t post_make_$TARGET)" = "function" ]; then
@@ -501,6 +531,12 @@ else
       ;;
     "configure:bootstrap"|"cmake-make:bootstrap"|"autotools:bootstrap"|"make:bootstrap")
       make install $PKG_MAKEINSTALL_OPTS_BOOTSTRAP
+      ;;
+
+    # python based build
+    "python2:host")
+      echo "Executing (host): python2 setup.py install" | tr -s " "
+      $TOOLCHAIN/bin/python2 setup.py build --build-base .$HOST_NAME install
       ;;
   esac
 fi
