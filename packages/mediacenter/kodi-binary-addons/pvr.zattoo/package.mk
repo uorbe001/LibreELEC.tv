@@ -17,9 +17,9 @@
 ################################################################################
 
 PKG_NAME="pvr.zattoo"
-PKG_VERSION="f04367b"
-PKG_SHA256="5685ccafe979935123bce6cea2a7499f5bab8ff16f4b1d5b60c9ed3b943ac6b6"
-PKG_REV="2"
+PKG_VERSION="eb56bef"
+PKG_SHA256="eda094fc075a703bd3addfc0ff40c458d255292e0fb78548269bce8db74e8389"
+PKG_REV="3"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.kodi.tv"

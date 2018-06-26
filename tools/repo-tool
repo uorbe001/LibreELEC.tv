@@ -129,9 +129,9 @@ build() {
       . $package
       if [ "$PKG_IS_ADDON" = "yes" ] ; then
         ADDON=$PKG_NAME
-        if listcontains "peripheral.steamcontroller screensaver.shadertoy visualization.wavforhue
+        if listcontains "peripheral.steamcontroller visualization.wavforhue
                          peripheral.xarcade repository.kodinerds tvheadend44 moonlight game.libretro.mame2014
-                         game.libretro.mame2010 game.libretro.mame2003 game.libretro.mame2000" "$ADDON"; then
+                         game.libretro.mame2010 game.libretro.mame2003 game.libretro.mame2000 sapphire" "$ADDON"; then
           echo "*** ERROR: PACKAGE $ADDON IS BROKEN, SKIPING ***"
           break
         else
@@ -217,6 +217,9 @@ if [ "$1" = "-b" -o "$1" = "-ru" ]; then
     elif [ "$3" == "S905" ]; then
       project="Amlogic"
       device="S905"
+    elif [ "$3" == "S912" ]; then
+      project="Amlogic"
+      device="S912"
     fi
   fi
 fi
