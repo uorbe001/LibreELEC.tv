@@ -81,8 +81,6 @@ PKG_CONFIGURE_OPTS_TARGET="-prefix /usr
                            -skip qtxmlpatterns"
 
 configure_target() {
-#set
-#exit 1
   QMAKE_CONF_DIR="qtbase/mkspecs/devices/linux-libreelec-g++"
   QMAKE_CONF="${QMAKE_CONF_DIR}/qmake.conf"
 
@@ -106,7 +104,7 @@ configure_target() {
     QMAKE_NM                = $NM -P
     QMAKE_STRIP             = $STRIP
     QMAKE_CFLAGS = $CFLAGS
-    QMAKE_CXXFLAGS = $CXXFLAGS -I$SYSROOT_PREFIX/usr/include
+    QMAKE_CXXFLAGS = $CXXFLAGS
     QMAKE_LFLAGS = $LDFLAGS
     load(qt_config)
 EOF
