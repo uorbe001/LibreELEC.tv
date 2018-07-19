@@ -19,7 +19,7 @@
 PKG_NAME="lcdd"
 PKG_VERSION="466edd3"
 PKG_SHA256="786aab192a788fd09119645d60576ba258eec3de1a455aaa6d9ddea5e30e1749"
-PKG_REV="106"
+PKG_REV="105"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://lcdproc.org/"
@@ -42,8 +42,7 @@ PKG_CONFIGURE_OPTS_TARGET="--with-ft-prefix=$SYSROOT_PREFIX/usr \
                            --disable-libX11 \
                            --enable-libhid \
                            --disable-libpng \
-                           --enable-drivers=all \
-                           --enable-seamless-hbars"
+                           --enable-drivers=all"
 
 addon() {
   drivers="none|$(cat $PKG_BUILD/.$TARGET_NAME/config.log | sed -n "s|^DRIVERS=' \(.*\)'|\1|p" | sed "s|.so||g" | tr ' ' '|')"
