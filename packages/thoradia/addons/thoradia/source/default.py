@@ -6,61 +6,66 @@ import xbmcgui
 import xml.etree.ElementTree as etree
 
 
-URL_D = 'https://raw.githubusercontent.com/thoradia/thoradia/master/{}/{}/{}/'
+KNOWN_REPOSITORIES = [
+    'repository.libreelec.tv',
+    'repository.coreelec',
+    'repository.rbrepo',
+    ]
+
+URL = 'https://raw.githubusercontent.com/thoradia/thoradia/master/{}/{}/{}/'
 
 
-def getTag(tree, tag):
-   return tree.iter(tag=tag).next()
-
-def getTree(xml):
-   return etree.parse(xml)
-
-def getXML(*id):
+def get_addon_xml(*id):
    return os.path.join(xbmcaddon.Addon(*id).getAddonInfo('path'), 'addon.xml')
 
 
 if __name__ == '__main__':
-   addon = xbmcaddon.Addon()
-   strings = addon.getLocalizedString
-   vpa_old = addon.getSetting('vpa')
-   addon.setSetting('le', strings(30010))
-   addon.setSetting('vpa', strings(30010))
-   try:
-      release = getTag(getTree(getXML('repository.libreelec.tv')), 'datadir').text.strip('/').split('/')[-3:]
-   except:
-      release = getTag(getTree(getXML('repository.rbrepo')), 'datadir').text.strip('/').split('/')[-3:]
-   addon.setSetting('le', strings(30011).format(*release))
+    strings = xbmcaddon.Addon().getLocalizedString
+    vpa_old = xbmcaddon.Addon().getSetting('vpa')
+    xbmcaddon.Addon().setSetting('le', strings(30010))
+    xbmcaddon.Addon().setSetting('vpa', strings(30010))
 
-   if release[1] in ['Virtual']:
-      release[1] = 'Generic'
-   elif release[2] == "aarch64":
-      if release[1] in ['WeTek_Hub', 'WeTek_Play_2']:
-         release[1] = 'Odroid_C2'
-   elif release[2] == 'arm':
-      if release[1] in ['Odroid_C2', 'S905', 'S912', 'Slice3']:
-         release[1] = 'RPi2'
-      elif release[1] in ['Slice']:
-         release[1] = 'RPi'
-      elif release[1] in ['S805', 'WeTek_Core', 'WeTek_Hub', 'WeTek_Play_2']:
-         release[1] = 'WeTek_Play'
+    release = None
+    for repository in KNOWN_REPOSITORIES:
+        try:
+            release = etree.parse(get_addon_xml(repository)).iter(tag='datadir').next().text.strip('/').split('/')[-3:]
+            break
+        except:
+            pass
 
-   xml = getXML()
-   tree = getTree(xml)
-   tag_d = getTag(tree, 'datadir')
-   url_d = URL_D.format(*release)
-   if tag_d.text == url_d:
-      vpa_new = strings(30011).format(*release)
-      addon.setSetting('vpa', vpa_new)
-      if vpa_new != vpa_old:
-         xbmc.executebuiltin('UpdateAddonRepos')
-   else:
-      tag_d.text = url_d
-      getTag(tree, 'info').text = url_d + 'addons.xml'
-      getTag(tree, 'checksum').text = url_d + 'addons.xml.md5'
-      tree.write(xml)
-      addon.setSetting('vpa', strings(30012).format(*release))
-      if xbmcgui.Dialog().yesno(addon.getAddonInfo('name'),
-                                strings(30013),
-                                nolabel=strings(30014),
-                                yeslabel=strings(30015)) == False:
-         subprocess.call(['systemctl', 'restart', 'kodi'])
+    if release is not None:
+        xbmcaddon.Addon().setSetting('le', strings(30011).format(*release))
+        if release[2] == 'aarch64':
+            if release[1] in ['WeTek_Hub', 'WeTek_Play_2']:
+                release[1] = 'Odroid_C2'
+        elif release[2] == 'arm':
+            if release[1] in ['Odroid_C2', 'S905', 'S912', 'Slice3']:
+                release[1] = 'RPi2'
+            elif release[1] in ['Slice']:
+                release[1] = 'RPi'
+            elif release[1] in ['S805', 'WeTek_Core', 'WeTek_Hub', 'WeTek_Play_2']:
+                release[1] = 'WeTek_Play'
+        elif release[2] == 'x86_64':
+            release[1] = 'Generic'
+
+        url = URL.format(*release)
+        xml = get_addon_xml()
+        tree = etree.parse(xml)
+        tag = tree.iter(tag='datadir').next()
+
+        if tag.text == url:
+            vpa_new = strings(30011).format(*release)
+            xbmcaddon.Addon().setSetting('vpa', vpa_new)
+            if vpa_new != vpa_old:
+                xbmc.executebuiltin('UpdateAddonRepos')
+        else:
+            tag.text = url
+            tree.iter(tag='info').next().text = url + 'addons.xml'
+            tree.iter(tag='checksum').next().text = url + 'addons.xml.md5'
+            tree.write(xml)
+            xbmcaddon.Addon().setSetting('vpa', strings(30012).format(*release))
+            if xbmcgui.Dialog().yesno(xbmcaddon.Addon().getAddonInfo('name'),
+                                      strings(30013),
+                                      nolabel=strings(30014),
+                                      yeslabel=strings(30015)) == False:
+                subprocess.call(['systemctl', 'restart', 'kodi'])
