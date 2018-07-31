@@ -12,9 +12,9 @@
     <provides>@PKG_ADDON_PROVIDES@</provides>
   </extension>
   <extension point="xbmc.addon.repository">
-    <datadir zip="true">https://raw.githubusercontent.com/thoradia/thoradia/master/9.0/Amlogic/arm/</datadir>
-    <info>https://raw.githubusercontent.com/thoradia/thoradia/master/9.0/Amlogic/arm/addons.xml</info>
-    <checksum>https://raw.githubusercontent.com/thoradia/thoradia/master/9.0/Amlogic/arm/addons.xml.md5</checksum>
+    <datadir zip="true">https://raw.githubusercontent.com/thoradia/thoradia/master/@VPA@/</datadir>
+    <info>https://raw.githubusercontent.com/thoradia/thoradia/master/@VPA@/addons.xml</info>
+    <checksum>https://raw.githubusercontent.com/thoradia/thoradia/master/@VPA@/addons.xml.md5</checksum>
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>@PKG_SHORTDESC@</summary>
