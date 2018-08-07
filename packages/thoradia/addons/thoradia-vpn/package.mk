@@ -14,6 +14,13 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: a virtual private network interface"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) provides the thoradia-vpn network interface to which applications can bind. The system continues using unmodified network configuration whereas applications bound to the thoradia-vpn network interface connect to the VPN. $PKG_ADDON_NAME is compatible with VPN Manager for OpenVPN."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
+make_target() {
+  :
+}
+
+makeinstall_target() {
+  :
+}
 
 addon() {
   :
