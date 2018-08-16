@@ -1,25 +1,9 @@
-################################################################################
-#      This file is part of CoreELEC - https://coreelec.org
-#      Copyright (C) 2018-present CoreELEC (team (at) coreelec.org)
-#      Copyright (C) 2018 Arthur Liberman (arthur_liberman (at) hotmail.com)
-#
-#  CoreELEC is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  CoreELEC is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with CoreELEC.  If not, see <http://www.gnu.org/licenses/>.
-################################################################################
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2018 Arthur Liberman (arthur_liberman@hotmail.com)
 
 PKG_NAME="openvfd"
-PKG_VERSION="2df85d9"
-PKG_SHA256="f45e6a0293a9c49610af36f1ae6846cc6cdf77d90c9e7b6ec21cb1d0f23d11f4"
+PKG_VERSION="c39d090"
+PKG_SHA256="71b85c94c2a8c75228838c8e56afa9473ce68b6cd030427dba292d0c1e513f24"
 PKG_ARCH="arm aarch64"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/arthur-liberman/linux_openvfd"
