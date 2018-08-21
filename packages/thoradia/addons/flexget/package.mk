@@ -1,7 +1,7 @@
 PKG_NAME="flexget"
-PKG_VERSION="2.13.0"
-PKG_SHA256="6eb1ef4a1f155e1f462f5ac73f6e8dc0a1dddcfe820da2a6318e136797e5b73c"
-PKG_REV="7"
+PKG_VERSION="2.14.17"
+PKG_SHA256="67a6a303c536d3a3c598a724bcaf43380897ddebea819c575702702cf619cc8b"
+PKG_REV="8"
 PKG_SITE="https://flexget.com"
 PKG_URL="https://github.com/Flexget/Flexget/archive/$PKG_VERSION.tar.gz"
 PKG_SOURCE_DIR="Flexget-$PKG_VERSION"
@@ -19,8 +19,9 @@ PKG_DISCLAIMER="Keep it legal and carry on"
 
 pre_make_target() {
   echo "mechanize==0.3.6" >> requirements.txt
-  echo "setuptools==38.5.1" >> requirements.txt
+  echo "setuptools==40.1.0" >> requirements.txt
   echo "transmissionrpc==0.11" >> requirements.txt
+  echo "python-telegram-bot"==10.1.0 >> requirements.txt
 }
 
 post_makeinstall_target() {
