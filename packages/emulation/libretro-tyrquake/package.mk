@@ -2,16 +2,12 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="libretro-tyrquake"
-PKG_VERSION="5aa8c55"
-PKG_SHA256="a78a96ffb53fee8e52b7423a76a9591c49beaa7f9c6dd89027fd4984b1c1cd51"
-PKG_ARCH="any"
+PKG_VERSION="83291a112e09c6a613a1bfd85fd44a47949f2d5f"
+PKG_SHA256="0f5586daa142794e43dfa4918b04829188b259c6ac5e75f2f36648d804241424"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/libretro/tyrquake"
 PKG_URL="https://github.com/libretro/tyrquake/archive/$PKG_VERSION.tar.gz"
-PKG_SOURCE_DIR="tyrquake-$PKG_VERSION*"
 PKG_DEPENDS_TARGET="toolchain kodi-platform"
-PKG_SECTION="emulation"
-PKG_SHORTDESC="game.libretro.tyrquake: tyrquake for Kodi"
 PKG_LONGDESC="game.libretro.tyrquake: tyrquake for Kodi"
 
 PKG_LIBNAME="tyrquake_libretro.so"

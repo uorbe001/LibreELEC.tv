@@ -2,16 +2,12 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="libretro-beetle-psx"
-PKG_VERSION="a8aa726"
-PKG_SHA256="d0ffd8865d401d5779e66b3202991707bab4ff900cb1d8353b857b97c93fe733"
-PKG_ARCH="any"
+PKG_VERSION="0975d3db1bd8c9451218f458ba7ec957d07d4a06"
+PKG_SHA256="919ad902919809369d4471bc7987766d4e36170fe7f69c95fc52a21d15a78489"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/beetle-psx-libretro"
 PKG_URL="https://github.com/libretro/beetle-psx-libretro/archive/$PKG_VERSION.tar.gz"
-PKG_SOURCE_DIR="beetle-psx-libretro-$PKG_VERSION*"
 PKG_DEPENDS_TARGET="toolchain kodi-platform"
-PKG_SECTION="emulation"
-PKG_SHORTDESC="Fork of Mednafen PSX"
 PKG_LONGDESC="Fork of Mednafen PSX"
 
 PKG_LIBNAME="mednafen_psx_libretro.so"

@@ -2,16 +2,12 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="libretro-desmume"
-PKG_VERSION="9fb1e8c"
-PKG_SHA256="80c89f23f7c964f33422571437605597e324e20c3b5af548b05e31e31af901e5"
-PKG_ARCH="any"
+PKG_VERSION="3032b69714c07ea076759aef09d353d64741fdbe"
+PKG_SHA256="9a3f4b2bff3b4f17d0f42220c27b490260fabf2091587414285df7b8867bbeb4"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/desmume"
 PKG_URL="https://github.com/libretro/desmume/archive/$PKG_VERSION.tar.gz"
-PKG_SOURCE_DIR="desmume-$PKG_VERSION*"
 PKG_DEPENDS_TARGET="toolchain kodi-platform"
-PKG_SECTION="emulation"
-PKG_SHORTDESC="libretro wrapper for desmume NDS emulator."
 PKG_LONGDESC="libretro wrapper for desmume NDS emulator."
 PKG_TOOLCHAIN="make"
 

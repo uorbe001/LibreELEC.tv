@@ -2,16 +2,12 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="libretro-fbalpha"
-PKG_VERSION="9d1b3af"
-PKG_SHA256="9d42b88bc8144a1ff8495c19c1d5896949103c5ac4682e2204901d491413b2c2"
-PKG_ARCH="any"
+PKG_VERSION="6cb346c667bf9278406931ec8f253fc659adf3ed"
+PKG_SHA256="412c9ae58d97d1112999ad4dec2b9d058126d0e00ca442df68b326b362650008"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/libretro/fbalpha"
 PKG_URL="https://github.com/libretro/fbalpha/archive/$PKG_VERSION.tar.gz"
-PKG_SOURCE_DIR="fbalpha-$PKG_VERSION*"
 PKG_DEPENDS_TARGET="toolchain kodi-platform"
-PKG_SECTION="emulation"
-PKG_SHORTDESC="game.libretro.fba: fba for Kodi"
 PKG_LONGDESC="game.libretro.fba: fba for Kodi"
 PKG_TOOLCHAIN="manual"
 # linking takes too long with lto

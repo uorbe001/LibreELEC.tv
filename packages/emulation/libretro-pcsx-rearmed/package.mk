@@ -2,16 +2,12 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="libretro-pcsx-rearmed"
-PKG_VERSION="1b86cbc"
-PKG_SHA256="b4e3463494af975c9ca38b1e539fb6bb27b46ac4899b26738b0ab5e158ec9fa9"
-PKG_ARCH="arm"
+PKG_VERSION="0370856deb325e759179c6835897e2553cef31c2"
+PKG_SHA256="e4971b2624100a4389e81ac51f2b43ab2784993e6803b47f8cdf7b96c86d8d8e"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/pcsx_rearmed"
 PKG_URL="https://github.com/libretro/pcsx_rearmed/archive/$PKG_VERSION.tar.gz"
-PKG_SOURCE_DIR="pcsx_rearmed-$PKG_VERSION*"
 PKG_DEPENDS_TARGET="toolchain kodi-platform"
-PKG_SECTION="emulation"
-PKG_SHORTDESC="game.libretro.pcsx-rearmed: PCSX Rearmed for Kodi"
 PKG_LONGDESC="game.libretro.pcsx-rearmed: PCSX Rearmed for Kodi"
 PKG_TOOLCHAIN="manual"
 PKG_BUILD_FLAGS="-gold"
@@ -31,13 +27,13 @@ make_target() {
   
   case $TARGET_ARCH in
     aarch64)
-      make -f Makefile.libretro platform=aarch64
+      make -f Makefile.libretro platform=aarch64 GIT_VERSION=$PKG_VERSION
       ;;
     arm)
-      make -f Makefile.libretro USE_DYNAREC=1
+      make -f Makefile.libretro USE_DYNAREC=1 GIT_VERSION=$PKG_VERSION
       ;;
-    x86-64)
-      make -f Makefile.libretro
+    x86_64)
+      make -f Makefile.libretro GIT_VERSION=$PKG_VERSION
       ;;
   esac
 }
