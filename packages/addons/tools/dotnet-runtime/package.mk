@@ -4,26 +4,27 @@
 case "$ARCH" in
   "aarch64")
     PKG_NC_ARCH="arm64"
-    PKG_SHA256="771904d72f06eb816e5a4adbaa76c4352c097fbf5ed7dee9e4059e776278223a"
+    PKG_SHA256="f933f9c30b355265badabfa26d57731f73cbab6f626191a1fc5cee39d3e0346b"
+    PKG_URL="https://download.visualstudio.microsoft.com/download/pr/9cb31ef2-d5ec-490d-8a3f-f45f52d28fec/4c906b6132f2c0fe55e9e0209f08b352/dotnet-runtime-2.1.6-linux-arm64.tar.gz"
     ;;
   "arm")
     PKG_NC_ARCH="arm"
-    PKG_SHA256="cbdc689bff4dc01cb89e792d34a296bf9971f251719b6d60bbe5c5caeda846c7"
+    PKG_SHA256="85ca44a63e05d9ee7601ab333dd24a0e3a3ab0bd57af056036139020d800c7ef"
+    PKG_URL="https://download.visualstudio.microsoft.com/download/pr/7d461733-a0cd-48ee-9963-791337dcaafa/3b75ee4c7fb9d6bc7d0ddd9761676096/dotnet-runtime-2.1.6-linux-arm.tar.gz"
     ;;
   "x86_64")
     PKG_NC_ARCH="x64"
-    PKG_SHA256="dd5d52fdc439fce37b2cc706ecdaf8900c36870654bbce4ae693a66279821b2e"
+    PKG_SHA256="b7c56119afb73c31f1cebb53cad758685850c248d44fdfc571af26390f53635b"
+    PKG_URL="https://download.visualstudio.microsoft.com/download/pr/5c1334bc-bd26-4232-a745-2728b36a2628/8e163216cdcec15332ebf2e5575962de/dotnet-runtime-2.1.6-linux-x64.tar.gz"
     ;;
 esac
 
 PKG_NAME="dotnet-runtime"
-PKG_VERSION="2.1.3"
-PKG_REV="101"
+PKG_VERSION="2.1.6"
+PKG_REV="103"
 PKG_ARCH="any"
 PKG_LICENSE="MIT"
 PKG_SITE="https://dotnet.github.io/"
-PKG_URL="https://download.microsoft.com/download/6/E/B/6EBD972D-2E2F-41EB-9668-F73F5FDDC09C/dotnet-runtime-$PKG_VERSION-linux-$PKG_NC_ARCH.tar.gz"
-PKG_SOURCE_NAME="$PKG_NAME-$PKG_VERSION-$ARCH.tar.gz"
 PKG_DEPENDS_TARGET="toolchain curl curl3 krb5 lttng-ust"
 PKG_SECTION="tools"
 PKG_SHORTDESC=".NET Core Runtime"
@@ -42,11 +43,11 @@ unpack() {
 
 addon() {
   mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/bin
-  cp -r $PKG_BUILD/* \
+  cp -r $PKG_BUILD/$PKG_NAME-$PKG_VERSION/* \
         $ADDON_BUILD/$PKG_ADDON_ID/bin
 
   mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/libs
-  cp -L $(get_build_dir curl3)/.$TARGET_NAME/lib/.libs/libcurl.so.? \
+  cp -L $(get_build_dir curl3)/.install_pkg/usr/lib/libcurl.so.? \
         $(get_build_dir krb5)/.install_pkg/usr/lib/libcom_err.so.? \
         $(get_build_dir krb5)/.install_pkg/usr/lib/libgssapi_krb5.so.? \
         $(get_build_dir krb5)/.install_pkg/usr/lib/libk5crypto.so.? \

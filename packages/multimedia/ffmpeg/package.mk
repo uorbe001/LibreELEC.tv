@@ -4,15 +4,12 @@
 
 PKG_NAME="ffmpeg"
 # Current branch is: release/4.0-kodi
-PKG_VERSION="719e85d" #4.0.2-Leia-Alpha3
-PKG_SHA256="3d6976f34de2abf7ee05f3f5f2af9ba4142e85f68eab75a83b74e89ab9f61541"
-PKG_ARCH="any"
+PKG_VERSION="4.0.3-Leia-Beta5"
+PKG_SHA256="f25559d4b803321483b28ac9b513671200bdc8e3531c02f0affdd622846a9c5e"
 PKG_LICENSE="LGPLv2.1+"
 PKG_SITE="https://ffmpeg.org"
 PKG_URL="https://github.com/xbmc/FFmpeg/archive/${PKG_VERSION}.tar.gz"
-PKG_SOURCE_DIR="FFmpeg-${PKG_VERSION}*"
 PKG_DEPENDS_TARGET="toolchain yasm:host zlib bzip2 openssl speex"
-PKG_SECTION="multimedia"
 PKG_LONGDESC="FFmpeg is a complete, cross-platform solution to record, convert and stream audio and video."
 PKG_BUILD_FLAGS="-gold"
 
@@ -67,6 +64,11 @@ if [ "$TARGET_ARCH" = "x86_64" ]; then
   PKG_FFMPEG_X86ASM="--enable-x86asm --x86asmexe=yasm"
 else
   PKG_FFMPEG_X86ASM="--disable-x86asm"
+fi
+
+if target_has_feature "(neon|sse)"; then
+  PKG_DEPENDS_TARGET+=" dav1d"
+  PKG_FFMPEG_AV1="--enable-libdav1d"
 fi
 
 pre_configure_target() {
@@ -174,6 +176,7 @@ configure_target() {
               --disable-libmp3lame \
               --disable-libopenjpeg \
               --disable-librtmp \
+              $PKG_FFMPEG_AV1 \
               --enable-libspeex \
               --disable-libtheora \
               --disable-libvo-amrwbenc \
