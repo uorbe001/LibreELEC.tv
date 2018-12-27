@@ -1,12 +1,24 @@
-diff -Naur qBittorrent-release-4.1.2/src/lang/lang.pri qBittorrent-release-4.1.2-lrelease/src/lang/lang.pri
---- qBittorrent-release-4.1.2/src/lang/lang.pri	2018-08-12 20:16:29.000000000 +0200
-+++ qBittorrent-release-4.1.2-lrelease/src/lang/lang.pri	2018-08-16 19:40:41.926188661 +0200
+diff -Naur qBittorrent-release-4.1.5/src/lang/lang.pri qBittorrent-release-4.1.5-lrelease/src/lang/lang.pri
+--- qBittorrent-release-4.1.5/src/lang/lang.pri	2018-12-24 18:24:16.000000000 +0100
++++ qBittorrent-release-4.1.5-lrelease/src/lang/lang.pri	2018-12-26 12:33:50.912007037 +0100
 @@ -11,7 +11,7 @@
-     else:QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
+     else: QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
      unix {
-       equals(QT_MAJOR_VERSION, 5) {
--        !exists($$QMAKE_LRELEASE) { QMAKE_LRELEASE = lrelease-qt5 }
-+        !exists($$QMAKE_LRELEASE) { QMAKE_LRELEASE = lrelease }
-       }
-     } else {
-         !exists($$QMAKE_LRELEASE) { QMAKE_LRELEASE = lrelease }
+         equals(QT_MAJOR_VERSION, 5) {
+-            !exists($$QMAKE_LRELEASE): QMAKE_LRELEASE = lrelease-qt5
++            !exists($$QMAKE_LRELEASE): QMAKE_LRELEASE = lrelease
+         }
+     }
+     else {
+diff -Naur qBittorrent-release-4.1.5/src/webui/webui.pri qBittorrent-release-4.1.5-lrelease/src/webui/webui.pri
+--- qBittorrent-release-4.1.5/src/webui/webui.pri	2018-12-24 18:24:16.000000000 +0100
++++ qBittorrent-release-4.1.5-lrelease/src/webui/webui.pri	2018-12-26 12:34:08.160011697 +0100
+@@ -39,7 +39,7 @@
+     else: QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
+     unix {
+         equals(QT_MAJOR_VERSION, 5) {
+-            !exists($$QMAKE_LRELEASE): QMAKE_LRELEASE = lrelease-qt5
++            !exists($$QMAKE_LRELEASE): QMAKE_LRELEASE = lrelease
+         }
+     }
+     else {
