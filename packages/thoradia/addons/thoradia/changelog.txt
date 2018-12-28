@@ -1,3 +1,6 @@
+19
+- Add Rockchip
+
 18
 - Rework default.py
 
