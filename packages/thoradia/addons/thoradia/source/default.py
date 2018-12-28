@@ -45,6 +45,8 @@ if __name__ == '__main__':
                 release[1] = 'RPi'
             elif release[1] in ['S805', 'WeTek_Core', 'WeTek_Hub', 'WeTek_Play_2']:
                 release[1] = 'WeTek_Play'
+            elif release[1] in ['MiQi', 'RK3399', 'TinkerBoard']:
+                release[1] = 'RK3328'
         elif release[2] == 'x86_64':
             release[1] = 'Generic'
 
