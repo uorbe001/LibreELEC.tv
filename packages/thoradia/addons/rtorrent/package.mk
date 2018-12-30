@@ -1,7 +1,7 @@
 PKG_NAME="rtorrent"
 PKG_VERSION="0.9.7"
 PKG_SHA256="5a7c9ded6b92d5ffc5ae32c19816f2328848d70841a4ce7d2739a5024d3587ca"
-PKG_REV="7"
+PKG_REV="8"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/rakshasa/rtorrent"
 PKG_URL="https://github.com/rakshasa/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
