@@ -1,3 +1,6 @@
+8
+- Rebuild
+
 7
 - Update to 0.9.7
 - Update libtorrent to 1.13.7
