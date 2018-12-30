@@ -1,6 +1,6 @@
 PKG_NAME="libmediainfo-shared"
-PKG_VERSION="17.12"
-PKG_SHA256="6189804822fe90ed4c86beeb8f054eda3381ae3728b885842683c6bf768dca41"
+PKG_VERSION="18.12"
+PKG_SHA256="e8f88fe9ab1ded093bd1c1e057e5633b5768479b6cd1327b9174361f78d77ca7"
 PKG_LICENSE="GPL"
 PKG_SITE="http://mediaarea.net/en/MediaInfo/Download/Source"
 PKG_URL="https://github.com/MediaArea/MediaInfoLib/archive/v$PKG_VERSION.tar.gz"
