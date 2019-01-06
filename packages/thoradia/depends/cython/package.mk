@@ -1,0 +1,8 @@
+PKG_NAME="cython"
+PKG_VERSION="0.29.2"
+PKG_SHA256="b5164b9650981aaa5457ef1e3cce4c671dee8d111f4ace99e3e6bb672c78c6f6"
+PKG_LICENSE="ALv2"
+PKG_SITE="https://cython.org"
+PKG_URL="https://github.com/cython/cython/archive/$PKG_VERSION.tar.gz"
+PKG_LONGDESC="The most widely used Python to C compiler"
+PKG_TOOLCHAIN="python2"
