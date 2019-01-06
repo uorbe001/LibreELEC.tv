@@ -2,9 +2,9 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="mono"
-PKG_VERSION="5.8.0.108"
-PKG_SHA256="ecd7c55c2f62caa65fb360ace74a45ee44bbe2de046566d90594ba66c082f39c"
-PKG_REV="110"
+PKG_VERSION="5.8.1.0"
+PKG_SHA256="a25ed4c8c4623ebae77dd307e7aca874f84f310d5cad1ff9454b3813a7f1cc39"
+PKG_REV="111"
 PKG_ARCH="any"
 PKG_LICENSE="MIT"
 PKG_SITE="http://www.mono-project.com"
@@ -18,7 +18,7 @@ PKG_TOOLCHAIN="autotools"
 PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="Mono"
 PKG_ADDON_TYPE="xbmc.python.script"
-PKG_MAINTAINER="Anton Voyl (awiouy)"
+PKG_MAINTAINER="thoradia"
 
 prefix="/storage/.kodi/addons/$PKG_SECTION.$PKG_NAME"
 options="--build=$HOST_NAME \
