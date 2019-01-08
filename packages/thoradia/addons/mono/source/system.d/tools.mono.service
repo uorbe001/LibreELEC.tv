@@ -1,0 +1,11 @@
+[Unit]
+Description=Mono installer
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /storage/.kodi/addons/tools.mono/bin/tools.mono.install
+RemainAfterExit=true
+Restart=no
+
+[Install]
+WantedBy=kodi.target

@@ -2,9 +2,9 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="mono"
-PKG_VERSION="5.8.1.0"
-PKG_SHA256="a25ed4c8c4623ebae77dd307e7aca874f84f310d5cad1ff9454b3813a7f1cc39"
-PKG_REV="111"
+PKG_VERSION="5.14.0.177"
+PKG_SHA256="d4f5fa2e8188d66fbc8054f4145711e45c1faa6d070e63600efab93d1d189498"
+PKG_REV="112"
 PKG_ARCH="any"
 PKG_LICENSE="MIT"
 PKG_SITE="http://www.mono-project.com"
@@ -17,10 +17,10 @@ PKG_TOOLCHAIN="autotools"
 
 PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="Mono"
-PKG_ADDON_TYPE="xbmc.python.script"
+PKG_ADDON_TYPE="xbmc.service"
 PKG_MAINTAINER="thoradia"
 
-prefix="/storage/.kodi/addons/$PKG_SECTION.$PKG_NAME"
+prefix=/storage/.kodi/addons/$PKG_SECTION.$PKG_NAME
 options="--build=$HOST_NAME \
          --prefix=$prefix \
          --bindir=$prefix/bin \
@@ -30,43 +30,32 @@ options="--build=$HOST_NAME \
          --localstatedir=/var \
          --disable-boehm \
          --disable-libraries \
-         --without-mcs-docs"
+         --without-mcs-docs \
+         --without-x"
 
 configure_host() {
-  cp -PR ../* .
-  ./configure $options --host=$HOST_NAME
+  ../configure $options --host=$HOST_NAME
 }
 
 makeinstall_host() {
-  : # nop
+  :
 }
 
 configure_target() {
-  cp -PR ../* .
-  ./configure $options --host=$TARGET_NAME \
-                       --disable-mcs-build
+  ../configure $options --host=$TARGET_NAME \
+                        --disable-mcs-build \
+                        --with-libgdiplus=$SYSROOT_PREFIX/usr/lib
 }
 
 makeinstall_target() {
-  make -C "$PKG_BUILD/.$HOST_NAME" install DESTDIR="$INSTALL"
-  make -C "$PKG_BUILD/.$TARGET_NAME" install DESTDIR="$INSTALL"
-  $STRIP "$INSTALL/storage/.kodi/addons/$PKG_SECTION.$PKG_NAME/bin/mono"
+  make -C $PKG_BUILD/.$HOST_NAME install DESTDIR=$INSTALL
+  make -C $PKG_BUILD/.$TARGET_NAME install DESTDIR=$INSTALL
+  $STRIP $INSTALL$prefix/bin/* $INSTALL/$prefix/lib/* &> /dev/null || true
 }
 
 addon() {
-  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID"
-
-  cp -PR "$PKG_BUILD/.install_pkg/storage/.kodi/addons/$PKG_SECTION.$PKG_NAME"/* \
-         "$ADDON_BUILD/$PKG_ADDON_ID/"
-
-  rm -fr "$ADDON_BUILD/$PKG_ADDON_ID/include" \
-         "$ADDON_BUILD/$PKG_ADDON_ID/share/man"
-
-  mv "$ADDON_BUILD/$PKG_ADDON_ID/bin/mono-sgen" \
-     "$ADDON_BUILD/$PKG_ADDON_ID/bin/mono"
-
-  cp -L "$(get_build_dir cairo)/.install_pkg/usr/lib/libcairo.so.2" \
-        "$(get_build_dir libgdiplus)/.install_pkg/usr/lib/libgdiplus.so" \
-        "$(get_build_dir pixman)/.install_pkg/usr/lib/libpixman-1.so.0" \
-        "$ADDON_BUILD/$PKG_ADDON_ID/lib"
+  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID
+  cd $PKG_BUILD/.install_pkg$prefix
+    XZ_OPT=-9e tar -cJf $ADDON_BUILD/$PKG_ADDON_ID/$PKG_SECTION.$PKG_NAME.tar.xz *
+  cd -
 }
