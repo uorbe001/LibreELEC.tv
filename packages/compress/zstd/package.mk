@@ -9,8 +9,10 @@ PKG_SITE="http://www.zstd.net"
 PKG_URL="https://github.com/facebook/zstd/archive/v${PKG_VERSION}.tar.gz"
 PKG_SOURCE_DIR=$PKG_NAME-$PKG_VERSION
 PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_HOST="ninja:host"
 PKG_LONGDESC="A fast real-time compression algorithm."
 
-
-PKG_CMAKE_SCRIPT="$PKG_BUILD/build/cmake/CMakeLists.txt"
-PKG_CMAKE_OPTS_HOST="-DTHREADS_PTHREAD_ARG=0"
+configure_package() {
+  PKG_CMAKE_SCRIPT="$PKG_BUILD/build/cmake/CMakeLists.txt"
+  PKG_CMAKE_OPTS_HOST="-DTHREADS_PTHREAD_ARG=0"
+}
