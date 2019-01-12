@@ -4,7 +4,7 @@
 PKG_NAME="webgrabplus"
 PKG_VERSION="2.1.5_beta"
 PKG_SHA256="bee5d6c12bc5b62366a0d05b48c1693d715199b28b12240fa74c0b2c0f613a72"
-PKG_REV="105"
+PKG_REV="106"
 PKG_ARCH="any"
 PKG_LICENSE="prop."
 PKG_SITE="http://www.webgrabplus.com/"
@@ -19,7 +19,7 @@ PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="WebGrab+Plus"
 PKG_ADDON_TYPE="xbmc.service"
 PKG_ADDON_REQUIRES="tools.mono:0.0.0"
-PKG_MAINTAINER="Anton Voyl (awiouy)"
+PKG_MAINTAINER="thoradia"
 
 addon() {
   mkdir -p $ADDON_BUILD/$PKG_ADDON_ID
