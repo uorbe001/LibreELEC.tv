@@ -1,7 +1,7 @@
 PKG_NAME="sabnzbd"
-PKG_VERSION="2.3.6"
-PKG_SHA256="fe7ee2a17464c57b3db6ea0ed942e45d9c6ef18b8223520cc4ae302e7e221949"
-PKG_REV="32"
+PKG_VERSION="2.3.7"
+PKG_SHA256="33999e3ed15c08bb36d58a07e4e936a2e17b2656f10e3b6ae4716e627ba15a39"
+PKG_REV="33"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://sabnzbd.org/"
 PKG_URL="https://github.com/sabnzbd/$PKG_NAME/archive/$PKG_VERSION.tar.gz"
@@ -17,7 +17,7 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: free and easy binary newsreader"
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a program to download binary files from Usenet servers."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
-PKG_TOOLCHAIN="python2"
+PKG_TOOLCHAIN="manual"
 
 make_target() {
   rm -fr linux osx six win
