@@ -1,11 +1,11 @@
 PKG_NAME="bazarr"
-PKG_VERSION="0.6.9.1"
-PKG_SHA256="89e37c1854b5931e6bf086cb288cd642f9f70b260e60ade7cecc76696d3afd77"
-PKG_REV="1"
+PKG_VERSION="0.7.0"
+PKG_SHA256="e0e6a277b657ed01e5cb0c62b3368d6598699e6c57acf8e7afa8e8a94dec63dc"
+PKG_REV="2"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/morpheus65535/bazarr"
 PKG_URL="https://github.com/morpheus65535/bazarr/archive/v$PKG_VERSION.tar.gz"
-PKG_DEPENDS_TARGET="toolchain gevent"
+PKG_DEPENDS_TARGET="toolchain gevent python_bazarr"
 PKG_SECTION="service"
 PKG_TOOLCHAIN="manual"
 
@@ -18,12 +18,13 @@ PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a companion application to Sonar
 PKG_DISCLAIMER="Keep it legal and carry on"
 
 addon() {
-  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/bazarr"
+  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/bazarr
 
-  cp -PR "$PKG_BUILD"/* \
-         "$ADDON_BUILD/$PKG_ADDON_ID/bazarr"
+  cp -PR $PKG_BUILD/* \
+         $ADDON_BUILD/$PKG_ADDON_ID/bazarr
 
-  cp -PR "$(get_build_dir gevent)/.install_pkg/usr/lib/python2.7/site-packages/gevent" \
-         "$(get_build_dir Python2)/Lib/unittest" \
-         "$ADDON_BUILD/$PKG_ADDON_ID/bazarr/libs"
+  cp -PR $(get_build_dir gevent)/.install_pkg/usr/lib/python2.7/site-packages/gevent \
+         $(get_build_dir python_bazarr)/.install_pkg/usr/lib/python2.7/site-packages/greenlet*/greenlet* \
+         $(get_build_dir Python2)/Lib/unittest \
+         $ADDON_BUILD/$PKG_ADDON_ID/bazarr/libs
 }

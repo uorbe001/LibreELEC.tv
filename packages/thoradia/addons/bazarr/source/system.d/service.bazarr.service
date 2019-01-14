@@ -1,8 +1,8 @@
 [Unit]
 Description=Bazarr
 Documentation=https://github.com/morpheus65535/bazarr/wiki
-After=multi-user.target network-online.target
-Requires=multi-user.target network-online.target
+After=multi-user.target
+Requires=multi-user.target
 
 [Service]
 ExecStart=/bin/sh /storage/.kodi/addons/service.bazarr/bin/bazarr.start
