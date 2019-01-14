@@ -55,6 +55,11 @@ fi
 
 ${SCRIPTS}/unpack "${PKG_NAME}" "${PARENT_PKG}"
 
+if [ "$PKG_TOOLCHAIN" = "python2" ]; then
+  PKG_DEPENDS_HOST="toolchain distutilscross:host $PKG_DEPENDS_HOST"
+  PKG_DEPENDS_TARGET="toolchain distutilscross:host Python2 $PKG_DEPENDS_TARGET"
+fi
+
 # build dependencies, only when PKG_DEPENDS_? is filled
 unset _pkg_depends
 case "${TARGET}" in
