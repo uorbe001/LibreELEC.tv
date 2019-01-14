@@ -56,6 +56,11 @@ fi
 
 $SCRIPTS/unpack $PACKAGE_NAME
 
+if [ "$PKG_TOOLCHAIN" = "python2" ]; then
+  PKG_DEPENDS_HOST="toolchain distutilscross:host $PKG_DEPENDS_HOST"
+  PKG_DEPENDS_TARGET="toolchain distutilscross:host Python2 $PKG_DEPENDS_TARGET"
+fi
+
 # build dependencies, only when PKG_DEPENDS_? is filled
 unset _pkg_depends
 case "$TARGET" in
@@ -172,11 +177,6 @@ INIT_MESON_OPTS="$TARGET_MESON_OPTS"
 BOOTSTRAP_CONFIGURE_OPTS="$HOST_CONFIGURE_OPTS"
 BOOTSTRAP_CMAKE_OPTS="$HOST_CMAKE_OPTS"
 BOOTSTRAP_MESON_OPTS="$HOST_MESON_OPTS"
-
-if [ "$PKG_TOOLCHAIN" = "python2" ]; then
-  PKG_DEPENDS_HOST="toolchain distutilscross:host $PKG_DEPENDS_HOST"
-  PKG_DEPENDS_TARGET="toolchain distutilscross:host Python2 $PKG_DEPENDS_TARGET"
-fi
 
 # setup configure scripts
 PKG_CONFIGURE_SCRIPT="${PKG_CONFIGURE_SCRIPT:-${PKG_BUILD}/configure}"
