@@ -4,6 +4,8 @@
 oe_setup_addon service.bazarr
 
 GIT_PYTHON_REFRESH=quiet \
+PYTHONPATH="$ADDON_DIR/bazarr/libs:$PYTHONPATH" \
 nice -n "$bz_nice" \
 python "$ADDON_DIR/bazarr/bazarr.py" \
-       --config "$ADDON_HOME"
+       --config "$ADDON_HOME" \
+       --no-update
