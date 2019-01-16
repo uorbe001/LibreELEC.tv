@@ -1,7 +1,7 @@
 PKG_NAME="qbittorrent"
 PKG_VERSION="4.1.5"
 PKG_SHA256="76c7d9c020a7d9f45f8956934dd89500b61986cc22b1e0b7a46dc1af11f11d2c"
-PKG_REV="19"
+PKG_REV="20"
 PKG_LICENSE="GPLv2"
 PKG_SITE="http://www.qbittorrent.org/"
 PKG_URL="https://github.com/qbittorrent/qBittorrent/archive/release-$PKG_VERSION.tar.gz"
@@ -23,10 +23,8 @@ PKG_CONFIGURE_OPTS_TARGET="--disable-gui \
                            --prefix=$SYSROOT_PREFIX/usr \
                            --with-boost=$SYSROOT_PREFIX/usr"
 
-export LDFLAGS="-L$SYSROOT_PREFIX/usr/plugins/bearer $LDFLAGS"
-
-makeinstall_target() {
- $STRIP src/qbittorrent-nox
+pre_configure_target() {
+  export LDFLAGS="-L$SYSROOT_PREFIX/usr/plugins/bearer $LDFLAGS"
 }
 
 addon() {
