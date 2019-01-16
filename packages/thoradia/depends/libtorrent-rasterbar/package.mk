@@ -1,6 +1,6 @@
 PKG_NAME="libtorrent-rasterbar"
-PKG_VERSION="1_1_11"
-PKG_SHA256="d98ea107513537771ce661d17ccc16148cda1294c2d42ff4efe314482e0de441"
+PKG_VERSION="1_1_12"
+PKG_SHA256="a84f68ad5656abeb90074602998d73b93588c7728b79e78f17353737b8180ef8"
 PKG_LICENSE="https://github.com/arvidn/libtorrent/blob/master/LICENSE"
 PKG_SITE="http://libtorrent.org/"
 PKG_URL="https://github.com/arvidn/libtorrent/archive/libtorrent_$PKG_VERSION.tar.gz"
@@ -18,5 +18,5 @@ post_unpack() {
 }
 
 pre_configure_target() {
-  export CXXFLAGS="$CXXFLAGS -lboost_python -lpython2.7"
+  export CXXFLAGS="$CXXFLAGS -lboost_python27 -lpython2.7"
 }
