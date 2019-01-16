@@ -1,8 +1,8 @@
 [Unit]
 Description=qBittorrent service
-Documentation=http://deluge-torrent.org/
-After=multi-user.target network-online.target
-Requires=multi-user.target network-online.target
+Documentation=https://github.com/qbittorrent/qBittorrent/wiki
+After=kodi.service
+Wants=kodi.service
 
 [Service]
 Type=forking
@@ -10,4 +10,4 @@ ExecStart=/bin/sh /storage/.kodi/addons/service.qbittorrent/bin/qbittorrent.star
 Restart=always
 
 [Install]
-WantedBy=kodi.target
+WantedBy=kodi.service
