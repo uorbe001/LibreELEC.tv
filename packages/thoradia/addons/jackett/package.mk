@@ -1,7 +1,7 @@
 PKG_NAME="jackett"
-PKG_VERSION="0.10.566"
-PKG_SHA256="6089c020db683b31a21f66036610758ed625f3b03bef1384cbd8b8bd786b2e83"
-PKG_REV="33"
+PKG_VERSION="0.10.657"
+PKG_SHA256="ac28fd4d92a3463bf7cbd5c00a56a0aa41fccca817fdac91cceabe3fc849ea7a"
+PKG_REV="34"
 PKG_LICENSE="GPL2"
 PKG_SITE="https://github.com/Jackett/Jackett"
 PKG_URL="https://github.com/Jackett/Jackett/releases/download/v$PKG_VERSION/Jackett.Binaries.Mono.tar.gz"
@@ -20,6 +20,6 @@ PKG_DISCLAIMER="Keep it legal and carry on"
 PKG_TOOLCHAIN="manual"
 
 addon() {
-  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/Jackett
-  cp -PR $PKG_BUILD/* $ADDON_BUILD/$PKG_ADDON_ID/Jackett
+  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/jackett
+  cp -PR $PKG_BUILD/* $ADDON_BUILD/$PKG_ADDON_ID/jackett
 }
