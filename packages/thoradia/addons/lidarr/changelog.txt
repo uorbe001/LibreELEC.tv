@@ -1,3 +1,7 @@
+7
+- Start after Kodi and Mono
+- Cosmetic changes
+
 6
 - Update to 0.5.0.583
 
