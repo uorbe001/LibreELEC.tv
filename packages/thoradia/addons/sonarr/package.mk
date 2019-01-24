@@ -1,7 +1,7 @@
 PKG_NAME="sonarr"
-PKG_VERSION="2.0.0.5252"
-PKG_SHA256="d70d6e236dbbdcd54692b3f71f12bf97465608f954d985c71e1b5ae905d74667"
-PKG_REV="26"
+PKG_VERSION="2.0.0.5301"
+PKG_SHA256="5b02f10cd3fdd1bc947bc2122131bc542db1cc980c5a4f32f04d16f980ee529a"
+PKG_REV="27"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://sonarr.tv/"
 PKG_URL="http://download.sonarr.tv/v2/master/mono/NzbDrone.master.$PKG_VERSION.mono.tar.gz"
@@ -20,6 +20,6 @@ PKG_DISCLAIMER="Keep it legal and carry on"
 PKG_TOOLCHAIN="manual"
 
 addon() {
-  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/NzbDrone"
-  cp -PR "$PKG_BUILD"/* "$ADDON_BUILD/$PKG_ADDON_ID/NzbDrone"
+  mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID/sonarr"
+  cp -PR $PKG_BUILD/* $ADDON_BUILD/$PKG_ADDON_ID/sonarr
 }

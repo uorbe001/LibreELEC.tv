@@ -1,3 +1,8 @@
+27
+- Update to 2.0.0.5301
+- Start after Kodi and Mono
+- Cosmetic changes
+
 26
 - Update to 2.0.0.5252
 
