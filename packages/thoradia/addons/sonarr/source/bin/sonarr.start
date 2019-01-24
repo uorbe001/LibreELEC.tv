@@ -4,4 +4,4 @@
 oe_setup_addon service.sonarr
 
 nice -n "$sr_nice" \
-mono "$ADDON_DIR/NzbDrone/NzbDrone.exe" -data="$ADDON_HOME" -nobrowser
+mono "$ADDON_DIR/sonarr/NzbDrone.exe" -data="$ADDON_HOME" -nobrowser
