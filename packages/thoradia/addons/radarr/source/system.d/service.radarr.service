@@ -1,12 +1,13 @@
 [Unit]
 Description=Radarr
 Documentation=https://github.com/Radarr/Radarr
-After=multi-user.target network-online.target
-Requires=multi-user.target network-online.target
+After=kodi.service tools.mono.service
+Requires=tools.mono.service
+Wants=kodi.service
 
 [Service]
 ExecStart=/bin/sh /storage/.kodi/addons/service.radarr/bin/radarr.start
 Restart=always
 
 [Install]
-WantedBy=kodi.target
+WantedBy=kodi.service
