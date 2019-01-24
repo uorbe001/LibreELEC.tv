@@ -1,3 +1,9 @@
+
+34
+- Update to 0.10.657
+- Start after Kodi and Mono
+- Cosmetic changes
+
 33
 - Update to 0.10.566
 
