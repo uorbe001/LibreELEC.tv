@@ -12,20 +12,20 @@ PKG_PATCH_DIRS="$KODI_VENDOR"
 
 case $KODI_VENDOR in
   raspberrypi)
-    PKG_VERSION="newclock5_18.0rc4-Leia"
-    PKG_SHA256="d4151ff73ab7790764100bf1b47908419bed9b04e1eb00f2e0480f95827b50b2"
+    PKG_VERSION="newclock5_18.0-Leia"
+    PKG_SHA256="9c056808eecc7dd2e72fffd3f3412d83c60fe3742bc0d96f16f9abdfc55c8012"
     PKG_URL="https://github.com/popcornmix/xbmc/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="kodi-$KODI_VENDOR-$PKG_VERSION.tar.gz"
     ;;
   rockchip)
-    PKG_VERSION="rockchip_18.0rc4-Leia"
-    PKG_SHA256="1c5ee8235319e957f5c7e2c5d601ee6816e7a710318fbd047201f02e9f0acbc6"
+    PKG_VERSION="rockchip_18.0-Leia"
+    PKG_SHA256="4f52928c06cbb684942b5bbb6623e2da5622ef278189ca5a8aefa5f801f6a22c"
     PKG_URL="https://github.com/kwiboo/xbmc/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="kodi-$KODI_VENDOR-$PKG_VERSION.tar.gz"
     ;;
   *)
-    PKG_VERSION="18.0rc4-Leia"
-    PKG_SHA256="90f7a8c32e571654d2503a4e97e438b597ff19ae7876e926aaa06b8de516b72b"
+    PKG_VERSION="18.0-Leia"
+    PKG_SHA256="ac5d64d59c6f4811b41a869538506e56c342b530fac97ad9dc9715f3d480e633"
     PKG_URL="https://github.com/xbmc/xbmc/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="kodi-$PKG_VERSION.tar.gz"
     ;;
@@ -190,7 +190,7 @@ configure_package() {
     PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET $KODIPLAYER_DRIVER libinput libxkbcommon"
     if [ "$KODIPLAYER_DRIVER" = bcm2835-driver ]; then
       KODI_PLAYER="-DCORE_PLATFORM_NAME=rbpi"
-    elif [ "$KODIPLAYER_DRIVER" = mesa -o "$KODIPLAYER_DRIVER" = rkmpp ]; then
+    elif [ "$OPENGLES_SUPPORT" = yes -a "$KODIPLAYER_DRIVER" = "$OPENGLES" ]; then
       KODI_PLAYER="-DCORE_PLATFORM_NAME=gbm -DGBM_RENDER_SYSTEM=gles"
       CFLAGS="$CFLAGS -DMESA_EGL_NO_X11_HEADERS"
       CXXFLAGS="$CXXFLAGS -DMESA_EGL_NO_X11_HEADERS"

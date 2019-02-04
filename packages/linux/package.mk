@@ -38,14 +38,14 @@ case "$LINUX" in
     PKG_SOURCE_NAME="linux-$LINUX-$PKG_VERSION.tar.gz"
     ;;
   raspberrypi)
-    PKG_VERSION="e75aca6e66f6091dd3b9c316750025c8e9684f16" # 4.19.12
-    PKG_SHA256="0f29fb52dc4d7fd705c9215e8a910a6e854b8014e697bdd7b6ce4854d7e342f4"
+    PKG_VERSION="5c4a6441f890845472a698e35c8df995804e06e2" # 4.19.17
+    PKG_SHA256="58eac16e603edfd106993ae057bcc13adf3f8ffce609172f404144696edd7221"
     PKG_URL="https://github.com/raspberrypi/linux/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="linux-$LINUX-$PKG_VERSION.tar.gz"
     ;;
   *)
-    PKG_VERSION="4.19.12"
-    PKG_SHA256="4d81ac539d62617f5b52f25971749d8c6d3a200deee76898bb99be8492999b77"
+    PKG_VERSION="4.19.17"
+    PKG_SHA256="872d92a17a2d252ccd6334503bc8f67eebceeb99cb822a77f5c72b936f2ccb59"
     PKG_URL="https://www.kernel.org/pub/linux/kernel/v4.x/$PKG_NAME-$PKG_VERSION.tar.xz"
     PKG_PATCH_DIRS="default"
     ;;
@@ -206,7 +206,7 @@ make_target() {
   ( cd $ROOT
     rm -rf $BUILD/initramfs
     $SCRIPTS/install initramfs
-  ) || die "FAILURE: Building initramfs"
+  )
 
   if [ "$BOOTLOADER" = "u-boot" -a -n "$KERNEL_UBOOT_EXTRA_TARGET" ]; then
     for extra_target in "$KERNEL_UBOOT_EXTRA_TARGET"; do
