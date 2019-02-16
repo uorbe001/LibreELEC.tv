@@ -1,3 +1,6 @@
+35
+- Update to 0.10.778
+- MemoryHigh=125M and MemoryMax=150M in system.d
 
 34
 - Update to 0.10.657
