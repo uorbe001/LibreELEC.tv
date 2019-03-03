@@ -34,6 +34,8 @@ if __name__ == '__main__':
             pass
 
     if release is not None:
+        if release[0] == '9.0.1':
+            release[0] = '9.1'
         xbmcaddon.Addon().setSetting('le', strings(30011).format(*release))
         if release[2] == 'aarch64':
             if release[1] in ['WeTek_Hub', 'WeTek_Play_2']:
