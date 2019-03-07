@@ -1,3 +1,7 @@
+22
+- Update to 0.2.0.1293
+- Restrict memory usage
+
 21
 - Start after Kodi and Mono
 - Cosmetic changes
