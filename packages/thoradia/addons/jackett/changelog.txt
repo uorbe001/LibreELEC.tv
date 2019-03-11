@@ -1,3 +1,8 @@
+38
+- Update to 0.11.8
+- Switch to .Net Core
+- Set MemoryMax=300M to enable auto-update
+
 35
 - Update to 0.10.778
 - MemoryHigh=125M and MemoryMax=150M in system.d
