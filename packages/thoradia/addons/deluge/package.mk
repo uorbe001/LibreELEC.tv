@@ -18,7 +18,7 @@ PKG_DISCLAIMER="Keep it legal and carry on"
 
 PKG_TOOLCHAIN="python2"
 
-pre_make_target() {
+pre_configure_target() {
   export LDSHARED="-pthread"
   python setup.py build
 }
