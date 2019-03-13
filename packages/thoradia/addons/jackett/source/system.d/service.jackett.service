@@ -9,7 +9,7 @@ Wants=kodi.service
 ExecStart=/bin/sh /storage/.kodi/addons/service.jackett/bin/jackett.start
 Restart=always
 MemoryHigh=125M
-MemoryMax=300M
+MemoryMax=200M
 
 [Install]
 WantedBy=kodi.service
