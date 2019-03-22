@@ -1,3 +1,6 @@
+113
+- Update to 5.18.1.0
+
 112
 - Update to 5.14.0.177
 - Build libgdiplus static
