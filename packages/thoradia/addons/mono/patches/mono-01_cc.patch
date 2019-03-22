@@ -1,0 +1,47 @@
+From 97e410a6529d4c3ef345ab6bc9034af797872f84 Mon Sep 17 00:00:00 2001
+From: ShonkyCH <christian@hack.id.au>
+Date: Fri, 4 Jan 2019 12:00:24 +1000
+Subject: [PATCH 1/2] Fix cross compile issue introduced in 5.16
+
+Fixes #9951
+---
+ configure.ac | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/configure.ac b/configure.ac
+index 2780f8184cbc..d8ee7a5e87b0 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -3226,6 +3226,8 @@ if test x$host_win32 = xno; then
+ 	AC_MSG_CHECKING(for shm_open that works well enough with mmap)
+ 	if test "x$ac_cv_func_shm_open" = "xno" -o "x$ac_cv_func_shm_open_working_with_mmap" = "xno" ; then
+ 		AC_MSG_RESULT(no)
++	elif test "x$cross_compiling" = "xyes"; then
++		AC_MSG_RESULT(cross compiling, assuming yes)
+ 	else
+ 		AC_TRY_RUN([
+ 			#include <sys/mman.h>
+
+From fa290a62d92fb5a3139490b17a9e1cce3e0fd5dc Mon Sep 17 00:00:00 2001
+From: Alexis Christoforides <alexis@thenull.net>
+Date: Sun, 13 Jan 2019 15:48:43 -0500
+Subject: [PATCH 2/2] Update configure.ac
+
+Define HAVE_SHM_OPEN_THAT_WORKS_WELL_ENOUGH_WITH_MMAP in the cross-compilation case also (since we are "assuming yes")
+---
+ configure.ac | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configure.ac b/configure.ac
+index d8ee7a5e87b0..cc3ada79c3eb 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -3228,6 +3228,7 @@ if test x$host_win32 = xno; then
+ 		AC_MSG_RESULT(no)
+ 	elif test "x$cross_compiling" = "xyes"; then
+ 		AC_MSG_RESULT(cross compiling, assuming yes)
++		AC_DEFINE(HAVE_SHM_OPEN_THAT_WORKS_WELL_ENOUGH_WITH_MMAP, 1, [shm_open that works well enough with mmap])
+ 	else
+ 		AC_TRY_RUN([
+ 			#include <sys/mman.h>
+
