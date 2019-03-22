@@ -1,3 +1,7 @@
+28
+- Update to 2.0.0.5319
+- Restrict memory usage
+
 27
 - Update to 2.0.0.5301
 - Start after Kodi and Mono
