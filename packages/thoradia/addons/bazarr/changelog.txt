@@ -1,3 +1,6 @@
+7
+- Update to 0.7.3
+
 6
 - Update to 0.7.2.1
 
