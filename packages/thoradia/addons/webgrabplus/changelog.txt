@@ -1,3 +1,6 @@
+107
+- Update to 2.1.9_beta
+
 105
 - Upgrade WebGrab!Plus to 2.1.5_beta
 
