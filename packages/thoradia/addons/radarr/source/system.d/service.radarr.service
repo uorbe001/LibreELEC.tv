@@ -9,7 +9,6 @@ Wants=kodi.service
 ExecStart=/bin/sh /storage/.kodi/addons/service.radarr/bin/radarr.start
 Restart=always
 MemoryHigh=100M
-MemoryMax=125M
 
 [Install]
 WantedBy=kodi.service
