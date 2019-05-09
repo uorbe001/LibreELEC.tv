@@ -1,3 +1,6 @@
+30
+- Remove MemoryMax (enable swap yourself)
+
 29
 - Update to 2.0.0.5322
 
