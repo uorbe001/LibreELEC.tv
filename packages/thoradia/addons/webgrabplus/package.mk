@@ -2,13 +2,13 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="webgrabplus"
-PKG_VERSION="2.1.5_beta"
-PKG_SHA256="bee5d6c12bc5b62366a0d05b48c1693d715199b28b12240fa74c0b2c0f613a72"
-PKG_REV="106"
+PKG_VERSION="2.1.9_beta"
+PKG_SHA256="11e5b68359bc09bf814ba01b224acadfeaa21e22c3ffa5d78a9b97fad71fe21f"
+PKG_REV="107"
 PKG_ARCH="any"
 PKG_LICENSE="prop."
 PKG_SITE="http://www.webgrabplus.com/"
-PKG_URL="http://webgrabplus.com/sites/default/files/download/SW/V2.1.5/WebGrabPlus_V2.1.5_beta_install.tar.gz"
+PKG_URL="http://webgrabplus.com/sites/default/files/download/SW/V2.1.9/WebGrabPlus_V2.1.9_beta_install.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_SECTION="service"
 PKG_SHORTDESC="WebGrab+Plus: a multi-site incremental xmltv epg grabber"
