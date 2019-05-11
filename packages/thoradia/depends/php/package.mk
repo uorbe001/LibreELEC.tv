@@ -1,6 +1,6 @@
 PKG_NAME="php"
-PKG_VERSION="7.2.5"
-PKG_SHA256="af70a33b3f7a51510467199b39af151333fbbe4cc21923bad9c7cf64268cddb2"
+PKG_VERSION="7.3.5"
+PKG_SHA256="e1011838a46fd4a195c8453b333916622d7ff5bce4aca2d9d99afac142db2472"
 PKG_LICENSE="PHP"
 PKG_SITE="http://www.php.net"
 PKG_URL="http://www.php.net/distributions/$PKG_NAME-$PKG_VERSION.tar.xz"
