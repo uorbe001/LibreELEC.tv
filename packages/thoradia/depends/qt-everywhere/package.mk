@@ -5,7 +5,7 @@ PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://qt-project.org"
 PKG_URL="http://download.qt.io/archive/qt/5.12/$PKG_VERSION/single/$PKG_NAME-src-$PKG_VERSION.tar.xz"
-PKG_DEPENDS_TARGET="toolchain freetype openssl pcre2 zlib"
+PKG_DEPENDS_TARGET="toolchain openssl pcre2 zlib"
 PKG_SOURCE_DIR="$PKG_NAME-src-$PKG_VERSION"
 PKG_LONGDESC="A cross-platform application and UI framework"
 PKG_AUTORECONF="no"
@@ -25,7 +25,6 @@ PKG_CONFIGURE_OPTS_TARGET="-prefix /usr
                            -system-zlib
                            -no-mtdev
                            -no-gif
-			   -no-libpng
                            -no-libjpeg
                            -no-harfbuzz
                            -no-libproxy
@@ -105,7 +104,7 @@ configure_target() {
     QMAKE_NM                = $NM -P
     QMAKE_STRIP             = $STRIP
     QMAKE_CFLAGS = $CFLAGS
-    QMAKE_CXXFLAGS = $CXXFLAGS -fpermissive
+    QMAKE_CXXFLAGS = $CXXFLAGS
     QMAKE_LFLAGS = $LDFLAGS
     load(qt_config)
 EOF
