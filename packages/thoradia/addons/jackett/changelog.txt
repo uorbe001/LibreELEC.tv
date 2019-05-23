@@ -1,5 +1,5 @@
 39
-- Update to standalone 0.11.355
+- Update to standalone 0.11.361
 
 38
 - Update to 0.11.295
