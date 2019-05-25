@@ -1,5 +1,5 @@
 PKG_NAME="jackett"
-PKG_VERSION="0.11.361"
+PKG_VERSION="0.11.355"
 PKG_REV="39"
 PKG_LICENSE="GPL2"
 PKG_SITE="https://github.com/Jackett/Jackett"
@@ -8,18 +8,17 @@ PKG_SECTION="service"
 
 case "$ARCH" in
   "arm")
-    PKG_SHA256="9eb9eb10e0b8c528a987fff9b5bfded28e00240b8364df448baed41940cb902f"
-    PKG_URL="https://github.com/Jackett/Jackett/releases/download/v$PKG_VERSION/Jackett.Binaries.LinuxARM32.tar.gz"
+    PKG_SHA256="28fd68c66f840e343a07eaa141e2f2f2819e887180134532e4df2a6c8e8c3459"
+    PKG_URL="https://github.com/Jackett/Jackett/releases/download/v0.11.355/Jackett.Binaries.LinuxARM32.tar.gz"
     ;;
   "x86_64")
-    PKG_SHA256="0d612e28bc45923883a17c166f3842e85895ea84dfb7a42b1855fdf9749c79e1"
-    PKG_URL="https://github.com/Jackett/Jackett/releases/download/v$PKG_VERSION/Jackett.Binaries.LinuxAMDx64.tar.gz"
+    PKG_SHA256="b8c1a5269340069fc27b636797f750ded911dfa29ef9c7499b46ae66535bdc8b"
+    PKG_URL="https://github.com/Jackett/Jackett/releases/download/v0.11.355/Jackett.Binaries.LinuxAMDx64.tar.gz"
     ;;
 esac
 
 PKG_IS_ADDON="yes"
 PKG_ADDON_NAME="Jackett"
-PKG_ADDON_PROJECTS="any !RPi1"
 PKG_ADDON_TYPE="xbmc.service"
 PKG_MAINTAINER="thoradia"
 PKG_SHORTDESC="$PKG_ADDON_NAME: proxy to tracker sites"
