@@ -1,6 +1,3 @@
-39
-- Update to standalone 0.11.355
-
 38
 - Update to 0.11.295
 - Remove MemoryMax (enable swap yourself)

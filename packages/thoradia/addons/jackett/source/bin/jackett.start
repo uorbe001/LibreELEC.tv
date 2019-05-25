@@ -3,10 +3,16 @@
 . /etc/profile
 oe_setup_addon service.jackett
 
-chmod +x "$ADDON_DIR/jackett/jackett"
+if [ ! -d "$ADDON_HOME/Jackett" ]; then
+  tmp="$(mktemp -d)"
+  find "/storage/.config/Jackett" "$ADDON_HOME" -maxdepth 1 -mindepth 1 \
+      ! -name settings.xml -exec mv {} "$tmp" ";"
+  mv "$tmp" "$ADDON_HOME/Jackett"
+  rm -fr "/storage/.config/Jackett"
+fi
 
-DOTNET_SYSTEM_GLOBALIZATION_INVARIANT="1" \
-LD_LIBRARY_PATH="$ADDON_DIR/libs:$LD_LIBRARY_PATH" \
+XDG_CONFIG_HOME="$ADDON_HOME" cert-sync --quiet --user /etc/pki/tls/cacert.pem
+
 XDG_CONFIG_HOME="$ADDON_HOME" \
 nice -n "$jk_nice" \
-"$ADDON_DIR/jackett/jackett" --NoRestart
+mono "$ADDON_DIR/jackett/JackettConsole.exe" --NoRestart
