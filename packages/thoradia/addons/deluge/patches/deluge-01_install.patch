@@ -1,0 +1,55 @@
+diff -Naur deluge-2.0.2/deluge-deluge-2.0.2/setup.py deluge-2.0.2-install/deluge-deluge-2.0.2/setup.py
+--- deluge-2.0.2.orig/setup.py	2019-06-08 22:34:27.000000000 +0200
++++ deluge-2.0.2/setup.py	2019-06-09 00:31:55.546558590 +0200
+@@ -454,35 +454,6 @@
+ }
+ 
+ 
+-if not windows_check() and not osx_check():
+-    for icon_path in glob.glob('deluge/ui/data/icons/hicolor/*x*'):
+-        size = os.path.basename(icon_path)
+-        icons = glob.glob(os.path.join(icon_path, 'apps', 'deluge*.png'))
+-        _data_files.append(('share/icons/hicolor/{}/apps'.format(size), icons))
+-    _data_files.extend(
+-        [
+-            (
+-                'share/icons/hicolor/scalable/apps',
+-                ['deluge/ui/data/icons/hicolor/scalable/apps/deluge.svg'],
+-            ),
+-            ('share/pixmaps', ['deluge/ui/data/pixmaps/deluge.png']),
+-            (
+-                'share/man/man1',
+-                [
+-                    'docs/man/deluge.1',
+-                    'docs/man/deluged.1',
+-                    'docs/man/deluge-gtk.1',
+-                    'docs/man/deluge-web.1',
+-                    'docs/man/deluge-console.1',
+-                ],
+-            ),
+-        ]
+-    )
+-    if os.path.isfile(desktop_data):
+-        _data_files.append(('share/applications', [desktop_data]))
+-    if os.path.isfile(appdata_data):
+-        _data_files.append(('share/appdata', [appdata_data]))
+-
+ _entry_points['console_scripts'] = [
+     'deluge-console = deluge.ui.console:start',
+     'deluge-web = deluge.ui.web:start',
+@@ -542,7 +513,6 @@
+     'rencode',
+     'pyopenssl',
+     'pyxdg',
+-    'pillow',
+     'mako',
+     'chardet',
+     'six',
+@@ -551,6 +521,7 @@
+     "py2-ipaddress; sys_platform == 'win32' and python_version == '2'",
+     "certifi; sys_platform == 'win32'",
+     'zope.interface',
++    'setuptools>=41.0.1',
+ ]
+ tests_require = ['pytest', 'pytest-twisted']
+ 
