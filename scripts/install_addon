@@ -35,8 +35,9 @@ build_msg "CLR_INFO" "*** compressing addon ${PKG_ADDON_ID} ... ***"
 ${TOOLCHAIN}/bin/7za a -l -mx9 -bsp0 -bso0 -tzip ${PKG_ADDON_ID}-${ADDONVER}.zip ${PKG_ADDON_ID}
 cd - &>/dev/null
 
-mkdir -p ${ADDON_INSTALL_DIR}
+mkdir -p $ADDON_INSTALL_DIR
 cp ${ADDON_BUILD}/${PKG_ADDON_ID}-${ADDONVER}.zip ${ADDON_INSTALL_DIR}
+md5sum ${ADDON_INSTALL_DIR}/${PKG_ADDON_ID}-${ADDONVER}.zip > ${ADDON_INSTALL_DIR}/${PKG_ADDON_ID}-${ADDONVER}.zip.md5
 if [ -f ${ADDON_BUILD}/${PKG_ADDON_ID}/changelog.txt ]; then
   cp ${ADDON_BUILD}/${PKG_ADDON_ID}/changelog.txt ${ADDON_INSTALL_DIR}/changelog-${ADDONVER}.txt
 fi
