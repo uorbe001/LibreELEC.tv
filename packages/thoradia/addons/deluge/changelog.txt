@@ -1,4 +1,7 @@
-27
+29
+- Provide libtorrent-rasterbar
+
+28
 - Update to 2.0.3
 
 27
