@@ -1,7 +1,7 @@
 PKG_NAME="qbittorrent"
 PKG_VERSION="4.1.6"
 PKG_SHA256="6e997e2fb662634eba97d69adf9b4d7e0def2e159bcb1d1e1fe91eadf8732b18"
-PKG_REV="21"
+PKG_REV="22"
 PKG_LICENSE="GPLv2"
 PKG_SITE="http://www.qbittorrent.org/"
 PKG_URL="https://github.com/qbittorrent/qBittorrent/archive/release-$PKG_VERSION.tar.gz"
@@ -18,13 +18,12 @@ PKG_SHORTDESC="$PKG_ADDON_NAME: efficient feature complete C++ bittorrent implem
 PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is an efficient feature complete C++ bittorrent implementation."
 PKG_DISCLAIMER="Keep it legal and carry on"
 
-
 PKG_CONFIGURE_OPTS_TARGET="--disable-gui \
                            --prefix=$SYSROOT_PREFIX/usr \
                            --with-boost=$SYSROOT_PREFIX/usr"
 
-pre_configure_target() {
-  export LDFLAGS="-L$SYSROOT_PREFIX/usr/plugins/bearer $LDFLAGS"
+post_configure_target() {
+  sed -i "s\ /usr/plugins\ $SYSROOT_PREFIX/usr/plugins\g" src/Makefile
 }
 
 addon() {
