@@ -1,3 +1,6 @@
+108
+- Update to 2.1.10_beta
+
 107
 - Update to 2.1.9_beta
 
