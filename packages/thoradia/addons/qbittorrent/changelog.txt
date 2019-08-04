@@ -1,3 +1,6 @@
+23
+- Update to 4.1.7
+
 22
 - Update qt-everywehere to 5.13.0
 
