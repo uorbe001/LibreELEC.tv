@@ -1,7 +1,7 @@
 PKG_NAME="rtorrent"
-PKG_VERSION="0.9.7"
-PKG_SHA256="5a7c9ded6b92d5ffc5ae32c19816f2328848d70841a4ce7d2739a5024d3587ca"
-PKG_REV="9"
+PKG_VERSION="0.9.8"
+PKG_SHA256="bc889ce1dde475ec56aa72ae996912ff58723226a4f4256fef4f1f8636d991d4"
+PKG_REV="10"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/rakshasa/rtorrent"
 PKG_URL="https://github.com/rakshasa/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
@@ -22,6 +22,7 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-static \
                            --disable-debug \
                            --disable-shared \
                            --with-xmlrpc-c=$SYSROOT_PREFIX/usr/bin/xmlrpc-c-config"
+
 pre_configure_target() {
   export LIBS="-lncurses"
 }
