@@ -1,6 +1,6 @@
 PKG_NAME="xmlrpc-c"
-PKG_VERSION="1.39.12"
-PKG_SHA256="d830f3264a832dfe09f629cc64036acfd08121692526d0fabe090f7ff881ce08"
+PKG_VERSION="1.51.03"
+PKG_SHA256="82f9a4f6dee03f6a58921d75a65949dd4f0036a4c268bce6a4343338932ec065"
 PKG_LICENSE="GPL"
 PKG_SITE="http://xmlrpc-c.sourceforge.net"
 PKG_URL="http://download.sourceforge.net/$PKG_NAME/$PKG_NAME-$PKG_VERSION.tgz"
@@ -20,6 +20,8 @@ PKG_CONFIGURE_OPTS_TARGET="have_curl_config=yes \
 pre_configure_target() {
   export CURL_CONFIG="$SYSROOT_PREFIX/usr/bin/curl-config"
   export XML2_CONFIG="$SYSROOT_PREFIX/usr/bin/xml2-config"
+  cd $PKG_BUILD
+  rm -rf .$TARGET_NAME
 }
 
 post_makeinstall_target() {
