@@ -1,3 +1,8 @@
+10
+- Update to 0.9.8
+- Update libtorrent to 1.13.8
+- Update xmlrpc-c to 1.51.03
+
 9
 - Rebuild
 
