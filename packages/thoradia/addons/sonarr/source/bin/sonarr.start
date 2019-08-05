@@ -3,5 +3,6 @@
 . /etc/profile
 oe_setup_addon service.sonarr
 
+MONO_TLS_PROVIDER="legacy" \
 nice -n "$sr_nice" \
-mono "$ADDON_DIR/sonarr/NzbDrone.exe" -data="$ADDON_HOME" -nobrowser
+mono "$ADDON_DIR/sonarr/Sonarr.exe" -data="$ADDON_HOME" -nobrowser
