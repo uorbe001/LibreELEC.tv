@@ -6,7 +6,7 @@ msgid "systemd-run"
 msgstr ""
 
 msgctxt "#30001"
-msgid "--on-active"
+msgid "--on-active (-1 to disable)"
 msgstr ""
 
 msgctxt "#30002"
