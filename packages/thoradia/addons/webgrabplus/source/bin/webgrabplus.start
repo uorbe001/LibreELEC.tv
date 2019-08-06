@@ -8,7 +8,7 @@ oe_setup_addon service.webgrabplus
 
 webgrabplus.init
 
-[ "$wgp_on_act" ] && on_act="--on-active=$wgp_on_act"
+[ "$wgp_on_act" ] && [ "$wgp_on_act" != "-1" ] && on_act="--on-active=$wgp_on_act"
 
 systemd-run $on_act --on-calendar="$wgp_on_cal" --unit=webgrabplus \
             /usr/bin/nice -n "$wgp_nice" "$ADDON_DIR/bin/webgrabplus.run"
