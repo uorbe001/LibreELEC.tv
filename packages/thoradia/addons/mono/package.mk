@@ -2,13 +2,13 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="mono"
-PKG_VERSION="5.18.1.0"
-PKG_SHA256="a92a8fb54f8faa922cdb203cf0bee93bf418f08144f5bc018c5013948d03a4f0"
-PKG_REV="113"
+PKG_VERSION="6.0.0.319"
+PKG_SHA256="6b4c80b88bf7688178797bfecc681e3dbc4c6810413c97d6f3c476061a8d261a"
+PKG_REV="114"
 PKG_ARCH="any"
 PKG_LICENSE="MIT"
 PKG_SITE="http://www.mono-project.com"
-PKG_URL="http://download.mono-project.com/sources/mono/$PKG_NAME-$PKG_VERSION.tar.bz2"
+PKG_URL="http://download.mono-project.com/sources/mono/$PKG_NAME-$PKG_VERSION.tar.xz"
 PKG_DEPENDS_TARGET="toolchain mono:host libgdiplus sqlite zlib"
 PKG_SECTION="tools"
 PKG_SHORTDESC="Mono: a cross platform, open source .NET framework"
