@@ -2,8 +2,8 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="libgdiplus"
-PKG_VERSION="5.6"
-PKG_SHA256="6a75e4a476695cd6a1475fd6b989423ecf73978fd757673669771d8a6e13f756"
+PKG_VERSION="6.0.2"
+PKG_SHA256="d605bf548affd29bd0418001ffb1bb8c1bf9962c1c37c23744abb0194a099232"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/mono/libgdiplus"
 PKG_URL="https://github.com/mono/libgdiplus/archive/$PKG_VERSION.tar.gz"
