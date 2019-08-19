@@ -1,3 +1,7 @@
+114
+- Update to 6.0.0.319
+- Update libgdiplus to 6.0.2
+
 113
 - Update to 5.18.1.0
 
