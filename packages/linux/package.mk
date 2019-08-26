@@ -23,20 +23,20 @@ case "$LINUX" in
     PKG_SOURCE_NAME="linux-$LINUX-$PKG_VERSION.tar.gz"
     ;;
   raspberrypi)
-    PKG_VERSION="14f3f9006235b69e7ae88904fd186d4074228745" # 5.1.9
-    PKG_SHA256="9a0e953b024c7d4943a2c31a88776c7b4b3ff14b6c5181d0341795ec52013d68"
+    PKG_VERSION="a3dfdf36d13214285bf7d828e0a87b1a2b5bd92c" # 5.2.6
+    PKG_SHA256="9b28d8e3b6206d66a81f5fe2d61c027e3099256cc7de2452fb9082f5e231a08d"
     PKG_URL="https://github.com/raspberrypi/linux/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="linux-$LINUX-$PKG_VERSION.tar.gz"
     ;;
   *)
-    PKG_VERSION="5.1.9"
-    PKG_SHA256="58c9eca99c3dd2fff5b559302996c985c3f3f2aad0b99b2172a61c4df7122a79"
+    PKG_VERSION="5.2.6"
+    PKG_SHA256="be105afb7394dce98953bcea79c2ce02345587eee4638fce9a5f5a1e7e7b1ff2"
     PKG_URL="https://www.kernel.org/pub/linux/kernel/v5.x/$PKG_NAME-$PKG_VERSION.tar.xz"
     PKG_PATCH_DIRS="default"
     ;;
 esac
 
-PKG_KERNEL_CFG_FILE=$(kernel_config_path)
+PKG_KERNEL_CFG_FILE=$(kernel_config_path) || die
 
 if [ -n "$KERNEL_TOOLCHAIN" ]; then
   PKG_DEPENDS_HOST="$PKG_DEPENDS_HOST gcc-arm-$KERNEL_TOOLCHAIN:host"
@@ -60,8 +60,7 @@ fi
 post_patch() {
   cp $PKG_KERNEL_CFG_FILE $PKG_BUILD/.config
 
-  sed -i -e "s|^CONFIG_INITRAMFS_SOURCE=.*$|CONFIG_INITRAMFS_SOURCE=\"$BUILD/image/initramfs.cpio\"|" $PKG_BUILD/.config
-  sed -i -e '/^CONFIG_INITRAMFS_SOURCE=*./ a CONFIG_INITRAMFS_ROOT_UID=0\nCONFIG_INITRAMFS_ROOT_GID=0' $PKG_BUILD/.config
+  sed -i -e "s|@INITRAMFS_SOURCE@|$BUILD/image/initramfs.cpio|" $PKG_BUILD/.config
 
   # set default hostname based on $DISTRONAME
     sed -i -e "s|@DISTRONAME@|$DISTRONAME|g" $PKG_BUILD/.config
@@ -90,14 +89,10 @@ post_patch() {
     sed -i -e "s|^CONFIG_ISCSI_IBFT=.*$|# CONFIG_ISCSI_IBFT is not set|" $PKG_BUILD/.config
   fi
 
-  # install extra dts files
-  for f in $PROJECT_DIR/$PROJECT/config/*-overlay.dts; do
-    [ -f "$f" ] && cp -v $f $PKG_BUILD/arch/$TARGET_KERNEL_ARCH/boot/dts/overlays || true
-  done
-  if [ -n "$DEVICE" ]; then
-    for f in $PROJECT_DIR/$PROJECT/devices/$DEVICE/config/*-overlay.dts; do
-      [ -f "$f" ] && cp -v $f $PKG_BUILD/arch/$TARGET_KERNEL_ARCH/boot/dts/overlays || true
-    done
+  # disable lima/panfrost if libmali is configured
+  if [ "$OPENGLES" = "libmali" ]; then
+    sed -e "s|^CONFIG_DRM_LIMA=.*$|# CONFIG_DRM_LIMA is not set|" -i $PKG_BUILD/.config
+    sed -e "s|^CONFIG_DRM_PANFROST=.*$|# CONFIG_DRM_PANFROST is not set|" -i $PKG_BUILD/.config
   fi
 }
 
@@ -131,6 +126,7 @@ pre_make_target() {
     rm -rf $BUILD/initramfs
     $SCRIPTS/install initramfs
   )
+  pkg_lock_status "ACTIVE" "linux:target" "build"
 
   if [ "$TARGET_ARCH" = "x86_64" ]; then
     # copy some extra firmware to linux tree

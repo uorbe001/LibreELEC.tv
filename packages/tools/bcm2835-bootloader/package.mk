@@ -3,8 +3,8 @@
 # Copyright (C) 2017-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="bcm2835-bootloader"
-PKG_VERSION="fd15e0700e45d9b7db83e30696aba299b9f2f31d"
-PKG_SHA256="c9d32c2355ce4116206b3deae3e340545f345441c0c93ba2347971784fd327ff"
+PKG_VERSION="94bae1b0a88a7fcaf171a4c91b9e1fdb03aad9ae"
+PKG_SHA256="23679dc76a1972bfcf8242199a3e39e5acd00224643386b000fbe2468f4cd133"
 PKG_ARCH="arm"
 PKG_LICENSE="nonfree"
 PKG_SITE="http://www.broadcom.com"
@@ -17,8 +17,13 @@ makeinstall_target() {
   mkdir -p $INSTALL/usr/share/bootloader
     cp -PRv LICENCE* $INSTALL/usr/share/bootloader
     cp -PRv bootcode.bin $INSTALL/usr/share/bootloader
-    cp -PRv fixup_x.dat $INSTALL/usr/share/bootloader/fixup.dat
-    cp -PRv start_x.elf $INSTALL/usr/share/bootloader/start.elf
+    if [ "$DEVICE" = "RPi4" ]; then
+      cp -PRv fixup4x.dat $INSTALL/usr/share/bootloader/fixup.dat
+      cp -PRv start4x.elf $INSTALL/usr/share/bootloader/start.elf
+    else
+      cp -PRv fixup_x.dat $INSTALL/usr/share/bootloader/fixup.dat
+      cp -PRv start_x.elf $INSTALL/usr/share/bootloader/start.elf
+    fi
 
     find_file_path config/dt-blob.bin && cp -PRv $FOUND_PATH $INSTALL/usr/share/bootloader
 
