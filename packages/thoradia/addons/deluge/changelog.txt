@@ -1,3 +1,6 @@
+30
+- Force versions of setuptools and wheel
+
 29
 - Provide libtorrent-rasterbar
 
