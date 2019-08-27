@@ -1,6 +1,6 @@
-diff -Naur deluge-2.0.2/deluge-deluge-2.0.2/setup.py deluge-2.0.2-install/deluge-deluge-2.0.2/setup.py
---- deluge-2.0.2.orig/setup.py	2019-06-08 22:34:27.000000000 +0200
-+++ deluge-2.0.2/setup.py	2019-06-09 00:31:55.546558590 +0200
+diff -Naur deluge-2.0.3/deluge-deluge-2.0.3/setup.py deluge-2.0.3-install/deluge-deluge-2.0.3/setup.py
+--- deluge-deluge-2.0.3/setup.py	2019-06-12 19:47:11.000000000 +0200
++++ deluge-deluge-2.0.3/setup.py	2019-08-27 07:28:28.311156767 +0200
 @@ -454,35 +454,6 @@
  }
  
@@ -37,6 +37,15 @@ diff -Naur deluge-2.0.2/deluge-deluge-2.0.2/setup.py deluge-2.0.2-install/deluge
  _entry_points['console_scripts'] = [
      'deluge-console = deluge.ui.console:start',
      'deluge-web = deluge.ui.web:start',
+@@ -533,7 +504,7 @@
+ ]
+ _package_data['deluge.ui.gtk3'] = ['glade/*.ui']
+ 
+-setup_requires = ['setuptools', 'wheel']
++setup_requires = ['setuptools']
+ install_requires = [
+     'twisted[tls]>=17.1',
+     # Add pyasn1 for setuptools workaround:
 @@ -542,7 +513,6 @@
      'rencode',
      'pyopenssl',
@@ -45,11 +54,12 @@ diff -Naur deluge-2.0.2/deluge-deluge-2.0.2/setup.py deluge-2.0.2-install/deluge
      'mako',
      'chardet',
      'six',
-@@ -551,6 +521,7 @@
+@@ -551,6 +521,8 @@
      "py2-ipaddress; sys_platform == 'win32' and python_version == '2'",
      "certifi; sys_platform == 'win32'",
      'zope.interface',
-+    'setuptools>=41.0.1',
++    'setuptools==41.0.1',
++    'wheel==0.33.4',
  ]
  tests_require = ['pytest', 'pytest-twisted']
  
