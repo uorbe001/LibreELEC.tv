@@ -3,6 +3,9 @@
 . /etc/profile
 oe_setup_addon service.sonarr
 
-MONO_TLS_PROVIDER="legacy" \
+export XDG_CONFIG_HOME="$ADDON_HOME"
+
+cert-sync --quiet --user /etc/pki/tls/cacert.pem
+
 nice -n "$sr_nice" \
 mono "$ADDON_DIR/sonarr/Sonarr.exe" -data="$ADDON_HOME" -nobrowser
