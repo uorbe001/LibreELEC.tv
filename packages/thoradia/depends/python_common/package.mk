@@ -5,7 +5,7 @@ PKG_LONGDESC="Common Python dependencies"
 
 PKG_TOOLCHAIN="python2"
 
-pre_make_target() {
+pre_configure_target() {
   export LDSHARED="-pthread"
 
   cat << EOF > setup.py
