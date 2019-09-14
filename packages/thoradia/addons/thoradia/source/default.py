@@ -9,6 +9,7 @@ import xml.etree.ElementTree as etree
 KNOWN_REPOSITORIES = [
     'repository.libreelec.tv',
     'repository.coreelec',
+    'repository.cenightly',
     'repository.rbrepo',
     ]
 
