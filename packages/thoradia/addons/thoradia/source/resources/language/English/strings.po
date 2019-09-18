@@ -2,37 +2,33 @@ msgid ""
 msgstr ""
 
 msgctxt "#30000"
-msgid "Status"
+msgid "Releases"
 msgstr ""
 
 msgctxt "#30001"
-msgid "LibreELEC"
+msgid "Distribution"
 msgstr ""
 
 msgctxt "#30002"
 msgid "Thoradia"
 msgstr ""
 
-msgctxt "#30010"
-msgid "N/A"
-msgstr ""
-
-msgctxt "#30011"
+msgctxt "#30005"
 msgid "{}/{}/{}"
 msgstr ""
 
-msgctxt "#30012"
-msgid "{}/{}/{} after Kodi restart"
+msgctxt "#30006"
+msgid "after update {}/{}/{}"
 msgstr ""
 
-msgctxt "#30013"
-msgid "Restart Kodi to update Thoradia Add-ons"
+msgctxt "#30010"
+msgid "Restart Kodi to update Thoradia Add-ons to {}/{}/{}"
 msgstr ""
 
-msgctxt "#30014"
+msgctxt "#30011"
 msgid "Now"
 msgstr ""
 
-msgctxt "#30015"
+msgctxt "#30012"
 msgid "Later"
 msgstr ""

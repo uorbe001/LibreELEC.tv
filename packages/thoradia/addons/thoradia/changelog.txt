@@ -1,3 +1,12 @@
+23
+- Rework
+
+22
+- Add CoreELEC cenightly repository
+
+21
+- Fix for CoreELEC ADDON_VERSION 9.0.1
+
 20
 - Mention Bazarr, Mono, Thoradia VPN interface and WebGrab+Plus
 
