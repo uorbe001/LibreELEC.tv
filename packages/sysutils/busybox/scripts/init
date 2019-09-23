@@ -41,9 +41,6 @@ GRUB_DEFAULT=""
 NBD_DEVS="0"
 FLASH_FREE_MIN="5"
 
-INSTALLED_MEMORY=$(cat /proc/meminfo | grep 'MemTotal:' | awk '{print $2}')
-SYSTEM_TORAM_LIMIT=1024000
-
 LIVE="no"
 
 BREAK_TRIPPED="no"
@@ -548,6 +545,17 @@ mount_flash() {
   fi
 }
 
+cleanup_flash() {
+  progress "Cleaning up flash (if required)"
+
+  if [ -f /flash/pieeprom.upd ]; then
+    mount -o remount,rw /flash
+    rm -f /flash/pieeprom.bin /flash/pieeprom.upd
+    rm -f /flash/recovery.bin /flash/recovery.[0-9][0-9][0-9] /flash/RECOVERY.[0-9][0-9][0-9]
+    mount -o remount,ro /flash
+  fi
+}
+
 mount_storage() {
   progress "Mounting storage"
 
@@ -908,11 +916,11 @@ check_update() {
 prepare_sysroot() {
   progress "Preparing system"
 
-  if [ "$SYSTEM_TORAM" = "no" -o "$INSTALLED_MEMORY" -lt "$SYSTEM_TORAM_LIMIT" ]; then
-    mount_part "/flash/$IMAGE_SYSTEM" "/sysroot" "ro,loop"
-  else
+  if [ "$SYSTEM_TORAM" = "yes" ]; then
     cp /flash/$IMAGE_SYSTEM /dev/$IMAGE_SYSTEM
     mount_part "/dev/$IMAGE_SYSTEM" "/sysroot" "ro,loop"
+  else
+    mount_part "/flash/$IMAGE_SYSTEM" "/sysroot" "ro,loop"
   fi
 
   mount --move /flash /sysroot/flash
@@ -1013,11 +1021,8 @@ for arg in $(cat /proc/cmdline); do
     nosplash)
       SPLASH=no
       ;;
-    noram)
-      SYSTEM_TORAM=no
-      ;;
-    ramlimit=*)
-      SYSTEM_TORAM_LIMIT="${arg#*=}"
+    toram)
+      SYSTEM_TORAM=yes
       ;;
     live)
       LIVE=yes
@@ -1072,6 +1077,7 @@ for BOOT_STEP in \
     set_consolefont \
     check_disks \
     mount_flash \
+    cleanup_flash \
     update_bootmenu \
     load_splash \
     mount_storage \
@@ -1117,17 +1123,16 @@ if [ "$STORAGE_NETBOOT" = "yes" ]; then
   echo "" > /sysroot/dev/.storage_netboot
 fi
 
+BACKUP_FILE=$(ls -1 /sysroot/storage/.restore/??????????????.tar 2>/dev/null | head -n 1)
+
 if [ -f /sysroot/storage/.please_resize_me ]; then
   INIT_UNIT="--unit=fs-resize.target"
-fi
-
-BACKUP_FILE=$(ls -1 /sysroot/storage/.restore/??????????????.tar 2>/dev/null | head -n 1)
-if [ -f "$BACKUP_FILE" ]; then
-  INIT_UNIT="--unit=backup-restore.target"
-fi
-
-if [ -f /sysroot/storage/.cache/reset_oe -o -f /sysroot/storage/.cache/reset_xbmc ]; then
+elif [ -f /sysroot/storage/.cache/reset_oe -o -f /sysroot/storage/.cache/reset_xbmc ]; then
   INIT_UNIT="--unit=factory-reset.target"
+elif [ -f "$BACKUP_FILE" ]; then
+  INIT_UNIT="--unit=backup-restore.target"
+elif [ -f /sysroot/storage/.rpi_flash_firmware ]; then
+  INIT_UNIT="--unit=rpi-flash-firmware.target"
 fi
 
 # switch to new sysroot and start real init
