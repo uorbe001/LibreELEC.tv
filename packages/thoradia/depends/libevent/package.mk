@@ -1,6 +1,6 @@
 PKG_NAME="libevent"
-PKG_VERSION="2.1.8-stable"
-PKG_SHA256="316ddb401745ac5d222d7c529ef1eada12f58f6376a66c1118eee803cb70f83d"
+PKG_VERSION="2.1.11-stable"
+PKG_SHA256="229393ab2bf0dc94694f21836846b424f3532585bac3468738b7bf752c03901e"
 PKG_LICENSE="BSD"
 PKG_SITE="http://libevent.org/"
 PKG_URL="https://github.com/libevent/$PKG_NAME/archive/release-$PKG_VERSION.tar.gz"
