@@ -1,5 +1,8 @@
 [Unit]
 Description=Mono installer
+After=multi-user.target kodi.service
+Before=service.jackett.service service.lidarr.service service.radarr.service service.sonarr.service service.webgrabplus.service
+Wants=multi-user.target service.jackett.service service.lidarr.service service.radarr.service service.sonarr.service service.webgrabplus.service
 
 [Service]
 Type=oneshot
@@ -8,4 +11,5 @@ RemainAfterExit=true
 Restart=no
 
 [Install]
-WantedBy=kodi.target
+RequiredBy=service.jackett.service service.lidarr.service service.radarr.service service.sonarr.service service.webgrabplus.service
+WantedBy=multi-user.target
