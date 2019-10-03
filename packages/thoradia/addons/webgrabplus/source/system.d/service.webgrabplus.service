@@ -1,8 +1,8 @@
 [Unit]
 Description=WebGrab+Plus
 Documentation=http://www.webgrabplus.com/
-After=network.target
-Requires=network.target
+After=kodi.service tools.mono.service
+Requires=tools.mono.service
 
 [Service]
 ExecStart=/bin/sh /storage/.kodi/addons/service.webgrabplus/bin/webgrabplus.start
@@ -12,4 +12,4 @@ RemainAfterExit=yes
 Type=oneshot
 
 [Install]
-WantedBy=kodi.target
+WantedBy=tools.mono.service
