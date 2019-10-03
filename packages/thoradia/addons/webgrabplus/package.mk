@@ -2,9 +2,9 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="webgrabplus"
-PKG_VERSION="2.1.10_beta"
-PKG_SHA256="8254e1e9040b978e4549cbfa68234b414cdfcaaf8c9e784b048729445d1dba90"
-PKG_REV="109"
+PKG_VERSION="2.1.11_beta"
+PKG_SHA256="9065c28e8556da4f33257aa9f4162677642cd026a80980769ab13b240c605f86"
+PKG_REV="111"
 PKG_ARCH="any"
 PKG_LICENSE="prop."
 PKG_SITE="http://www.webgrabplus.com/"
