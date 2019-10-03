@@ -1,7 +1,7 @@
 PKG_NAME="radarr"
 PKG_VERSION="0.2.0.1358"
 PKG_SHA256="6757caf0b37af32cdbff03a8bae7a360bca85b56423c5f09b3e73697d94bcd53"
-PKG_REV="24"
+PKG_REV="25"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/Radarr/Radarr"
 PKG_URL="https://github.com/Radarr/Radarr/releases/download/v$PKG_VERSION/Radarr.develop.$PKG_VERSION.linux.tar.gz"
