@@ -3,7 +3,6 @@ Description=Jackett
 Documentation=https://github.com/Jackett/Jackett
 After=kodi.service tools.mono.service
 Requires=tools.mono.service
-Wants=kodi.service
 
 [Service]
 ExecStart=/bin/sh /storage/.kodi/addons/service.jackett/bin/jackett.start
@@ -11,4 +10,4 @@ Restart=always
 MemoryHigh=125M
 
 [Install]
-WantedBy=kodi.service
+WantedBy=tools.mono.service
