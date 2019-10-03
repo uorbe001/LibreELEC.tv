@@ -3,7 +3,6 @@ Description=Radarr
 Documentation=https://github.com/Radarr/Radarr
 After=kodi.service tools.mono.service
 Requires=tools.mono.service
-Wants=kodi.service
 
 [Service]
 ExecStart=/bin/sh /storage/.kodi/addons/service.radarr/bin/radarr.start
@@ -11,4 +10,4 @@ Restart=always
 MemoryHigh=100M
 
 [Install]
-WantedBy=kodi.service
+WantedBy=tools.mono.service
