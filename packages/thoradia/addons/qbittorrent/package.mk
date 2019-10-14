@@ -1,7 +1,7 @@
 PKG_NAME="qbittorrent"
 PKG_VERSION="4.1.8"
 PKG_SHA256="0e3a16324e463910a3dfa43ae18574f60a7ac5a97c433d431aa5e320fed9888f"
-PKG_REV="24"
+PKG_REV="25"
 PKG_LICENSE="GPLv2"
 PKG_SITE="http://www.qbittorrent.org/"
 PKG_URL="https://github.com/qbittorrent/qBittorrent/archive/release-$PKG_VERSION.tar.gz"
