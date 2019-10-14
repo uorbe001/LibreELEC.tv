@@ -1,7 +1,7 @@
 PKG_NAME="aria2"
-PKG_VERSION="1.34.0"
-PKG_SHA256="bc68bf9a9f192280846e07d25b801c111ea47b9a954cd4deb6f455dbf5191996"
-PKG_REV="4"
+PKG_VERSION="1.35.0"
+PKG_SHA256="c4072deaf6b443be15f9710657aa6c53527f642bc7a3252bb81d2853161080ed"
+PKG_REV="5"
 PKG_LICENSE="OpenSSL"
 PKG_SITE="https://aria2.github.io/"
 PKG_URL="https://github.com/aria2/$PKG_NAME/archive/release-$PKG_VERSION.tar.gz"
@@ -18,7 +18,8 @@ PKG_LONGDESC="$PKG_ADDON_NAME ($PKG_VERSION) is a lightweight multi-protocol and
 PKG_DISCLAIMER="Keep it legal and carry on"
 
 PKG_TOOLCHAIN="autotools"
-PKG_CONFIGURE_OPTS_TARGET="--disable-shared --enable-static --with-libssh2"
+PKG_CONFIGURE_OPTS_TARGET="ARIA2_STATIC=yes --with-libssh2"
+
 
 makeinstall_target() {
   $STRIP src/aria2c
