@@ -8,7 +8,7 @@ PKG_SITE="http://www.kernel.org"
 PKG_DEPENDS_HOST="ccache:host openssl:host"
 PKG_DEPENDS_TARGET="toolchain linux:host cpio:host kmod:host xz:host wireless-regdb keyutils $KERNEL_EXTRA_DEPENDS_TARGET"
 PKG_DEPENDS_INIT="toolchain"
-PKG_NEED_UNPACK="$LINUX_DEPENDS"
+PKG_NEED_UNPACK="$LINUX_DEPENDS $(get_pkg_directory busybox)"
 PKG_LONGDESC="This package contains a precompiled kernel image and the modules."
 PKG_IS_KERNEL_PKG="yes"
 PKG_STAMP="$KERNEL_TARGET $KERNEL_MAKE_EXTRACMD"
@@ -23,8 +23,8 @@ case "$LINUX" in
     PKG_SOURCE_NAME="linux-$LINUX-$PKG_VERSION.tar.gz"
     ;;
   raspberrypi)
-    PKG_VERSION="8ea4810a9f2d0c510f6a8fd56805e82ac76904a3" # 4.19.57
-    PKG_SHA256="c5390847b342376fa6146f17a504ddca7eeb2817c8a1ada28aca2d4106693af6"
+    PKG_VERSION="7a54e45c03bc95777687adaca091e083aa138718" # 4.19.76
+    PKG_SHA256="73f3eb50cd8558e7e764a3a4ebbf16046d8923c633ef873da52631c06b65b163"
     PKG_URL="https://github.com/raspberrypi/linux/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="linux-$LINUX-$PKG_VERSION.tar.gz"
     ;;
