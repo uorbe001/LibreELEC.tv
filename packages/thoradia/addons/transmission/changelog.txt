@@ -1,3 +1,7 @@
+19
+- Downgrade to 2.94
+- Add CLI
+
 18
 - Rework package
 - Fix system.d

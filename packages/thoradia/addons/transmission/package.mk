@@ -1,11 +1,11 @@
 PKG_NAME="transmission"
-PKG_VERSION="3.00-beta"
-PKG_SHA256="6c5a30c737bcab51a93f99cae4e1e5d3a1115934aa63effefc8a8cea1dfae320"
-PKG_REV="18"
+PKG_VERSION="2.94"
+PKG_SHA256="35442cc849f91f8df982c3d0d479d650c6ca19310a994eccdaa79a4af3916b7d"
+PKG_REV="19"
 PKG_LICENSE="OSS"
 PKG_SITE="http://www.transmissionbt.com/"
-PKG_URL="https://raw.githubusercontent.com/thoradia/LibreELEC.tv/sources/transmission-3.00-beta.tar.gz"
-PKG_DEPENDS_TARGET="toolchain curl libiconv libevent systemd"
+PKG_URL="https://github.com/transmission/transmission-releases/raw/master/$PKG_NAME-$PKG_VERSION.tar.xz"
+PKG_DEPENDS_TARGET="toolchain curl libevent"
 PKG_SECTION="service"
 PKG_TOOLCHAIN="cmake-make"
 
@@ -36,7 +36,7 @@ PKG_CMAKE_OPTS_TARGET="-DENABLE_DAEMON=ON \
                        -DUSE_SYSTEM_UTP=OFF \
                        -DUSE_SYSTEM_B64=OFF \
                        -DWITH_CRYPTO=openssl \
-                       -DWITH_SYSTEMD=ON"
+                       -DWITH_SYSTEMD=OFF"
 
 addon() {
   mkdir -p "$ADDON_BUILD/$PKG_ADDON_ID"
