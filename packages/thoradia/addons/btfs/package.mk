@@ -1,7 +1,7 @@
 PKG_NAME="btfs"
-PKG_VERSION="2.18"
-PKG_SHA256="bb9679045540554232eff303fc4f615d28eb4023461eae3f65f08f2427ec9ef2"
-PKG_REV="1"
+PKG_VERSION="2.20"
+PKG_SHA256="ab85d10407d210c367dc5a0db6aa9e8620ebbb819c58da783ca343dfa8577441"
+PKG_REV="2"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/johang/btfs"
 PKG_URL="https://github.com/johang/$PKG_NAME/archive/v$PKG_VERSION.tar.gz"
@@ -23,6 +23,6 @@ addon() {
   cp -PR "$PKG_BUILD/.install_pkg/usr/bin" \
          "$ADDON_BUILD/$PKG_ADDON_ID"
 
-  cp -LR "$(get_build_dir libtorrent-rasterbar)/.install_pkg/usr/lib"/libtorrent-rasterbar.so.? \
+  cp -LR "$(get_build_dir libtorrent-rasterbar)/.install_pkg/usr/lib"/libtorrent-rasterbar.so.?? \
          "$ADDON_BUILD/$PKG_ADDON_ID/lib"
 }
