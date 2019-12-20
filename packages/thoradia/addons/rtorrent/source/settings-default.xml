@@ -1,4 +1,4 @@
-<settings>
-   <setting id="rt_nice" value="10" />
-   <setting id="rt_port" value="5000" />
+<settings version="2">
+    <setting id="rt_nice">10</setting>
+    <setting id="rt_port">5000</setting>
 </settings>

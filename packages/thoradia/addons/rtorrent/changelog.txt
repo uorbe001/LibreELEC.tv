@@ -1,3 +1,6 @@
+11
+- Update xmlrpc-c to 1.51.05
+
 10
 - Update to 0.9.8
 - Update libtorrent to 1.13.8
