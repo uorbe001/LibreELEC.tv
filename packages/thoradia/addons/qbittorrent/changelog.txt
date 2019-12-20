@@ -1,4 +1,10 @@
-24
+27
+- Update to 4.2.1
+- Update libtorrent-rasterbar to 1.2.3
+- Update qt-everywhere to 5.14.0
+- Important: password is reset to default password
+
+26
 - Update to 4.1.9
 
 25
