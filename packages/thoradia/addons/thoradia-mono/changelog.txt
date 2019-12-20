@@ -1,3 +1,6 @@
+11
+- Update libmediainfo to 19.09
+
 10
 - Update libmediainfo to 18.12
 
