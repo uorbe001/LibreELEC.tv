@@ -1,12 +1,11 @@
 PKG_NAME="qt-everywhere"
-PKG_VERSION="5.13.2"
-PKG_SHA256="55e8273536be41f4f63064a79e552a22133848bb419400b6fa8e9fc0dc05de08"
+PKG_VERSION="5.14.0"
+PKG_SHA256="be9a77cd4e1f9d70b58621d0753be19ea498e6b0da0398753e5038426f76a8ba"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://qt-project.org"
-PKG_URL="http://download.qt.io/archive/qt/5.13/$PKG_VERSION/single/$PKG_NAME-src-$PKG_VERSION.tar.xz"
+PKG_URL="http://download.qt.io/archive/qt/5.14/${PKG_VERSION}/single/${PKG_NAME}-src-${PKG_VERSION}.tar.xz"
 PKG_DEPENDS_TARGET="toolchain openssl pcre2 zlib"
-PKG_SOURCE_DIR="$PKG_NAME-src-$PKG_VERSION"
 PKG_LONGDESC="A cross-platform application and UI framework"
 PKG_AUTORECONF="no"
 
@@ -85,8 +84,8 @@ configure_target() {
   QMAKE_CONF="${QMAKE_CONF_DIR}/qmake.conf"
 
   cd ..
-  mkdir -p $QMAKE_CONF_DIR
-  echo '#include "../../linux-g++/qplatformdefs.h"' >> $QMAKE_CONF_DIR/qplatformdefs.h
+  mkdir -p ${QMAKE_CONF_DIR}
+  echo '#include "../../linux-g++/qplatformdefs.h"' >> ${QMAKE_CONF_DIR}/qplatformdefs.h
   cat > $QMAKE_CONF <<EOF
     MAKEFILE_GENERATOR       = UNIX
     CONFIG                  += incremental
@@ -102,10 +101,10 @@ configure_target() {
     QMAKE_AR                = $AR cqs
     QMAKE_OBJCOPY           = $OBJCOPY
     QMAKE_NM                = $NM -P
-    QMAKE_STRIP             = $STRIP
-    QMAKE_CFLAGS = $CFLAGS
-    QMAKE_CXXFLAGS = $CXXFLAGS
-    QMAKE_LFLAGS = $LDFLAGS
+    QMAKE_STRIP             = ${STRIP}
+    QMAKE_CFLAGS            = ${CFLAGS}
+    QMAKE_CXXFLAGS          = ${CXXFLAGS}
+    QMAKE_LFLAGS            = ${LDFLAGS}
     load(qt_config)
 EOF
 
