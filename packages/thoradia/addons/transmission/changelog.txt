@@ -1,3 +1,6 @@
+21
+- Add command-line client
+
 20
 - Quote settings
 

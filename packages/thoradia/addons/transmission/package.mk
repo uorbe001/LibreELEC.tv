@@ -1,7 +1,7 @@
 PKG_NAME="transmission"
 PKG_VERSION="2.94"
 PKG_SHA256="35442cc849f91f8df982c3d0d479d650c6ca19310a994eccdaa79a4af3916b7d"
-PKG_REV="20"
+PKG_REV="21"
 PKG_LICENSE="OSS"
 PKG_SITE="http://www.transmissionbt.com/"
 PKG_URL="https://github.com/transmission/transmission-releases/raw/master/${PKG_NAME}-${PKG_VERSION}.tar.xz"
@@ -22,7 +22,7 @@ PKG_CMAKE_OPTS_TARGET="-DENABLE_DAEMON=ON \
                        -DENABLE_QT=OFF \
                        -DENABLE_MAC=OFF \
                        -DENABLE_UTILS=OFF \
-                       -DENABLE_CLI=OFF \
+                       -DENABLE_CLI=ON \
                        -DENABLE_TESTS=OFF \
                        -DENABLE_LIGHTWEIGHT=OFF \
                        -DENABLE_UTP=ON \
