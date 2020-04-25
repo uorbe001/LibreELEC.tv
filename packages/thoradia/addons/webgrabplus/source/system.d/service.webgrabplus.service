@@ -1,10 +1,10 @@
 [Unit]
 Description=WebGrab+Plus
-Documentation=http://www.webgrabplus.com/
-After=kodi.service tools.mono.service
-Requires=tools.mono.service
+After=multi-user.target network-online.target tools.mono.service
+Wants=multi-user.target network-online.target tools.mono.service
 
 [Service]
+SyslogIdentifier=%N
 ExecStart=/bin/sh /storage/.kodi/addons/service.webgrabplus/bin/webgrabplus.start
 ExecStop=/usr/bin/systemctl stop webgrabplus.timer
 ExecStop=/usr/bin/systemctl stop webgrabplus.service
@@ -12,4 +12,4 @@ RemainAfterExit=yes
 Type=oneshot
 
 [Install]
-WantedBy=tools.mono.service
+WantedBy=multi-user.target

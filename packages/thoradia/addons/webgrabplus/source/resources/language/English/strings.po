@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 
 msgctxt "#30000"
-msgid "systemd-run"
+msgid "Configuration"
 msgstr ""
 
 msgctxt "#30001"
