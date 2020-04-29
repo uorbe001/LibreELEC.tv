@@ -40,6 +40,9 @@ for f in mdb/mdb.config.xml rex/rex.config.xml ./WebGrab++.config.xml; do
   fi
 done
 
+export XDG_CONFIG_HOME=${ADDON_HOME}
+
+cert-sync --quiet --user /etc/pki/tls/cacert.pem
 wgp_user ${ADDON_HOME}/before.sh
 mono ${ADDON_DIR}/bin/WebGrab+Plus.exe ${ADDON_HOME}
 wgp_user ${ADDON_HOME}/after.sh
