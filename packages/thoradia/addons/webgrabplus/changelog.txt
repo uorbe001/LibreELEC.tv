@@ -1,1 +1,1 @@
-- WebGrab+Plus version 3.0.2_beta
+- WebGrab+Plus version 3.0.3_beta

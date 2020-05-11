@@ -2,12 +2,12 @@
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="webgrabplus"
-PKG_VERSION="3.0.2_beta"
-PKG_SHA256="a2388fcee909c2731adc714b8ea97720ea74d081f8d5efe08ad93ffdc0963797"
-PKG_REV="113"
+PKG_VERSION="3.0.3_beta"
+PKG_SHA256="87825e10421ece1c6bf3f974ed9bfa4bb642a60cb32238d6d6ae05f299af2464"
+PKG_REV="114"
 PKG_LICENSE="prop."
 PKG_SITE="http://www.webgrabplus.com/"
-PKG_URL="http://webgrabplus.com/sites/default/files/download/SW/V3.0.2/WebGrabPlus_V3.0.2_beta_install.tar.gz"
+PKG_URL="http://webgrabplus.com/sites/default/files/download/SW/V3.0.3/WebGrabPlus_V3.0.3_beta_install.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_TOOLCHAIN="manual"
 
