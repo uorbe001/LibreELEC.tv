@@ -3,8 +3,8 @@
 # Copyright (C) 2017-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="bcm2835-driver"
-PKG_VERSION="66bafab005569e3eb92ec54cd3efeee3da338738"
-PKG_SHA256="262b2eab4af814ada6d7806a23dd720b5e6c5706a19cfe46ea30c19f76fdc11b"
+PKG_VERSION="62fc8c01165a80021054a430182b504f7b877c2d"
+PKG_SHA256="00cd04ae1c5b73de10e1a189b2b643fa349f08f06324d966227f147e72243bd9"
 PKG_LICENSE="nonfree"
 PKG_SITE="http://www.broadcom.com"
 PKG_URL="${DISTRO_SRC}/${PKG_NAME}-${PKG_VERSION}.tar.xz"
@@ -78,11 +78,13 @@ makeinstall_target() {
     ln -s dtoverlay                            ${INSTALL}/usr/bin/dtparam
     cp -PRv ${PKG_FLOAT}/opt/vc/bin/vcdbg      ${INSTALL}/usr/bin
     cp -PRv ${PKG_FLOAT}/opt/vc/bin/vcgencmd   ${INSTALL}/usr/bin
+    cp -PRv ${PKG_FLOAT}/opt/vc/bin/vcmailbox  ${INSTALL}/usr/bin
     cp -PRv ${PKG_FLOAT}/opt/vc/bin/tvservice  ${INSTALL}/usr/bin
     cp -PRv ${PKG_FLOAT}/opt/vc/bin/edidparser ${INSTALL}/usr/bin
 
   # Create symlinks to /opt/vc to satisfy hardcoded lib paths
   mkdir -p ${INSTALL}/opt/vc
+    ln -sf /usr/bin ${INSTALL}/opt/vc/bin
     ln -sf /usr/lib ${INSTALL}/opt/vc/lib
 }
 

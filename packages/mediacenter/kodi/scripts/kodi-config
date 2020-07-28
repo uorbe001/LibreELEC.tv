@@ -8,6 +8,9 @@ KODI_ROOT=$HOME/.kodi
 
 BOOT_STATE="$(cat $HOME/.config/boot.status 2>/dev/null)"
 
+# May not exist if testing a clean /storage/.kodi without rebooting
+mkdir -p $KODI_ROOT/userdata
+
 # hack: make addon-bins executable
 # done in kodi on addon install. but just in case..
 chmod +x $KODI_ROOT/addons/*/bin/* 2>/dev/null
@@ -20,6 +23,26 @@ if [ ! -f $KODI_ROOT/userdata/sources.xml ]; then
   if [ -f /usr/share/kodi/config/sources.xml ]; then
     cp /usr/share/kodi/config/sources.xml $KODI_ROOT/userdata
   fi
+fi
+
+#choose libCEC version, default is libcec package version
+ln -sf /usr/lib/libcec.so.4.0.4 /var/lib/libcec.so.4
+
+if [ -f /storage/.config/libcec-4.0.5.conf ]; then
+    ln -sf /usr/lib/libcec.so.4.0.5 /var/lib/libcec.so.4
+fi
+
+if [ -f /storage/.config/libcec-4.0.7.conf ]; then
+    ln -sf /usr/lib/libcec.so.4.0.7 /var/lib/libcec.so.4
+fi
+
+#device specific configs
+mkdir -p /var/share/kodi/system/settings/
+
+if [ -d "/proc/device-tree/auge_sound" ]; then
+    ln -sf /usr/share/kodi/system/settings/appliance.g12x.xml /var/share/kodi/system/settings/appliance.xml
+elif [ -d "/proc/device-tree/aml_sound_meson" ]; then
+    ln -sf /usr/share/kodi/system/settings/appliance.gxx.xml /var/share/kodi/system/settings/appliance.xml
 fi
 
 # common setup guisettings
@@ -43,4 +66,6 @@ else #arm
   echo "MALLOC_MMAP_THRESHOLD_=8192" >> /run/libreelec/kodi.conf
 fi
 
-[ -f /storage/.config/kodi.conf ] && cat /storage/.config/kodi.conf >>/run/libreelec/kodi.conf
+if [ -f /storage/.config/kodi.conf ] ; then
+  cat /storage/.config/kodi.conf >>/run/libreelec/kodi.conf
+fi

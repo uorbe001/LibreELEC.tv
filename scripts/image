@@ -164,6 +164,14 @@ EOF
 [ -n "${BUILDER_NAME}" ] && echo "BUILDER_NAME=\"${BUILDER_NAME}\"" >> ${INSTALL}/etc/os-release
 [ -n "${BUILDER_VERSION}" ] && echo "BUILDER_VERSION=\"${BUILDER_VERSION}\"" >> ${INSTALL}/etc/os-release
 
+# Add release notes / changelog
+
+if [ -n "${RELEASE_NOTES}" ] && [ -f "${RELEASE_NOTES}" ]; then
+  cp "${RELEASE_NOTES}" ${INSTALL}/etc/release-notes
+else
+  echo "" > ${INSTALL}/etc/release-notes
+fi
+
 # Create /etc/issue
 cat <<EOF >${INSTALL}/etc/issue
 ${GREETING0}
@@ -465,4 +473,14 @@ if [ "${1}" = "release" -o "${1}" = "mkimage" -o "${1}" = "noobs" ]; then
     # Cleanup release dir
     rm -rf ${RELEASE_DIR}
   fi
+fi
+
+# remove unneeded files in target folder
+if [ "$COREELEC_TARGET_REMOVE" = "kernel_system" ]; then
+  rm -f ${TARGET_IMG}/*.kernel
+  rm -f ${TARGET_IMG}/*.system
+elif [ "$COREELEC_TARGET_REMOVE" = "kernel_system_sha256" ]; then
+  rm -f ${TARGET_IMG}/*.kernel
+  rm -f ${TARGET_IMG}/*.system
+  rm -f ${TARGET_IMG}/*.sha256
 fi

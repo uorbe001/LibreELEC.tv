@@ -8,46 +8,45 @@ PKG_LICENSE="GPL"
 PKG_SITE="http://www.kodi.tv"
 PKG_DEPENDS_TARGET="toolchain JsonSchemaBuilder:host TexturePacker:host Python2 zlib systemd lzo pcre swig:host libass curl fontconfig fribidi tinyxml libjpeg-turbo freetype libcdio taglib libxml2 libxslt rapidjson sqlite ffmpeg crossguid giflib libdvdnav libhdhomerun libfmt lirc libfstrcmp flatbuffers:host flatbuffers"
 PKG_LONGDESC="A free and open source cross-platform media player."
-PKG_TOOLCHAIN="cmake-make"
 
 PKG_PATCH_DIRS="$KODI_VENDOR"
 
 case $KODI_VENDOR in
   amlogic-3.14)
-    PKG_VERSION="e95dc442265375aa0cd75284eeaf70ad99b04862"
-    PKG_SHA256="12652020e3302cc1ff5c5d910553c89e970979c7271630bdadea3e925c9ff793"
+    PKG_VERSION="9bbbb2b4eb546efd3ea455f20e0aa4e44d134712"
+    PKG_SHA256="105f5496aa33046b5e28bf7c912fe32b084bb300b6892c711fbac122748e39bb"
     PKG_URL="https://github.com/CoreELEC/xbmc/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="kodi-$PKG_VERSION.tar.gz"
-    PKG_PATCH_DIRS="default"
+    PKG_PATCH_DIRS="default coreelec"
     ;;
   amlogic-4.9)
-    PKG_VERSION="48c0b53aae7b0647d1f5a0a9cdb6ad5b1ebb9407"
-    PKG_SHA256="a202d5b0346327363f3dabc0640c50a915b26639b67a08647712abe266760649"
+    PKG_VERSION="1e99570711ca43792fcfadb653564aed19505f11"
+    PKG_SHA256="0465f11ac565184b00c5e399b6edf8d56dae986fc68a4ee9a0c2247680940f0d"
     PKG_URL="https://github.com/CoreELEC/xbmc/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="kodi-$PKG_VERSION.tar.gz"
-    PKG_PATCH_DIRS="default"
+    PKG_PATCH_DIRS="default coreelec"
     ;;
   raspberrypi)
-    PKG_VERSION="newclock5_18.4-Leia"
-    PKG_SHA256="2d3c864202a391dfe60b7eeade27a6ce1a9dfac2d0fc80add70cf5bd8318dadf"
+    PKG_VERSION="newclock5_18.7.1-Leia"
+    PKG_SHA256="2556a23548b1ec207f413ab3d5602562a354b426445feabc1afee25797562e42"
     PKG_URL="https://github.com/popcornmix/xbmc/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="kodi-$KODI_VENDOR-$PKG_VERSION.tar.gz"
     ;;
   raspberrypi4)
-    PKG_VERSION="leia_pi4_18.4-Leia"
-    PKG_SHA256="39c075e40a076c6fb60a6d954573916d671b33caf9ec5f2b6e4549990afa4b34"
+    PKG_VERSION="leia_pi4_18.7.1-Leia"
+    PKG_SHA256="63f9e5e4219e5e8cad96e68d10393f6ac11d28e4b3915a6f6168340531210bff"
     PKG_URL="https://github.com/popcornmix/xbmc/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="kodi-$KODI_VENDOR-$PKG_VERSION.tar.gz"
     ;;
   rockchip)
-    PKG_VERSION="rockchip_18.4-Leia"
-    PKG_SHA256="16a64493ba1c91f22064444970147b505e6d38d368012f4ea88c68c1416a2ef2"
+    PKG_VERSION="rockchip_18.7.1-Leia"
+    PKG_SHA256="196f0bcb34cdcab42bee0ed71ab62b92bfaacc35d93db6435295f907cfd8061b"
     PKG_URL="https://github.com/kwiboo/xbmc/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="kodi-$KODI_VENDOR-$PKG_VERSION.tar.gz"
     ;;
   *)
-    PKG_VERSION="18.4-Leia"
-    PKG_SHA256="bf2be186d8ae5b5377e43c06a538012bb9f51a0e98f8244b70a401006861d110"
+    PKG_VERSION="18.7.1-Leia"
+    PKG_SHA256="5cfec391bcd168bbd4f9d38a6c8ec93e42e040cf82cf6ebf23db5e86753816fb"
     PKG_URL="https://github.com/xbmc/xbmc/archive/$PKG_VERSION.tar.gz"
     PKG_SOURCE_NAME="kodi-$PKG_VERSION.tar.gz"
     ;;
@@ -217,7 +216,7 @@ configure_package() {
   fi
 
   if [ "$PROJECT" = "Amlogic" -o "$PROJECT" = "Amlogic-ng" ]; then
-    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET amlogic-displayinfo-addon"
+    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET amlogic.displayinfo"
   fi
 
   if [ "$DEVICE" = "Slice" -o "$DEVICE" = "Slice3" ]; then
@@ -303,6 +302,7 @@ post_makeinstall_target() {
 
   mkdir -p $INSTALL/usr/lib/kodi
     cp $PKG_DIR/scripts/kodi-config $INSTALL/usr/lib/kodi
+    cp $PKG_DIR/scripts/kodi-after $INSTALL/usr/lib/kodi
     cp $PKG_DIR/scripts/kodi-safe-mode $INSTALL/usr/lib/kodi
     cp $PKG_DIR/scripts/kodi.sh $INSTALL/usr/lib/kodi
 
@@ -317,6 +317,8 @@ post_makeinstall_target() {
   mkdir -p $INSTALL/usr/bin
     cp $PKG_DIR/scripts/kodi-remote $INSTALL/usr/bin
     cp $PKG_DIR/scripts/setwakeup.sh $INSTALL/usr/bin
+    cp $PKG_DIR/scripts/pastekodi $INSTALL/usr/bin
+    ln -sf /usr/bin/pastekodi $INSTALL/usr/bin/pastecrash
 
   mkdir -p $INSTALL/usr/share/kodi/addons
     cp -R $PKG_DIR/config/os.openelec.tv $INSTALL/usr/share/kodi/addons
@@ -330,6 +332,9 @@ post_makeinstall_target() {
     sed -e "s|@ADDON_REPO_VERSION@|$ADDON_REPO_VERSION|g" -i $INSTALL/usr/share/kodi/addons/$ADDON_REPO_ID/addon.xml
 
   mkdir -p $INSTALL/usr/share/kodi/config
+
+  ln -sf /run/libreelec/cacert.pem $INSTALL/usr/share/kodi/system/certs/cacert.pem
+
   mkdir -p $INSTALL/usr/share/kodi/system/settings
 
   $PKG_DIR/scripts/xml_merge.py $PKG_DIR/config/guisettings.xml \
@@ -347,10 +352,17 @@ post_makeinstall_target() {
                                 $PROJECT_DIR/$PROJECT/devices/$DEVICE/kodi/advancedsettings.xml \
                                 > $INSTALL/usr/share/kodi/system/advancedsettings.xml
 
+  ln -sf /var/share/kodi/system/settings/appliance.xml $INSTALL/usr/share/kodi/system/settings/appliance.xml
+
   $PKG_DIR/scripts/xml_merge.py $PKG_DIR/config/appliance.xml \
-                                $PROJECT_DIR/$PROJECT/kodi/appliance.xml \
+                                $PROJECT_DIR/$PROJECT/kodi/g12x/appliance.xml \
                                 $PROJECT_DIR/$PROJECT/devices/$DEVICE/kodi/appliance.xml \
-                                > $INSTALL/usr/share/kodi/system/settings/appliance.xml
+                                > $INSTALL/usr/share/kodi/system/settings/appliance.g12x.xml
+
+  $PKG_DIR/scripts/xml_merge.py $PKG_DIR/config/appliance.xml \
+                                $PROJECT_DIR/$PROJECT/kodi/gxx/appliance.xml \
+                                $PROJECT_DIR/$PROJECT/devices/$DEVICE/kodi/appliance.xml \
+                                > $INSTALL/usr/share/kodi/system/settings/appliance.gxx.xml
 
   # update addon manifest
   ADDON_MANIFEST=$INSTALL/usr/share/kodi/system/addon-manifest.xml

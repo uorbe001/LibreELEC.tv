@@ -3,11 +3,11 @@
 # Copyright (C) 2018-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="gnutls"
-PKG_VERSION="3.6.5"
-PKG_SHA256="073eced3acef49a3883e69ffd5f0f0b5f46e2760ad86eddc6c0866df4e7abb35"
+PKG_VERSION="3.6.13"
+PKG_SHA256="32041df447d9f4644570cf573c9f60358e865637d69b7e59d1159b7240b52f38"
 PKG_LICENSE="LGPL2.1"
 PKG_SITE="https://gnutls.org"
-PKG_URL="https://www.gnupg.org/ftp/gcrypt/gnutls/v${PKG_VERSION%.*}/gnutls-$PKG_VERSION.tar.xz"
+PKG_URL="https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-$PKG_VERSION.tar.xz"
 PKG_DEPENDS_TARGET="toolchain libidn2 nettle zlib"
 PKG_LONGDESC="A library which provides a secure layer over a reliable transport layer."
 

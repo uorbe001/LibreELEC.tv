@@ -3,8 +3,8 @@
 # Copyright (C) 2018-present Team CoreELEC (https://coreelec.org)
 
 PKG_NAME="brcmfmac_sdio-firmware-aml"
-PKG_VERSION="55df400aa1d1a11dee71f90abe1e51d3f49aeee2"
-PKG_SHA256="bdf6aa7c5e1e8958f17b70ae4ce13cd7568712a538b097d773b479687ac5e5d1"
+PKG_VERSION="182efe21ac5fc2e08621446150683f83b2d4e34e"
+PKG_SHA256="4a12a3400ca0418bddb8cf2c7bc23f561b8eef62b010d5a97657104e6563f123"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/CoreELEC/brcmfmac_sdio-firmware-aml"
 PKG_URL="https://github.com/CoreELEC/brcmfmac_sdio-firmware-aml/archive/$PKG_VERSION.tar.gz"
@@ -21,4 +21,5 @@ makeinstall_target() {
     ln -sr $f $(echo $f | sed -r 's/[^.]*/\U&/') 2>/dev/null || true
   done
   ln -sr bcm4335_V0343.0353.hcd bcm4335a0.hcd 2>/dev/null || true
+  ln -sr bcm4335_V0343.0353.hcd BCM4335A0.hcd 2>/dev/null || true
 }
