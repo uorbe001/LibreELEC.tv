@@ -1,5 +1,5 @@
 [Unit]
-Description=transmission
+Description=Transmission
 After=kodi.service multi-user.target network-online.target
 Requires=multi-user.target network-online.target
 

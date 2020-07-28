@@ -1,3 +1,19 @@
+23
+- Update libevent to 2.1.12-stable
+
+22
+- Update to 3.00
+
+21
+- Add command-line client
+
+20
+- Quote settings
+
+19
+- Downgrade to 2.94
+- Add CLI
+
 18
 - Rework package
 - Fix system.d
