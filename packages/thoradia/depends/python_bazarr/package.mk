@@ -1,5 +1,6 @@
 PKG_NAME="python_bazarr"
 PKG_VERSION="1"
+PKG_DEPENDS_TARGET="libxslt"
 PKG_LONGDESC="Bazarr Python dependencies"
 
 PKG_TOOLCHAIN="python2"
@@ -16,7 +17,7 @@ setup(name='$PKG_NAME',
       author='thoradia',
       url='https://github.com/thoradia/LibreELEC.tv',
       install_requires=[
-          "greenlet==0.4.15",
+          "lxml==4.5.2",
         ],
      )
 EOF
